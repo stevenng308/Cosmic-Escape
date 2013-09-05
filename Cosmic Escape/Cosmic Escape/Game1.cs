@@ -28,7 +28,6 @@ namespace Cosmic_Escape
         //platform variables
         string platformInfo;
         System.IO.StreamReader file;
-        //Platform platform;
         Texture2D block;
         List<Platform> platList;
 
@@ -112,8 +111,11 @@ namespace Cosmic_Escape
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.transform);
+            
+            //draw player
             player.Draw(spriteBatch);
 
+            //draw platform
             foreach (Platform p in platList)
             {
                 p.Draw(spriteBatch);

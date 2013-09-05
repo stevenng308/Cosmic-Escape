@@ -33,7 +33,7 @@ namespace Cosmic_Escape
         const float WALK_SPEED = 1.5f;
         //const float RUN_SPEED = 4.0f;
         float GRAVITY = 1.5f;
-        Rectangle tempRect;
+        Rectangle tempRect;     // debugging purpose to show what rectangle is in contact
 
         int frameCounter;       // Which frame of the animation we're in (a value between 0 and 23)
         float frameRate;        // This should always be 1/24 (or 0.04167 seconds)
@@ -101,7 +101,6 @@ namespace Cosmic_Escape
             }
 
             //jumping
-            //if (spaceKeyDown && cooldown != true && !parent.platform.destRect.Intersects(destRect))
             if (spaceKeyDown && cooldown != true)
             {
                 //state = JUMPING;
@@ -140,7 +139,9 @@ namespace Cosmic_Escape
                 }*/
             }
 
+            // gravity
             pos.Y += GRAVITY;
+
             // Update the destination rectangle based on our position.
             destRect.X = (int)pos.X;
             destRect.Y = (int)pos.Y;
@@ -172,11 +173,13 @@ namespace Cosmic_Escape
                 sb.Draw(tex, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.None, 1.0f);
         }
 
+        //setter when collision detected
         public void setIsCollide(bool flag)
         {
             isCollide = flag;
         }
 
+        //get play position
         public Vector2 getPos()
         {
             return pos;

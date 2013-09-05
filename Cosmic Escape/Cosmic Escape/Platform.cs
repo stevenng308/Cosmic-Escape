@@ -16,34 +16,25 @@ namespace Cosmic_Escape
         Texture2D tex;
         Rectangle destRect;
         Vector2 pos;
-        //string blockInfo;
 
         public Platform(Texture2D t, Vector2 p)
         {
             tex = t;
             pos = p;
             destRect = new Rectangle((int)pos.X, (int)pos.Y, tex.Width, tex.Height);
-            //blockInfo = info;
         }
 
         public void Update(Player play)
         {
-            
+            //Something to update the platforms
         }
 
         public void Draw(SpriteBatch sb)
         {
-            /*string[] tempArray = null;
-            for (int i = 0; i < blockInfo.Length; i++)
-            {
-                tempArray = blockInfo.Split(',');
-            }
-
-            destRect.X = Convert.ToInt32(tempArray[0]);
-            destRect.Y = Convert.ToInt32(tempArray[1]);*/
             sb.Draw(tex, destRect, Color.White);
         }
 
+        //get the rectangle of the platform
         public Rectangle getDestRect()
         {
             return destRect;
