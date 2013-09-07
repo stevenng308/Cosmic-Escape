@@ -107,7 +107,7 @@ namespace Cosmic_Escape
                 //state = JUMPING;
                 srcRect.Y = state * 64;
                 srcRect.X = frameCounter * 64;
-                pos.Y += -100.0f;
+                pos.Y += -130.0f;
                 cooldown = true;
                 timer = totalTime + 0.003f;
             }
