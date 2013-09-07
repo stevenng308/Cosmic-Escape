@@ -39,6 +39,7 @@ namespace Cosmic_Escape
         float frameRate;        // This should always be 1/24 (or 0.04167 seconds)
         float timeCounter;      // How much time has elapsed since the last time we incremented the frame counter
         float totalTime;        // Total time elapsed
+        float timer;
 
         public Player(Texture2D t, Vector2 p, Game1 g)
         {
@@ -106,24 +107,28 @@ namespace Cosmic_Escape
                 //state = JUMPING;
                 srcRect.Y = state * 64;
                 srcRect.X = frameCounter * 64;
-                pos.Y += -125.0f;
+                pos.Y += -100.0f;
                 cooldown = true;
+                timer = totalTime + 0.003f;
             }
 
             //gravity
             foreach (Platform p in l)
             {
                 isCollide = p.getDestRect().Intersects(this.destRect);
-                if (isCollide || pos.Y > parent.screenHeight - 59)
+                if (isCollide || pos.Y > parent.screenHeight - 63)
                 {
-                    cooldown = false;
+                    if (totalTime >= timer)
+                    {
+                        cooldown = false;
+                    }
                     GRAVITY = 0.0f;
                     tempRect = p.getDestRect();
                     break;   
                 }
                 else
                 {
-                    GRAVITY = 1.5f;
+                    GRAVITY = 2.0f;
                 }
                 /*if (pos.Y < parent.screenHeight - 59)
                 //if (pos.Y < parent.screenHeight - 59 && isCollide != true)
@@ -140,7 +145,7 @@ namespace Cosmic_Escape
             }
 
             // gravity
-            pos.Y += GRAVITY;
+            pos.Y = pos.Y + (GRAVITY += GRAVITY / 2) ;
 
             // Update the destination rectangle based on our position.
             destRect.X = (int)pos.X;

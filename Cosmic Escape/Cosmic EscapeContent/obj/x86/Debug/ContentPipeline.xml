@@ -37,16 +37,26 @@
       <Output>C:\Users\Steven\Documents\Visual Studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\block1.xnb</Output>
       <Time>2013-08-31T16:48:33.4380638-04:00</Time>
     </Item>
+    <Item>
+      <Source>SECRET IV - Adaptation.mp3</Source>
+      <Name>SECRET IV - Adaptation</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Steven\documents\visual studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\SECRET IV - Adaptation.xnb</Output>
+      <Extra>C:\Users\Steven\documents\visual studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\SECRET IV - Adaptation.wma</Extra>
+      <Time>2013-09-07T14:18:58.2919578-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Steven\Documents\Visual Studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic EscapeContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Steven\Documents\Visual Studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Steven\Documents\Visual Studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic EscapeContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Steven\Documents\Visual Studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Steven\documents\visual studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic EscapeContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Steven\documents\visual studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Steven\documents\visual studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic EscapeContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Steven\documents\visual studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

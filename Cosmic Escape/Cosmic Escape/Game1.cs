@@ -24,6 +24,8 @@ namespace Cosmic_Escape
         Player player;
         public SpriteFont theFont;
         public Vector2 textPos;
+        Song bgsong;
+        bool songstart;
 
         //platform variables
         string platformInfo;
@@ -45,7 +47,7 @@ namespace Cosmic_Escape
         {
             // TODO: Add your initialization logic here
             camera = new Camera(GraphicsDevice.Viewport);
-
+            songstart = false;
             base.Initialize();
 
             graphics.SynchronizeWithVerticalRetrace = false;
@@ -58,6 +60,9 @@ namespace Cosmic_Escape
             spriteBatch = new SpriteBatch(GraphicsDevice);
             spritesheet = Content.Load<Texture2D>("zep spritesheet");
             theFont = Content.Load<SpriteFont>("myFont");
+            //load song
+            bgsong = Content.Load<Song>("SECRET IV - Adaptation");
+            MediaPlayer.IsRepeating = true;
             //platformInfo = System.IO.File.ReadAllText("platform sheet.txt");
             file = new System.IO.StreamReader("platform sheet.txt");
             block = Content.Load<Texture2D>("block1");
@@ -93,10 +98,18 @@ namespace Cosmic_Escape
                 (Keyboard.GetState().IsKeyDown(Keys.Escape)))
                 this.Exit();
 
+            //start song
+            if (!songstart)
+            {
+                MediaPlayer.Play(bgsong);
+                songstart = true;
+            }
 
             // Note that the Update method of the player MUST have access to the game time
             // to know which image/frame to draw
             player.Update(gameTime, platList);
+            textPos.X = camera.getCamera().X + 25.0f;
+            textPos.Y = camera.getCamera().Y;
 
             //update camera movement
             camera.Update(gameTime, 32, player);
