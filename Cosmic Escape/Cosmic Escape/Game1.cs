@@ -34,8 +34,8 @@ namespace Cosmic_Escape
 
         int space_bg_pos;               
         int ship_bg_pos;
-        Background Background_space;
-        Background Background_ship;
+        Background background_space;
+        Background background_ship;
         
 
         //platform variables
@@ -79,7 +79,7 @@ namespace Cosmic_Escape
             //load song
             bgsong = Content.Load<Song>("SECRET IV - Adaptation");
             MediaPlayer.IsRepeating = true;
-            //platformInfo = System.IO.File.ReadAllText("platform sheet.txt");
+            //read block sheet
             file = new System.IO.StreamReader("platform sheet.txt");
             block = Content.Load<Texture2D>("block1");
             textPos = new Vector2(10, 10);
@@ -87,8 +87,8 @@ namespace Cosmic_Escape
             //Load Backgrounds and Initialize
             spaceBackgroundTex = Content.Load<Texture2D>("space_bg");                   
             shipBackgroundTex = Content.Load<Texture2D>("background_ship");             
-            Background Background_space = new Background(spaceBackgroundTex, space_bg_pos);
-            Background Background_ship = new Background(shipBackgroundTex, ship_bg_pos);
+            background_space = new Background(spaceBackgroundTex, space_bg_pos);
+            background_ship = new Background(shipBackgroundTex, ship_bg_pos);
 
             // Get the width and height of the window
             screenWidth = graphics.GraphicsDevice.Viewport.Width;
@@ -121,7 +121,7 @@ namespace Cosmic_Escape
                 this.Exit();
 
             //moves space background
-            Background_space.MoveBackground((float)gameTime.ElapsedGameTime.TotalMilliseconds);
+            background_space.MoveBackground((float)gameTime.ElapsedGameTime.TotalMilliseconds, player.getPos());
 
             //start song
             if (!songstart)
@@ -149,14 +149,13 @@ namespace Cosmic_Escape
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.transform);
-            
-            //draw player
-            player.Draw(spriteBatch);
 
             //draw backgrounds      
-            Background_space.Draw(gameTime);
-            Background_ship.Draw(gameTime);
-            
+            background_space.Draw(spriteBatch);
+            background_ship.Draw(spriteBatch);
+
+            //draw player
+            player.Draw(spriteBatch);
             //draw platform
             foreach (Platform p in platList)
             {

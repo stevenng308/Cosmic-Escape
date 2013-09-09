@@ -15,24 +15,20 @@ namespace Cosmic_Escape
     {
 
         const int BACKGROUND_RATE = 60;     //controls speed of space and stars background outside the ship
-        SpriteBatch spriteBatch;
-        Texture2D spaceBackground;
-        Texture2D shipBackground;
-        int space_bg_pos;
-        int ship_bg_pos;
+        Texture2D texBg;
         float backgroundCounter = 0.0f;
-
-        Texture2D tex;
         int pos;
+        Vector2 playerPos;
 
         public Background(Texture2D t, int p)
         {
-            tex = t;
+            texBg = t;
             pos = p;
         }
 
-        public void MoveBackground(float elapsedTime)
+        public void MoveBackground(float elapsedTime, Vector2 alienPos)
         {
+            playerPos = alienPos;
             backgroundCounter -= elapsedTime;
 
             if (backgroundCounter > 0)
@@ -40,26 +36,21 @@ namespace Cosmic_Escape
 
             backgroundCounter = 1000f / BACKGROUND_RATE;
 
-            space_bg_pos--;
+            pos--;
 
 
-            if (space_bg_pos < -spaceBackground.Width)
+            if (pos < -texBg.Width)
             {
-                space_bg_pos += spaceBackground.Width;
-            }
-
-            if (ship_bg_pos < -shipBackground.Width)
-            {
-                ship_bg_pos += shipBackground.Width;
+                pos += texBg.Width;
             }
 
         }
 
-        public void Draw(GameTime gameTime)
+        public void Draw(SpriteBatch sb)
         {
-            spriteBatch.Draw(tex, new Vector2(pos, 0), Color.White);                       //draws background of the player's current view
-            spriteBatch.Draw(tex, new Vector2(pos + tex.Width, 0), Color.White);           //draws background to the right of player's current view
-            spriteBatch.Draw(tex, new Vector2(pos - tex.Width, 0), Color.White);           //draws background to the left of player's current view
+            sb.Draw(texBg, new Vector2(pos, 0), Color.White);                         //draws background of the player's current view
+            sb.Draw(texBg, new Vector2(pos + texBg.Width, 0), Color.White);           //draws background to the right of player's current view
+            sb.Draw(texBg, new Vector2(pos - texBg.Width, 0), Color.White);           //draws background to the left of player's current view
         }
 
     }

@@ -26,3 +26,5 @@ C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\
 C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\platform sheet.txt
 C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Cosmic Escape.exe
 C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Cosmic Escape.pdb
+C:\Users\Steven\Documents\Visual Studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\background_ship.xnb
+C:\Users\Steven\Documents\Visual Studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\space_bg.xnb
