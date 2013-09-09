@@ -1,1 +1,2 @@
 C:\Users\Steven\documents\visual studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic EscapeContent\obj\x86\Debug\Cosmic EscapeContent.contentprojResolveAssemblyReference.cache
+C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic EscapeContent\obj\x86\Debug\Cosmic EscapeContent.contentprojResolveAssemblyReference.cache

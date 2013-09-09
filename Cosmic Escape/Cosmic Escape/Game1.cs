@@ -27,6 +27,17 @@ namespace Cosmic_Escape
         Song bgsong;
         bool songstart;
 
+        //background variables
+        const int BACKGROUND_RATE = 60;     //controls speed of space and stars background outside the ship
+        Texture2D spaceBackgroundTex;
+        Texture2D shipBackgroundTex;
+
+        int space_bg_pos;               
+        int ship_bg_pos;
+        Background Background_space;
+        Background Background_ship;
+        
+
         //platform variables
         string platformInfo;
         System.IO.StreamReader file;
@@ -48,6 +59,11 @@ namespace Cosmic_Escape
             // TODO: Add your initialization logic here
             camera = new Camera(GraphicsDevice.Viewport);
             songstart = false;
+            
+            //background initialization
+            space_bg_pos = 0;
+            ship_bg_pos = 0;
+
             base.Initialize();
 
             graphics.SynchronizeWithVerticalRetrace = false;
@@ -67,6 +83,12 @@ namespace Cosmic_Escape
             file = new System.IO.StreamReader("platform sheet.txt");
             block = Content.Load<Texture2D>("block1");
             textPos = new Vector2(10, 10);
+
+            //Load Backgrounds and Initialize
+            spaceBackgroundTex = Content.Load<Texture2D>("space_bg");                   
+            shipBackgroundTex = Content.Load<Texture2D>("background_ship");             
+            Background Background_space = new Background(spaceBackgroundTex, space_bg_pos);
+            Background Background_ship = new Background(shipBackgroundTex, ship_bg_pos);
 
             // Get the width and height of the window
             screenWidth = graphics.GraphicsDevice.Viewport.Width;
@@ -98,6 +120,9 @@ namespace Cosmic_Escape
                 (Keyboard.GetState().IsKeyDown(Keys.Escape)))
                 this.Exit();
 
+            //moves space background
+            Background_space.MoveBackground((float)gameTime.ElapsedGameTime.TotalMilliseconds);
+
             //start song
             if (!songstart)
             {
@@ -128,6 +153,10 @@ namespace Cosmic_Escape
             //draw player
             player.Draw(spriteBatch);
 
+            //draw backgrounds      
+            Background_space.Draw(gameTime);
+            Background_ship.Draw(gameTime);
+            
             //draw platform
             foreach (Platform p in platList)
             {
