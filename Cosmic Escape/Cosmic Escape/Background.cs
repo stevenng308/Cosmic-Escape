@@ -35,9 +35,7 @@ namespace Cosmic_Escape
                 return;
 
             backgroundCounter = 1000f / BACKGROUND_RATE;
-
             pos--;
-
 
             if (pos < -texBg.Width)
             {

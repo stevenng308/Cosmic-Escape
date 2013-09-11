@@ -11,18 +11,18 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Cosmic_Escape
 {
-    public class Player
+    public class Player : GameObject
     {
-        Texture2D tex;          // The *entire* spritesheet
-        Rectangle srcRect;      // Where in the *spritesheet* we're drawing
-        Rectangle destRect;     // Where on the *screen* we're drawing
-        Vector2 pos;            // Position of the player
-        Vector2 origin;         // We're not using this, but have to have it for drawing
-        Game1 parent;           // Game1
+        //Texture2D tex;          // The *entire* spritesheet
+        //Rectangle srcRect;      // Where in the *spritesheet* we're drawing
+        //Rectangle destRect;     // Where on the *screen* we're drawing
+        //Vector2 pos;            // Position of the player
+        //Vector2 origin;         // We're not using this, but have to have it for drawing
+        //Game1 parent;           // Game1
         int state;              // The state that the player is in IDLE/WALKING/JUMPING/RUNNING...
         int facing;             // Either facing LEFT or RIGHT.
         bool cooldown;          // allow for jumping
-        bool isCollide;         // flag for rectangle collision
+        //bool isCollide;         // flag for rectangle collision
         const int IDLE = 0;
         const int WALKING = 1;
         //const int JUMPING = 0;
@@ -167,7 +167,7 @@ namespace Cosmic_Escape
                 }
             } 
         }
-        public void Draw(SpriteBatch sb)
+        public override void Draw(SpriteBatch sb)
         {
             //sb.DrawString(parent.theFont, "Total Time: " + totalTime + "\nFrame: " + frameCounter, parent.textPos, Color.White);
             sb.DrawString(parent.theFont, "Rectangle X: " + tempRect.X + "\nRectangle Y: " + tempRect.Y, parent.textPos, Color.White);
