@@ -11,11 +11,11 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Cosmic_Escape
 {
-    public class Platform
+    public class Platform : GameObject
     {
-        Texture2D tex;
-        Rectangle destRect;
-        Vector2 pos;
+        //Texture2D tex;
+        //Rectangle destRect;
+        //Vector2 pos;
 
         public Platform(Texture2D t, Vector2 p)
         {
@@ -26,10 +26,10 @@ namespace Cosmic_Escape
 
         public void Update(Player play)
         {
-            //Something to update the platforms
+            //default update is invoked from GameObject
         }
 
-        public void Draw(SpriteBatch sb)
+        public override void Draw(SpriteBatch sb)
         {
             sb.Draw(tex, destRect, Color.White);
         }
