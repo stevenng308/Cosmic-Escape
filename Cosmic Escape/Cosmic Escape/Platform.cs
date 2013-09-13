@@ -22,6 +22,11 @@ namespace Cosmic_Escape
             tex = t;
             pos = p;
             destRect = new Rectangle((int)pos.X, (int)pos.Y, tex.Width, tex.Height);
+
+            point1 = p;
+            point2 = new Vector2(pos.X + tex.Width, pos.Y);
+            point3 = new Vector2(pos.X + tex.Width, pos.Y + tex.Height);
+            point4 = new Vector2(pos.X, pos.Y + tex.Height);
         }
 
         public void Update(Player play)
@@ -29,9 +34,10 @@ namespace Cosmic_Escape
             //default update is invoked from GameObject
         }
 
-        public override void Draw(SpriteBatch sb)
+        public void Draw(SpriteBatch sb, SpriteFont font)
         {
             sb.Draw(tex, destRect, Color.White);
+            sb.DrawString(font, "point1 X: " + point1.X + "\npoint2 x: " + point2.X, pos, Color.White);
         }
 
         //get the rectangle of the platform

@@ -95,7 +95,7 @@ namespace Cosmic_Escape
             screenHeight = graphics.GraphicsDevice.Viewport.Height;
 
             // Start the player off at the middle/bottom of the screen
-            Vector2 initialPlayerPos = new Vector2(600, 300);
+            Vector2 initialPlayerPos = new Vector2(400, 300);
             // Bring the player to life
             player = new Player(spritesheet, initialPlayerPos, this);
             // Platform list created
@@ -154,14 +154,14 @@ namespace Cosmic_Escape
             background_space.Draw(spriteBatch);
             background_ship.Draw(spriteBatch);
 
-            //draw player
-            player.Draw(spriteBatch);
             //draw platform
             foreach (Platform p in platList)
             {
-                p.Draw(spriteBatch);
+                p.Draw(spriteBatch, theFont);
             }
 
+            //draw player
+            player.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

@@ -50,9 +50,14 @@ namespace Cosmic_Escape
             frameCounter = 0;
             frameRate = 1.0f / 2.0f;
             totalTime = 0.0f;
+            timer = 2.0f;
             cooldown = false;
             isCollide = false;
 
+            point1 = p;
+            point2 = new Vector2(pos.X + tex.Width / 2, pos.Y);
+            point3 = new Vector2(pos.X + tex.Width / 2, pos.Y + tex.Height / 2);
+            point4 = new Vector2(pos.X, pos.Y + tex.Height / 2);
             // we're not using this, since we're not doing rotation...
             origin = new Vector2(0, 0);
             // we'll start the source rectangle to be the idle row, frame 0
@@ -60,7 +65,7 @@ namespace Cosmic_Escape
             // the destination rect is where we're drawing on the screen
             destRect = new Rectangle((int)pos.X, (int)pos.Y, 64, 64);
         }
-        public void Update(GameTime gameTime, List<Platform> l)
+        public override void Update(GameTime gameTime, List<Platform> l)
         {
             // Determine which keys are down
             //bool shiftDown = Keyboard.GetState().IsKeyDown(Keys.LeftShift);
@@ -107,16 +112,15 @@ namespace Cosmic_Escape
                 //state = JUMPING;
                 srcRect.Y = state * 64;
                 srcRect.X = frameCounter * 64;
-                pos.Y += -130.0f;
+                pos.Y += -7.5f * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 cooldown = true;
-                timer = totalTime + 0.003f;
             }
 
             //gravity
-            foreach (Platform p in l)
+            /*foreach (Platform p in l)
             {
                 isCollide = p.getDestRect().Intersects(this.destRect);
-                if (isCollide || pos.Y > parent.screenHeight - 63)
+                if (isCollide || pos.Y > parent.screenHeight - 61)
                 {
                     if (totalTime >= timer)
                     {
@@ -124,32 +128,33 @@ namespace Cosmic_Escape
                     }
                     GRAVITY = 0.0f;
                     tempRect = p.getDestRect();
-                    break;   
+                    break;
                 }
                 else
                 {
-                    GRAVITY = 2.0f;
+                    GRAVITY = 1.5f;
                 }
-                /*if (pos.Y < parent.screenHeight - 59)
-                //if (pos.Y < parent.screenHeight - 59 && isCollide != true)
-                {
-                    pos.Y += 1.5f;
-                    //state = IDLE;
-                }
-                else //have the sprite reach the ground?
-                {
-                    //pos.Y += 0.5f;
-                    //state = IDLE;
-                    cooldown = false;
-                }*/
+            }*/
+            if (isCollide || pos.Y > parent.screenHeight - (tex.Height / 2 - 3))
+            {
+                GRAVITY = 0.0f;
+                cooldown = false;
+            }
+            else
+            {
+                GRAVITY = 1.5f;
             }
 
-            // gravity
-            pos.Y = pos.Y + (GRAVITY += GRAVITY / 2) ;
-
+            pos.Y += GRAVITY;
             // Update the destination rectangle based on our position.
             destRect.X = (int)pos.X;
             destRect.Y = (int)pos.Y;
+
+            //update the 4 points of the rectangle with new position
+            updatePoints();
+
+            //check for collision in gameobject update method
+            base.Update(gameTime, l);
 
             //frame rate
             timeCounter += gameTime.ElapsedGameTime.Milliseconds / 1000f;
@@ -165,12 +170,12 @@ namespace Cosmic_Escape
                     frameCounter = 0; //reset frameCounter
                     timeCounter -= frameRate; //decrement updatecounter
                 }
-            } 
+            }
         }
         public override void Draw(SpriteBatch sb)
         {
             //sb.DrawString(parent.theFont, "Total Time: " + totalTime + "\nFrame: " + frameCounter, parent.textPos, Color.White);
-            sb.DrawString(parent.theFont, "Rectangle X: " + tempRect.X + "\nRectangle Y: " + tempRect.Y, parent.textPos, Color.White);
+            sb.DrawString(parent.theFont, "Rectangle X: " + point3.X + "\nRectangle Y: " + point3.Y, parent.textPos, Color.White);
             // Using Draw method 5 of 7
             if (facing == LEFT)
                 sb.Draw(tex, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.FlipHorizontally, 1.0f);
