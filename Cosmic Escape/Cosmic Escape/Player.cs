@@ -21,7 +21,7 @@ namespace Cosmic_Escape
         //Game1 parent;           // Game1
         int state;              // The state that the player is in IDLE/WALKING/JUMPING/RUNNING...
         int facing;             // Either facing LEFT or RIGHT.
-        bool cooldown;          // allow for jumping
+        bool cooldown, cooldownF;          // allow for jumping
         //bool isCollide;         // flag for rectangle collision
         const int IDLE = 0;
         const int WALKING = 1;
@@ -32,10 +32,11 @@ namespace Cosmic_Escape
         const float STOPPED = 0.0f;
         const float WALK_SPEED = 3.5f;
         //const float RUN_SPEED = 4.0f;
-        float GRAVITY = 1.5f;
+        float gravity = 1.5f;
         Rectangle tempRect;     // debugging purpose to show what rectangle is in contact
         Platform targetPlat;
-        float timer;
+        float timer, timerF;
+        Power power;
 
         int frameCounter;       // Which frame of the animation we're in (a value between 0 and 23)
         float frameRate;        // This should always be 1/24 (or 0.04167 seconds)
@@ -52,9 +53,10 @@ namespace Cosmic_Escape
             frameRate = 1.0f / 2.0f;
             totalTime = 0.0f;
             targetPlat = null;
-            cooldown = false;
+            cooldown = cooldownF = false;
             isCollide = false;
-            timer = 0.0f;
+            timer = timerF = 0.0f;
+            power = new Power();
 
             point1 = p;
             point2 = new Vector2(pos.X + tex.Width / 2, pos.Y);
@@ -73,7 +75,9 @@ namespace Cosmic_Escape
             //bool shiftDown = Keyboard.GetState().IsKeyDown(Keys.LeftShift);
             bool aKeyDown = Keyboard.GetState().IsKeyDown(Keys.A);
             bool dKeyDown = Keyboard.GetState().IsKeyDown(Keys.D);
+            bool fKeyDown = Keyboard.GetState().IsKeyDown(Keys.F);
             bool spaceKeyDown = Keyboard.GetState().IsKeyDown(Keys.Space);
+
 
             // This aggregates the amount of time that has elapsed since the last frame was called
             totalTime += gameTime.ElapsedGameTime.Milliseconds / 1000f;
@@ -119,6 +123,13 @@ namespace Cosmic_Escape
                 cooldown = true;
             }
 
+            //activate power
+            if (fKeyDown)
+            {
+                timerF = totalTime + 1.0f;
+                cooldownF = true;
+                power.zeroGravity(this);
+            }
             //gravity
             /*foreach (Platform p in l)
             {
@@ -138,9 +149,9 @@ namespace Cosmic_Escape
                     GRAVITY = 1.5f;
                 }
             }*/
-            if (isCollide || pos.Y > parent.screenHeight - (tex.Height / 2 - 3))
+            if (isCollide || (pos.Y > parent.screenHeight - (tex.Height / 2 - 3)))
             {
-                GRAVITY = 0.0f;
+                gravity = 0.0f;
                 if (totalTime >= timer)
                 {
                     cooldown = false;
@@ -148,11 +159,11 @@ namespace Cosmic_Escape
             }
             else
             {
-                GRAVITY = 1.5f;
+                gravity = 1.5f;
                 //targetPlat = isColliding(l); //chack for collision
             }
 
-            pos.Y += GRAVITY;
+            pos.Y += gravity;
             // Update the destination rectangle based on our position.
             destRect.X = (int)pos.X;
             destRect.Y = (int)pos.Y;
@@ -183,7 +194,7 @@ namespace Cosmic_Escape
         public override void Draw(SpriteBatch sb)
         {
             //sb.DrawString(parent.theFont, "Total Time: " + totalTime + "\nFrame: " + frameCounter, parent.textPos, Color.White);
-            sb.DrawString(parent.theFont, "      X: " + point3.X + "\n      Y: " + point3.Y, pos, Color.White);
+            sb.DrawString(parent.theFont, "      X: " + point3.X + "\n      Y: " + point3.Y + "\n timeF: " + timerF, pos, Color.White);
             if (targetPlat != null)
             {
                 sb.DrawString(parent.theFont, "Rectangle X: " + targetPlat.getDestRect().X + " Rectangle Y: " + targetPlat.getDestRect().Y, parent.textPos, Color.White);
@@ -211,6 +222,18 @@ namespace Cosmic_Escape
         public override float getWalkSpeed()
         {
             return WALK_SPEED;
+        }
+
+        //change gravity based on power used
+        public void setGravity(float g)
+        {
+            gravity = g;
+            pos.Y += gravity;
+        }
+
+        public float getGravity()
+        {
+            return gravity;
         }
     }
 }
