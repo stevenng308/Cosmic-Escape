@@ -1,4 +1,3 @@
-Content\spritesheet_small.xnb
 Content\zep spritesheet.xnb
 Content\block1.xnb
 Content\background_ship.xnb

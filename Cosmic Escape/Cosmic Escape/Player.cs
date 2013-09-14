@@ -30,7 +30,7 @@ namespace Cosmic_Escape
         const int LEFT = 0;
         const int RIGHT = 1;
         const float STOPPED = 0.0f;
-        const float WALK_SPEED = 1.5f;
+        const float WALK_SPEED = 3.5f;
         //const float RUN_SPEED = 4.0f;
         float GRAVITY = 1.5f;
         Rectangle tempRect;     // debugging purpose to show what rectangle is in contact
@@ -149,7 +149,7 @@ namespace Cosmic_Escape
             else
             {
                 GRAVITY = 1.5f;
-                targetPlat = isColliding(l);
+                //targetPlat = isColliding(l); //chack for collision
             }
 
             pos.Y += GRAVITY;
@@ -160,8 +160,9 @@ namespace Cosmic_Escape
             //update the 4 points of the rectangle with new position
             updatePoints();
 
-            //check for collision in gameobject update method
-            base.Update(gameTime, targetPlat);
+            //check for collision with other gameobjects;
+            //base.Update(gameTime, targetPlat);
+            targetPlat = isColliding(l); //chack for collision
 
             //frame rate
             timeCounter += gameTime.ElapsedGameTime.Milliseconds / 1000f;
@@ -201,9 +202,15 @@ namespace Cosmic_Escape
         }
 
         //get play position
-        public Vector2 getPos()
+        public override Vector2 getPos()
         {
             return pos;
+        }
+
+        //get walk speed
+        public override float getWalkSpeed()
+        {
+            return WALK_SPEED;
         }
     }
 }

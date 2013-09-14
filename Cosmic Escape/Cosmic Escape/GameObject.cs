@@ -55,10 +55,11 @@ namespace Cosmic_Escape
                 this.isCollide = false;
                     //break;
             }
+            /*
             else if (this.point3.Y < (plat.point2.Y - 10))
             {
                 this.isCollide = false;
-            }
+            }*/
         }
 
         public virtual void Draw(SpriteBatch sb)
@@ -87,8 +88,35 @@ namespace Cosmic_Escape
                     this.isCollide = true;
                     return plat;
                 }
+                else if (this.point4.X <= plat.point3.X && this.point4.X > plat.point4.X && this.point1.Y > plat.point2.Y && this.point1.Y < plat.point3.Y)//cannot go into platform from the right
+                {
+                    this.isCollide = true;
+                    this.pos.X += this.getWalkSpeed();
+                    return plat;
+                }
+                else if (this.point3.X >= plat.point4.X && this.point3.X < plat.point3.X && this.point1.Y > plat.point2.Y && this.point1.Y < plat.point3.Y)//cannot go into platform from the left
+                {
+                    this.isCollide = true;
+                    this.pos.X -= this.getWalkSpeed();
+                    return plat;
+                }
+                else
+                {
+                    this.isCollide = false;
+                }
             }
             return null;
         }
+
+        public virtual float getWalkSpeed()
+        {
+            return 0.0f;
+        }
+
+        public virtual Vector2 getPos()
+        {
+            return new Vector2(0,0);
+        }
     }
+
 }

@@ -2,15 +2,6 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
-      <Source>spritesheet_small.png</Source>
-      <Name>spritesheet_small</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Steven\Documents\Visual Studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\spritesheet_small.xnb</Output>
-      <Time>2012-08-19T13:33:40-04:00</Time>
-    </Item>
-    <Item>
       <Source>zep spritesheet.png</Source>
       <Name>zep spritesheet</Name>
       <Importer>TextureImporter</Importer>
