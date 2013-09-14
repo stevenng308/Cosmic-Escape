@@ -34,12 +34,13 @@ namespace Cosmic_Escape
         //const float RUN_SPEED = 4.0f;
         float GRAVITY = 1.5f;
         Rectangle tempRect;     // debugging purpose to show what rectangle is in contact
+        Platform targetPlat;
+        float timer;
 
         int frameCounter;       // Which frame of the animation we're in (a value between 0 and 23)
         float frameRate;        // This should always be 1/24 (or 0.04167 seconds)
         float timeCounter;      // How much time has elapsed since the last time we incremented the frame counter
         float totalTime;        // Total time elapsed
-        float timer;
 
         public Player(Texture2D t, Vector2 p, Game1 g)
         {
@@ -50,9 +51,10 @@ namespace Cosmic_Escape
             frameCounter = 0;
             frameRate = 1.0f / 2.0f;
             totalTime = 0.0f;
-            timer = 2.0f;
+            targetPlat = null;
             cooldown = false;
             isCollide = false;
+            timer = 0.0f;
 
             point1 = p;
             point2 = new Vector2(pos.X + tex.Width / 2, pos.Y);
@@ -65,7 +67,7 @@ namespace Cosmic_Escape
             // the destination rect is where we're drawing on the screen
             destRect = new Rectangle((int)pos.X, (int)pos.Y, 64, 64);
         }
-        public override void Update(GameTime gameTime, List<Platform> l)
+        public void Update(GameTime gameTime, List<Platform> l)
         {
             // Determine which keys are down
             //bool shiftDown = Keyboard.GetState().IsKeyDown(Keys.LeftShift);
@@ -113,6 +115,7 @@ namespace Cosmic_Escape
                 srcRect.Y = state * 64;
                 srcRect.X = frameCounter * 64;
                 pos.Y += -7.5f * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                timer = totalTime + 0.01f;
                 cooldown = true;
             }
 
@@ -138,11 +141,15 @@ namespace Cosmic_Escape
             if (isCollide || pos.Y > parent.screenHeight - (tex.Height / 2 - 3))
             {
                 GRAVITY = 0.0f;
-                cooldown = false;
+                if (totalTime >= timer)
+                {
+                    cooldown = false;
+                }
             }
             else
             {
                 GRAVITY = 1.5f;
+                targetPlat = isColliding(l);
             }
 
             pos.Y += GRAVITY;
@@ -154,7 +161,7 @@ namespace Cosmic_Escape
             updatePoints();
 
             //check for collision in gameobject update method
-            base.Update(gameTime, l);
+            base.Update(gameTime, targetPlat);
 
             //frame rate
             timeCounter += gameTime.ElapsedGameTime.Milliseconds / 1000f;
@@ -175,7 +182,11 @@ namespace Cosmic_Escape
         public override void Draw(SpriteBatch sb)
         {
             //sb.DrawString(parent.theFont, "Total Time: " + totalTime + "\nFrame: " + frameCounter, parent.textPos, Color.White);
-            sb.DrawString(parent.theFont, "Rectangle X: " + point3.X + "\nRectangle Y: " + point3.Y, parent.textPos, Color.White);
+            //sb.DrawString(parent.theFont, "Rectangle X: " + point4.X + "\nRectangle Y: " + point4.Y, parent.textPos, Color.White);
+            if (targetPlat != null)
+            {
+                sb.DrawString(parent.theFont, "Rectangle X: " + targetPlat.getDestRect().X + " Rectangle Y: " + targetPlat.getDestRect().Y, parent.textPos, Color.White);
+            }
             // Using Draw method 5 of 7
             if (facing == LEFT)
                 sb.Draw(tex, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.FlipHorizontally, 1.0f);

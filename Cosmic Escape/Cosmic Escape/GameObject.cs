@@ -44,23 +44,31 @@ namespace Cosmic_Escape
             parent = g;
         }
 
-        public virtual void Update(GameTime gametime, List<Platform> l)
+        public virtual void Update(GameTime gametime, Platform plat)
         {
-            foreach (Platform plat in l)
-            {
                 //this.point3.X < plat.point2.X && this.point4.X > plat.point1.X && 
                 //&& this.point3.Y >= plat.getDestRect().Top && this.point4.Y >= plat.getDestRect().Top
-                if (this.point3.X < plat.point2.X && this.point4.X > plat.point1.X && this.point3.Y >= plat.getDestRect().Top + 7 && this.point4.Y >= plat.getDestRect().Top + 7)
+                /*if (this.point3.X < plat.point2.X && this.point4.X > plat.point1.X && this.point3.Y >= plat.getDestRect().Top + 7 && this.point4.Y >= plat.getDestRect().Top + 7)
                 //if (this.destRect.Intersects(plat.getDestRect()))
                 {
                     this.isCollide = true;
                     break;
-                }
-                else
-                {
-                    this.isCollide = false;
-                }
+                }*/
+                //|| (this.point3.X > plat.point2.X && this.point4.X > plat.point2.X)
+            if (plat == null)
+            {
+                return;
             }
+            else if ((this.point4.X < plat.point1.X && this.point3.X < plat.point1.X) || (this.point4.X > plat.point2.X && this.point3.X > plat.point2.X) && this.isCollide)
+            {
+                this.isCollide = false;
+                    //break;
+            }
+            else if (this.point3.Y < plat.point1.Y && this.point4.Y < plat.point2.Y && this.isCollide)
+            {
+                this.isCollide = false;
+            }
+        
         }
 
         public virtual void Draw(SpriteBatch sb)
@@ -77,6 +85,22 @@ namespace Cosmic_Escape
             point3.Y = pos.Y + tex.Height / 2;
             point4.X = pos.X;
             point4.Y = pos.Y + tex.Height / 2;
+        }
+
+        public Platform isColliding(List<Platform> l)
+        {
+            foreach (Platform plat in l)
+            {
+                //this.point3.X < plat.point2.X && this.point4.X > plat.point1.X && 
+                //&& this.point3.Y >= plat.getDestRect().Top && this.point4.Y >= plat.getDestRect().Top
+                if (this.point3.X < plat.point2.X && this.point4.X > plat.point1.X && this.point3.Y >= plat.point2.Y + 7 && this.point4.Y >= plat.point1.Y + 7)
+                //if (this.destRect.Intersects(plat.getDestRect()))
+                {
+                    this.isCollide = true;
+                    return plat;
+                }
+            }
+            return null;
         }
     }
 }
