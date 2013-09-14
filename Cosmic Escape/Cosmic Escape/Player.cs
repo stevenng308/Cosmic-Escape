@@ -115,7 +115,7 @@ namespace Cosmic_Escape
                 srcRect.Y = state * 64;
                 srcRect.X = frameCounter * 64;
                 pos.Y += -7.5f * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                timer = totalTime + 0.01f;
+                timer = totalTime + 0.03f;
                 cooldown = true;
             }
 
@@ -182,7 +182,7 @@ namespace Cosmic_Escape
         public override void Draw(SpriteBatch sb)
         {
             //sb.DrawString(parent.theFont, "Total Time: " + totalTime + "\nFrame: " + frameCounter, parent.textPos, Color.White);
-            //sb.DrawString(parent.theFont, "Rectangle X: " + point4.X + "\nRectangle Y: " + point4.Y, parent.textPos, Color.White);
+            sb.DrawString(parent.theFont, "      X: " + point3.X + "\n      Y: " + point3.Y, pos, Color.White);
             if (targetPlat != null)
             {
                 sb.DrawString(parent.theFont, "Rectangle X: " + targetPlat.getDestRect().X + " Rectangle Y: " + targetPlat.getDestRect().Y, parent.textPos, Color.White);

@@ -46,29 +46,19 @@ namespace Cosmic_Escape
 
         public virtual void Update(GameTime gametime, Platform plat)
         {
-                //this.point3.X < plat.point2.X && this.point4.X > plat.point1.X && 
-                //&& this.point3.Y >= plat.getDestRect().Top && this.point4.Y >= plat.getDestRect().Top
-                /*if (this.point3.X < plat.point2.X && this.point4.X > plat.point1.X && this.point3.Y >= plat.getDestRect().Top + 7 && this.point4.Y >= plat.getDestRect().Top + 7)
-                //if (this.destRect.Intersects(plat.getDestRect()))
-                {
-                    this.isCollide = true;
-                    break;
-                }*/
-                //|| (this.point3.X > plat.point2.X && this.point4.X > plat.point2.X)
             if (plat == null)
             {
                 return;
             }
-            else if ((this.point4.X < plat.point1.X && this.point3.X < plat.point1.X) || (this.point4.X > plat.point2.X && this.point3.X > plat.point2.X) && this.isCollide)
+            else if ((this.point4.X < plat.point1.X && this.point3.X < plat.point1.X) || (this.point4.X > plat.point2.X && this.point3.X > plat.point2.X) && this.isCollide)//allows falling on edge of platforms
             {
                 this.isCollide = false;
                     //break;
             }
-            else if (this.point3.Y < plat.point1.Y && this.point4.Y < plat.point2.Y && this.isCollide)
+            else if (this.point3.Y < (plat.point2.Y - 10))
             {
                 this.isCollide = false;
             }
-        
         }
 
         public virtual void Draw(SpriteBatch sb)
@@ -91,10 +81,8 @@ namespace Cosmic_Escape
         {
             foreach (Platform plat in l)
             {
-                //this.point3.X < plat.point2.X && this.point4.X > plat.point1.X && 
-                //&& this.point3.Y >= plat.getDestRect().Top && this.point4.Y >= plat.getDestRect().Top
-                if (this.point3.X < plat.point2.X && this.point4.X > plat.point1.X && this.point3.Y >= plat.point2.Y + 7 && this.point4.Y >= plat.point1.Y + 7)
-                //if (this.destRect.Intersects(plat.getDestRect()))
+                if (this.point3.X < plat.point2.X && this.point4.X > plat.point1.X && this.point3.Y >= plat.point2.Y + 7 && this.point4.Y >= plat.point1.Y + 7
+                        && this.point3.Y < plat.point3.Y && this.point4.Y < plat.point4.Y) //stop falling through platforms
                 {
                     this.isCollide = true;
                     return plat;
