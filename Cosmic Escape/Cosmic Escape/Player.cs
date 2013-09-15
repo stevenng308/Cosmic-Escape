@@ -54,7 +54,8 @@ namespace Cosmic_Escape
             targetPlat = null;
             cooldown = cooldownF = false;
             isCollide = false;
-            timer = timerF = 0.0f;
+            timer = 0.0f;
+            timerF = 0.0f;
             power = new Power();
 
             point1 = p;
@@ -126,7 +127,6 @@ namespace Cosmic_Escape
             //activate power
             if (fKeyDown && cooldownF != true)
             {
-                //ftimerF = totalTime + 1.0f;
                 //cooldownF = true;
                 power.zeroGravity(this, gameTime);
             }
@@ -210,6 +210,14 @@ namespace Cosmic_Escape
         public bool getIsCollide()
         {
             return isCollide;
+        }
+        public bool getIsCollideTop()
+        {
+            return isCollideTop;
+        }
+        public bool getIsCollideBot()
+        {
+            return isCollideBot;
         }
 
         //get play position
