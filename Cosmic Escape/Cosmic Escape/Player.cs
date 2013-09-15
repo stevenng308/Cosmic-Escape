@@ -173,7 +173,7 @@ namespace Cosmic_Escape
 
             //check for collision with other gameobjects;
             //base.Update(gameTime, targetPlat);
-            targetPlat = isColliding(l); //chack for collision
+            targetPlat = isColliding(l); //check for collision
 
             //frame rate
             timeCounter += gameTime.ElapsedGameTime.Milliseconds / 1000f;
@@ -206,10 +206,10 @@ namespace Cosmic_Escape
                 sb.Draw(tex, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.None, 1.0f);
         }
 
-        //setter when collision detected
-        public void setIsCollide(bool flag)
+        //get iscolliding
+        public bool getIsCollide()
         {
-            isCollide = flag;
+            return isCollide;
         }
 
         //get play position

@@ -32,12 +32,15 @@ namespace Cosmic_Escape
         }
         public void zeroGravity(Player p)
         {
-            float gravity = p.getGravity();
-            double time = 10.0;
-            for (double t = 0.1; t < time; t += 0.005)
+            if (!p.getIsCollide())
             {
-                gravity = -(float)(gravity + t * 0.0125);
-                p.setGravity(gravity);
+                float gravity = p.getGravity();
+                double time = 10.0;
+                for (double t = 0.1; t < time; t += 0.005)
+                {
+                    gravity = -(float)(gravity + t * 0.00125);
+                    p.setGravity(gravity);
+                }
             }
             //p.cooldownF = true;
             p.setGravity(1.5f);
