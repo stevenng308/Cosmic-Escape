@@ -13,6 +13,7 @@ namespace Cosmic_Escape
 {
     class Power
     {
+
         public Power()
         {
 
@@ -30,7 +31,7 @@ namespace Cosmic_Escape
             p.cooldown = true;
             //p.setGravity(gravity);
         }
-        public void zeroGravity(Player p)
+        public void zeroGravity(Player p, GameTime gt)
         {
             if (!p.getIsCollide())
             {

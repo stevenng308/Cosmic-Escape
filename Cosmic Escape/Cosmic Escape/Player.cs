@@ -128,7 +128,7 @@ namespace Cosmic_Escape
             {
                 //ftimerF = totalTime + 1.0f;
                 //cooldownF = true;
-                power.zeroGravity(this);
+                power.zeroGravity(this, gameTime);
             }
             //gravity
             /*foreach (Platform p in l)
