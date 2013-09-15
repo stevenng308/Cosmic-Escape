@@ -13,15 +13,15 @@ namespace Cosmic_Escape
 {
     class Power
     {
-
+        double timer;
         public Power()
         {
-
+            timer = 0.0;
         }
 
         public void jumping(Player p)
         {
-            if (!p.getIsCollide())
+            if (p.getIsCollideBot())
             {
                 float gravity = p.getGravity();
                 double time = 15.0;
@@ -30,13 +30,18 @@ namespace Cosmic_Escape
                     gravity = -(float)(gravity + t * 0.0025);
                     p.setGravity(gravity);
                 }
-                p.cooldown = true;
+                //p.cooldown = true;
             }
             p.setGravity(1.5f);
         }
-        public void zeroGravity(Player p, GameTime gt)
+
+        public void zeroGravity(Player p, double timeLimit)
         {
-            if (!p.getIsCollideTop())
+            if (timer == 0 || timer >= 30)
+            {
+                timer = timeLimit;
+            }
+            if (!p.getIsCollideTop() && timer != 0)
             {
                 float gravity = p.getGravity();
                 double time = 10.0;
@@ -45,9 +50,28 @@ namespace Cosmic_Escape
                     gravity = -(float)(gravity + t * 0.00125);
                     p.setGravity(gravity);
                 }
+                timer -= 0.5;
+                if (timer == 0)
+                {
+                    p.cooldownF = true;
+                }
             }
             //p.cooldownF = true;
             p.setGravity(1.5f);
+        }
+
+        public void rechargeTimer(double num, Player p)
+        {
+            timer += num;
+            if (timer >= 30)
+            {
+                p.cooldownF = false;
+            }
+        }
+
+        public double getTimer()
+        {
+            return timer;
         }
     }
 }
