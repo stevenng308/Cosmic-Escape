@@ -30,7 +30,7 @@ namespace Cosmic_Escape
         const int LEFT = 0;
         const int RIGHT = 1;
         const float STOPPED = 0.0f;
-        const float WALK_SPEED = 3.5f;
+        const float WALK_SPEED = 3.0f;
         //const float RUN_SPEED = 4.0f;
         Rectangle tempRect;     // debugging purpose to show what rectangle is in contact
         Platform targetPlat;
@@ -176,7 +176,7 @@ namespace Cosmic_Escape
             targetPlat = isColliding(l); //check for collision
 
             //recharge time
-            if (cooldownF)
+            if (cooldownF || isCollideBot)
             {
                 power.rechargeTimer(0.5, this);
             }

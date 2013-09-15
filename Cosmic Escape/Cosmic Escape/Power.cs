@@ -62,8 +62,11 @@ namespace Cosmic_Escape
 
         public void rechargeTimer(double num, Player p)
         {
-            timer += num;
-            if (timer >= 30)
+            if (timer <= 30)
+            {
+                timer += num;
+            }
+            else
             {
                 p.cooldownF = false;
             }
