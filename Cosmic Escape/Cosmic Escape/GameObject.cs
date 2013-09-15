@@ -21,6 +21,7 @@ namespace Cosmic_Escape
         protected Game1 parent;
         protected bool isCollide;         // flag for rectangle collision
         protected Vector2 point1, point2, point3, point4;
+        protected float gravity;
 
         public GameObject()
         {
@@ -29,6 +30,7 @@ namespace Cosmic_Escape
             pos = new Vector2(0, 0);
             parent = new Game1();
             isCollide = false;
+            gravity = 1.5f;
 
             // we're not using this, since we're not doing rotation...
             origin = new Vector2(0, 0);
@@ -64,7 +66,7 @@ namespace Cosmic_Escape
 
         public virtual void Draw(SpriteBatch sb)
         {
-            return;
+            
         }
 
         public virtual void updatePoints()
@@ -86,6 +88,14 @@ namespace Cosmic_Escape
                         && this.point3.Y < plat.point3.Y && this.point4.Y < plat.point4.Y) //stop falling through platforms
                 {
                     this.isCollide = true;
+                    this.gravity = 0;
+                    return plat;
+                }
+                else if (this.point2.X < plat.point3.X && this.point1.X > plat.point4.X && this.point2.Y <= plat.point3.Y + 7 && this.point1.Y <= plat.point4.Y + 7
+                    && this.point2.Y > plat.point2.Y && this.point1.Y > plat.point1.Y) //cannot go below platforms
+                {
+                    this.isCollide = true;
+                    this.pos.Y += 0.0f;
                     return plat;
                 }
                 else if (this.point4.X <= plat.point3.X && this.point4.X > plat.point4.X && this.point1.Y > plat.point2.Y && this.point1.Y < plat.point3.Y)//cannot go into platform from the right
@@ -103,12 +113,18 @@ namespace Cosmic_Escape
                 else
                 {
                     this.isCollide = false;
+                    this.gravity = 1.5f;
                 }
             }
             return null;
         }
 
         public virtual float getWalkSpeed()
+        {
+            return 0.0f;
+        }
+
+        public virtual float getGravity()
         {
             return 0.0f;
         }

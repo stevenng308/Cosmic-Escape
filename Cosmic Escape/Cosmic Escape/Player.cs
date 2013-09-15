@@ -21,7 +21,7 @@ namespace Cosmic_Escape
         //Game1 parent;           // Game1
         int state;              // The state that the player is in IDLE/WALKING/JUMPING/RUNNING...
         int facing;             // Either facing LEFT or RIGHT.
-        bool cooldown, cooldownF;          // allow for jumping
+        public bool cooldown, cooldownF;          // allow for jumping
         //bool isCollide;         // flag for rectangle collision
         const int IDLE = 0;
         const int WALKING = 1;
@@ -32,7 +32,6 @@ namespace Cosmic_Escape
         const float STOPPED = 0.0f;
         const float WALK_SPEED = 3.5f;
         //const float RUN_SPEED = 4.0f;
-        float gravity = 1.5f;
         Rectangle tempRect;     // debugging purpose to show what rectangle is in contact
         Platform targetPlat;
         float timer, timerF;
@@ -118,16 +117,17 @@ namespace Cosmic_Escape
                 //state = JUMPING;
                 srcRect.Y = state * 64;
                 srcRect.X = frameCounter * 64;
-                pos.Y += -7.5f * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                //pos.Y += -7.5f * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                power.jumping(this);
                 timer = totalTime + 0.03f;
-                cooldown = true;
+                //cooldown = true;
             }
 
             //activate power
-            if (fKeyDown)
+            if (fKeyDown && cooldownF != true)
             {
-                timerF = totalTime + 1.0f;
-                cooldownF = true;
+                //ftimerF = totalTime + 1.0f;
+                //cooldownF = true;
                 power.zeroGravity(this);
             }
             //gravity
@@ -151,7 +151,7 @@ namespace Cosmic_Escape
             }*/
             if (isCollide || (pos.Y > parent.screenHeight - (tex.Height / 2 - 3)))
             {
-                gravity = 0.0f;
+                //gravity = 0.0f;
                 if (totalTime >= timer)
                 {
                     cooldown = false;
@@ -159,7 +159,7 @@ namespace Cosmic_Escape
             }
             else
             {
-                gravity = 1.5f;
+                //gravity = 1.5f;
                 //targetPlat = isColliding(l); //chack for collision
             }
 
@@ -231,7 +231,11 @@ namespace Cosmic_Escape
             pos.Y += gravity;
         }
 
-        public float getGravity()
+        public void resetGravity(float g)
+        {
+            gravity = g;
+        }
+        public override float getGravity()
         {
             return gravity;
         }

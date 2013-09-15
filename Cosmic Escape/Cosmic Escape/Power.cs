@@ -18,11 +18,29 @@ namespace Cosmic_Escape
 
         }
 
+        public void jumping(Player p)
+        {
+            float gravity = p.getGravity();
+            double time = 15.0;
+            for (double t = 0.1; t < time; t += 0.005)
+            {
+                gravity = -(float)(gravity + t * 0.0125);
+                p.setGravity(gravity);
+            }
+            p.cooldown = true;
+            //p.setGravity(gravity);
+        }
         public void zeroGravity(Player p)
         {
             float gravity = p.getGravity();
-            gravity = -(gravity + gravity * 0.5f);
-            p.setGravity(gravity);
+            double time = 10.0;
+            for (double t = 0.1; t < time; t += 0.005)
+            {
+                gravity = -(float)(gravity + t * 0.0125);
+                p.setGravity(gravity);
+            }
+            //p.cooldownF = true;
+            p.setGravity(1.5f);
         }
     }
 }
