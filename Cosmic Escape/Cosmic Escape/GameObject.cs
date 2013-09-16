@@ -19,8 +19,8 @@ namespace Cosmic_Escape
         protected Vector2 pos;            // Position of the player
         protected Vector2 origin;         // We're not using this, but have to have it for drawing
         protected Game1 parent;
-        protected bool isCollide, isCollideTop, isCollideBot;         // flag for rectangle collision
-        protected Vector2 point1, point2, point3, point4;
+        protected bool isCollide, isCollideTop, isCollideBot;         // flags for rectangle collision
+        protected Vector2 point1, point2, point3, point4;   //4 points of any rectangle
         protected float gravity;
 
         public GameObject()
@@ -48,7 +48,7 @@ namespace Cosmic_Escape
 
         public virtual void Update(GameTime gametime, Platform plat)
         {
-            if (plat == null)
+            /*if (plat == null)
             {
                 return;
             }
@@ -57,7 +57,7 @@ namespace Cosmic_Escape
                 this.isCollide = false;
                     //break;
             }
-            /*
+            
             else if (this.point3.Y < (plat.point2.Y - 10))
             {
                 this.isCollide = false;
@@ -84,35 +84,43 @@ namespace Cosmic_Escape
         {
             foreach (Platform plat in l)
             {
-                if (this.point3.X < plat.point2.X && this.point4.X > plat.point1.X && this.point3.Y >= plat.point2.Y + 7 && this.point4.Y >= plat.point1.Y + 7
-                        && this.point3.Y < plat.point3.Y && this.point4.Y < plat.point4.Y) //stop falling through platforms
+                //if (this.point3.X < plat.point2.X && this.point4.X > plat.point1.X && this.point3.Y >= plat.point2.Y + 7 && this.point4.Y >= plat.point1.Y + 7
+                        //&& this.point3.Y < plat.point3.Y && this.point4.Y < plat.point4.Y) //stop falling through platforms
+                if (((this.point3.X > plat.point1.X && this.point3.X < plat.point2.X) || (this.point4.X > plat.point1.X && this.point4.X < plat.point2.X)) && 
+                        (this.point3.Y >= plat.point2.Y && this.point3.Y < plat.point2.Y + 6))//don't fall through platform
                 {
                     this.isCollideBot = true;
                     this.gravity = 0;
                     return plat;
                 }
-                else if (this.point2.X < plat.point3.X && this.point1.X > plat.point4.X && this.point2.Y <= plat.point3.Y && this.point1.Y <= plat.point4.Y
-                    && this.point2.Y > plat.point2.Y && this.point1.Y > plat.point1.Y) //cannot go from below platforms
+                //else if (this.point2.X < plat.point3.X && this.point1.X > plat.point4.X && this.point2.Y <= plat.point3.Y && this.point1.Y <= plat.point4.Y
+                    //&& this.point2.Y > plat.point2.Y && this.point1.Y > plat.point1.Y) //cannot go from below platforms
+                if (((this.point3.X > plat.point1.X && this.point3.X < plat.point2.X) || (this.point4.X > plat.point1.X && this.point4.X < plat.point2.X)) &&
+                        (this.point2.Y <= plat.point3.Y && this.point2.Y > plat.point3.Y - 6))//cannot go through the bottom
                 {
                     this.isCollideTop = true;
                     this.pos.Y += 0;
                     return plat;
                 }
-                else if (this.point4.X <= plat.point3.X && this.point4.X > plat.point4.X && this.point1.Y > plat.point2.Y && this.point1.Y < plat.point3.Y)//cannot go into platform from the right
+                //else if (this.point4.X <= plat.point3.X && this.point4.X > plat.point4.X && this.point1.Y > plat.point2.Y && this.point1.Y < plat.point3.Y)//cannot go into platform from the right
+                else if (((this.point2.Y > plat.point1.Y && this.point2.Y < plat.point4.Y) || this.point3.Y > plat.point1.Y && this.point3.Y < plat.point4.Y) && 
+                        (this.point1.X <= plat.point2.X && this.point1.X > plat.point2.X - 6)) //cannot go into platform from the left
                 {
                     this.isCollide = true;
                     this.isCollideBot = true;
                     this.pos.X += this.getWalkSpeed();
                     return plat;
                 }
-                else if (this.point3.X >= plat.point4.X && this.point3.X < plat.point3.X && this.point2.Y > plat.point1.Y && this.point3.Y < plat.point3.Y)//cannot go into platform from the left
+                //else if (this.point3.X >= plat.point4.X && this.point3.X < plat.point3.X && this.point2.Y > plat.point1.Y && this.point3.Y < plat.point3.Y)//cannot go into platform from the left
+                else if (((this.point2.Y > plat.point1.Y && this.point2.Y < plat.point4.Y) || this.point3.Y > plat.point1.Y && this.point3.Y < plat.point4.Y) && 
+                        (this.point2.X >= plat.point1.X && this.point2.X < plat.point1.X + 6)) //cannot go into platform from the right
                 {
                     this.isCollide = true;
                     this.isCollideBot = true;
                     this.pos.X -= this.getWalkSpeed();
                     return plat;
                 }
-                else if ((pos.Y > parent.screenHeight - (tex.Height / 2 - 3)))
+                else if ((pos.Y > parent.screenHeight - (tex.Height / 2 - 3))) // fall off the screen on the bottom
                 {
                     this.isCollideBot = true;
                     this.gravity = 0;

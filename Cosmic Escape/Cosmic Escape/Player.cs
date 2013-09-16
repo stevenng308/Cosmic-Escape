@@ -148,7 +148,7 @@ namespace Cosmic_Escape
                 {
                     GRAVITY = 1.5f;
                 }
-            }*/
+            }
             if (isCollide || (pos.Y > parent.screenHeight - (tex.Height / 2 - 3)))
             {
                 //gravity = 0.0f;
@@ -157,7 +157,7 @@ namespace Cosmic_Escape
                     cooldown = false;
                 }
             }
-            /*else
+            else
             {
                 //gravity = 1.5f;
                 //targetPlat = isColliding(l); //chack for collision
@@ -175,7 +175,7 @@ namespace Cosmic_Escape
             //base.Update(gameTime, targetPlat);
             targetPlat = isColliding(l); //check for collision
 
-            //recharge time
+            //recharge timer for power
             if (cooldownF || isCollideBot)
             {
                 power.rechargeTimer(0.15, this);
