@@ -178,7 +178,7 @@ namespace Cosmic_Escape
             //recharge time
             if (cooldownF || isCollideBot)
             {
-                power.rechargeTimer(0.5, this);
+                power.rechargeTimer(0.15, this);
             }
 
             //frame rate

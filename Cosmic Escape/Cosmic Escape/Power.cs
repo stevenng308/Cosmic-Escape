@@ -47,11 +47,11 @@ namespace Cosmic_Escape
                 double time = 10.0;
                 for (double t = 0.1; t < time; t += 0.005)
                 {
-                    gravity = -(float)(gravity + t * 0.00125);
+                    gravity = -(float)(gravity + t * 0.0015);
                     p.setGravity(gravity);
                 }
-                timer -= 0.5;
-                if (timer == 0)
+                timer -= 0.8;
+                if (timer <= 0)
                 {
                     p.cooldownF = true;
                 }
