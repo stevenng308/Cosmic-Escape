@@ -116,7 +116,7 @@ namespace Cosmic_Escape
             if (spaceKeyDown && cooldown != true)
             {
                 //state = JUMPING;
-                srcRect.Y = state * 64;
+                 srcRect.Y = state * 64;
                 srcRect.X = frameCounter * 64;
                 pos.Y += -7.5f * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 timer = totalTime + 0.03f;
