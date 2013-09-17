@@ -63,12 +63,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="platform sheet.txt">
-      <Name>platform sheet</Name>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="SECRET IV - Adaptation.mp3">
       <Name>SECRET IV - Adaptation</Name>
       <Importer>Mp3Importer</Importer>
@@ -88,6 +82,12 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="platformsheet.txt">
+      <Name>platformsheet</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 

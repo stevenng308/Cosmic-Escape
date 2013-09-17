@@ -74,7 +74,7 @@ namespace Cosmic_Escape
             bgsong = Content.Load<Song>("SECRET IV - Adaptation");
             MediaPlayer.IsRepeating = true;
             //read block sheet
-            file = new System.IO.StreamReader("platform sheet.txt");
+            file = new System.IO.StreamReader("Content\\platformsheet.txt");
             block = Content.Load<Texture2D>("block1");
             textPos = new Vector2(10, 10);
 
