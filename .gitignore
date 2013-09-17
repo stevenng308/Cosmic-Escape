@@ -1,0 +1,24 @@
+*.user
+*.suo
+Cosmic Escape/Cosmic Escape/Cosmic Escape.csproj.Debug.cachefile
+Cosmic Escape/Cosmic Escape/bin/x86/Debug/Content/SECRET IV - Adaptation.wma
+Cosmic Escape/Cosmic Escape/bin/x86/Debug/Content/SECRET IV - Adaptation.xnb
+Cosmic Escape/Cosmic Escape/bin/x86/Debug/Content/background_ship.xnb
+Cosmic Escape/Cosmic Escape/bin/x86/Debug/Content/block1.xnb
+Cosmic Escape/Cosmic Escape/bin/x86/Debug/Content/myFont.xnb
+Cosmic Escape/Cosmic Escape/bin/x86/Debug/Content/platform sheet.txt
+Cosmic Escape/Cosmic Escape/bin/x86/Debug/Content/space_bg.xnb
+Cosmic Escape/Cosmic Escape/bin/x86/Debug/Content/zep spritesheet.xnb
+Cosmic Escape/Cosmic Escape/bin/x86/Debug/Cosmic Escape.exe
+Cosmic Escape/Cosmic Escape/bin/x86/Debug/Cosmic Escape.pdb
+Cosmic Escape/Cosmic Escape/bin/x86/Debug/platform sheet.txt
+Cosmic Escape/Cosmic Escape/obj/x86/Debug/Cosmic Escape.csproj.FileListAbsolute.txt
+Cosmic Escape/Cosmic Escape/obj/x86/Debug/Cosmic Escape.exe
+Cosmic Escape/Cosmic Escape/obj/x86/Debug/Cosmic Escape.pdb
+Cosmic Escape/Cosmic Escape/obj/x86/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+Cosmic Escape/Cosmic Escape/obj/x86/Debug/Microsoft.Xna.Framework.RuntimeProfile.txt
+Cosmic Escape/Cosmic Escape/obj/x86/Debug/cachefile-{F7252602-7376-4477-A031-75E453C378C8}-targetpath.txt
+Cosmic Escape/Cosmic EscapeContent/obj/x86/Debug/ContentPipeline.xml
+Cosmic Escape/Cosmic EscapeContent/obj/x86/Debug/Cosmic EscapeContent.contentproj.FileListAbsolute.txt
+Cosmic Escape/Cosmic EscapeContent/obj/x86/Debug/Cosmic EscapeContent.contentprojResolveAssemblyReference.cache
+Cosmic Escape/Cosmic EscapeContent/obj/x86/Debug/DesignTimeResolveAssemblyReferencesInput.cache
