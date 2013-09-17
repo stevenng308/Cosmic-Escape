@@ -18,29 +18,32 @@ namespace Cosmic_Escape
         protected Texture2D texBg;
         protected float backgroundCounter = 0.0f;
         protected int pos;
-        protected Vector2 playerPos;
+        protected Vector2 playerPos, startPos;
         protected Player alien;
 
         public Background()
         {
         }
 
-        public Background(Texture2D t, Player p)
+        public Background(Texture2D t)
         {
             texBg = t;
-            alien = p;
+            playerPos = new Vector2(0, 0);
         }
 
-        public void Update()
+        public void Update(Player p)
         {
-            playerPos = alien.getPos(); 
+            playerPos.X = p.getPos().X; 
         }
 
         public virtual void Draw(SpriteBatch sb)
         {
-            sb.Draw(texBg, new Vector2(pos, 0), Color.White);                         //draws background of the player's current view
-            sb.Draw(texBg, new Vector2(pos += texBg.Width, 0), Color.White);           //draws background to the right of player's current view
-            sb.Draw(texBg, new Vector2(pos -= texBg.Width, 0), Color.White);           //draws background to the left of player's current view
+            sb.Draw(texBg, new Vector2(0, 0), Color.White);                         //draws background of the player's current view
+            if (playerPos.X >= 350)
+            {
+                sb.Draw(texBg, new Vector2(800, 0), Color.White);           //draws background to the right of player's current view
+            }
+            sb.Draw(texBg, new Vector2(pos - texBg.Width, 0), Color.White);           //draws background to the left of player's current view
         }
 
     }

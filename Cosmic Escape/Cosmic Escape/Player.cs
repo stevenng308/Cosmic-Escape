@@ -148,7 +148,7 @@ namespace Cosmic_Escape
                 {
                     GRAVITY = 1.5f;
                 }
-            }*/
+            }
             if (isCollide || (pos.Y > parent.screenHeight - (tex.Height / 2 - 3)))
             {
                 //gravity = 0.0f;
@@ -157,7 +157,7 @@ namespace Cosmic_Escape
                     cooldown = false;
                 }
             }
-            /*else
+            else
             {
                 //gravity = 1.5f;
                 //targetPlat = isColliding(l); //chack for collision
@@ -175,7 +175,7 @@ namespace Cosmic_Escape
             //base.Update(gameTime, targetPlat);
             targetPlat = isColliding(l); //check for collision
 
-            //recharge time
+            //recharge timer for power
             if (cooldownF || isCollideBot)
             {
                 power.rechargeTimer(0.15, this);
@@ -200,7 +200,7 @@ namespace Cosmic_Escape
         public override void Draw(SpriteBatch sb)
         {
             //sb.DrawString(parent.theFont, "Total Time: " + totalTime + "\nFrame: " + frameCounter, parent.textPos, Color.White);
-            sb.DrawString(parent.theFont, "      X: " + point3.X + "\n      Y: " + point3.Y + "\n timeF: " + power.getTimer(), pos, Color.White);
+            sb.DrawString(parent.theFont, "      X: " + point1.X + "\n      Y: " + point1.Y + "\n timeF: " + power.getTimer(), pos, Color.White);
             if (targetPlat != null)
             {
                 sb.DrawString(parent.theFont, "Rectangle X: " + targetPlat.getDestRect().X + " Rectangle Y: " + targetPlat.getDestRect().Y, parent.textPos, Color.White);

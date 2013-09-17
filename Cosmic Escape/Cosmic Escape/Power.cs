@@ -35,13 +35,14 @@ namespace Cosmic_Escape
             p.setGravity(1.5f);
         }
 
+        //zero gravity power
         public void zeroGravity(Player p, double timeLimit)
         {
-            if (timer == 0 || timer >= 30)
+            if (timer == 0 || timer >= 30) //cannot assign the timer until it is recharged or when initialized
             {
                 timer = timeLimit;
             }
-            if (!p.getIsCollideTop() && timer != 0)
+            if (!p.getIsCollideTop() && timer != 0) //cannot continue floating if hitting platform from the bottom or the timer is zero
             {
                 float gravity = p.getGravity();
                 double time = 10.0;
@@ -57,18 +58,19 @@ namespace Cosmic_Escape
                 }
             }
             //p.cooldownF = true;
-            p.setGravity(1.5f);
+            p.setGravity(1.5f); //reset to default gravity
         }
 
+        //recharging timer gets called from update when cooldownF is true
         public void rechargeTimer(double num, Player p)
         {
-            if (timer <= 30)
+            if (timer <= 30)//recharge until 30
             {
                 timer += num;
             }
             else
             {
-                p.cooldownF = false;
+                p.cooldownF = false;//allow for power activation
             }
         }
 

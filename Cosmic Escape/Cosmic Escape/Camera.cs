@@ -16,6 +16,7 @@ namespace Cosmic_Escape
         public Camera(Viewport newView)
         {
             view = newView;
+            
         }
 
         public void Update(GameTime gameTime, int mid, Player alien)

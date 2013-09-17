@@ -14,10 +14,9 @@ namespace Cosmic_Escape
     class Space : Background
     {
 
-        public Space(Texture2D t, Player p)
+        public Space(Texture2D t)
         {
             texBg = t;
-            alien = p;
         }
 
         public void MoveBackground(float elapsedTime, Player p)

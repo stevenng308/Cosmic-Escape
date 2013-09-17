@@ -87,8 +87,8 @@ namespace Cosmic_Escape
             //Load Backgrounds and Initialize
             spaceBackgroundTex = Content.Load<Texture2D>("space_bg");                   
             shipBackgroundTex = Content.Load<Texture2D>("background_ship");             
-            background_space = new Space(spaceBackgroundTex, player);
-            background_ship = new Background(shipBackgroundTex, player);
+            background_space = new Space(spaceBackgroundTex);
+            background_ship = new Background(shipBackgroundTex);
 
             // Get the width and height of the window
             screenWidth = graphics.GraphicsDevice.Viewport.Width;
@@ -123,6 +123,8 @@ namespace Cosmic_Escape
             //moves space background
             background_space.MoveBackground((float)gameTime.ElapsedGameTime.TotalMilliseconds, player);
             
+            //update ship background
+            background_ship.Update(player);
             //start song
             if (!songstart)
             {

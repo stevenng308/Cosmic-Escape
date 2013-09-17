@@ -12,6 +12,7 @@ C:\Users\Steven\documents\visual studio 2010\Projects\Cosmic Escape\Cosmic Escap
 C:\Users\Steven\documents\visual studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\SECRET IV - Adaptation.wma
 C:\Users\Steven\Documents\Visual Studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\background_ship.xnb
 C:\Users\Steven\Documents\Visual Studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\space_bg.xnb
+C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\myFont.xnb
 C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\zep spritesheet.xnb
 C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\block1.xnb
@@ -22,6 +23,5 @@ C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\
 C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\platform sheet.txt
 C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Cosmic Escape.exe
 C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Cosmic Escape.pdb
-C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\obj\x86\Debug\Cosmic Escape.exe
 C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\obj\x86\Debug\Cosmic Escape.pdb
