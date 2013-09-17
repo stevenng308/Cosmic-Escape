@@ -7,8 +7,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\myFont.xnb</Output>
-      <Time>2013-09-08T18:12:32.2886902-04:00</Time>
+      <Output>C:\Users\Steven\documents\visual studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\myFont.xnb</Output>
+      <Time>2012-08-19T13:44:30-04:00</Time>
     </Item>
     <Item>
       <Source>zep spritesheet.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\zep spritesheet.xnb</Output>
-      <Time>2013-09-08T18:12:32.4266981-04:00</Time>
+      <Output>C:\Users\Steven\documents\visual studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\zep spritesheet.xnb</Output>
+      <Time>2013-08-31T15:14:36.3357562-04:00</Time>
     </Item>
     <Item>
       <Source>block1.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\block1.xnb</Output>
-      <Time>2013-09-08T18:12:32.2876902-04:00</Time>
+      <Output>C:\Users\Steven\documents\visual studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\block1.xnb</Output>
+      <Time>2013-08-31T16:48:33.4380638-04:00</Time>
     </Item>
     <Item>
       <Source>background_ship.png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\background_ship.xnb</Output>
-      <Time>2013-09-08T22:53:08.9926946-04:00</Time>
+      <Output>C:\Users\Steven\documents\visual studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\background_ship.xnb</Output>
+      <Time>2013-09-08T22:27:25.9800699-04:00</Time>
     </Item>
     <Item>
       <Source>space_bg.jpg</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\space_bg.xnb</Output>
-      <Time>2013-09-02T17:30:53.8138152-04:00</Time>
+      <Output>C:\Users\Steven\documents\visual studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\space_bg.xnb</Output>
+      <Time>2013-09-08T22:04:25.8007658-04:00</Time>
     </Item>
     <Item>
       <Source>SECRET IV - Adaptation.mp3</Source>
@@ -52,9 +52,9 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\SECRET IV - Adaptation.xnb</Output>
-      <Extra>C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\SECRET IV - Adaptation.wma</Extra>
-      <Time>2013-09-08T18:12:32.2596886-04:00</Time>
+      <Output>C:\Users\Steven\documents\visual studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\SECRET IV - Adaptation.xnb</Output>
+      <Extra>C:\Users\Steven\documents\visual studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\SECRET IV - Adaptation.wma</Extra>
+      <Time>2013-09-07T14:18:58.2919578-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -62,10 +62,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic EscapeContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic EscapeContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Zach\Documents\Cosmic-Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Steven\documents\visual studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic EscapeContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Steven\documents\visual studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Steven\documents\visual studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic EscapeContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Steven\documents\visual studio 2010\Projects\Cosmic Escape\Cosmic Escape\Cosmic Escape\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -94,7 +94,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2013-08-22T14:23:37.2621449-04:00</Value>
+        <Value>2013-08-17T12:51:31.5161872-04:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
