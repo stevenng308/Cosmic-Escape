@@ -13,9 +13,6 @@ namespace Cosmic_Escape
 {
     public class Background
     {
-
-        //Test comment !!!!!!!!!!!!!!!!!!!!!!!!!
-
         protected const int BACKGROUND_RATE = 60;     //controls speed of space and stars background outside the ship
         protected Texture2D texBg;
         protected float backgroundCounter = 0.0f;
