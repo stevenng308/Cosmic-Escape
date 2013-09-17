@@ -19,8 +19,9 @@ namespace Cosmic_Escape
         protected Vector2 pos;            // Position of the player
         protected Vector2 origin;         // We're not using this, but have to have it for drawing
         protected Game1 parent;
-        protected bool isCollide;         // flag for rectangle collision
+        protected bool isCollide, isCollideTop, isCollideBot;         // flag for rectangle collision
         protected Vector2 point1, point2, point3, point4;
+        protected float gravity;
 
         public GameObject()
         {
@@ -28,7 +29,8 @@ namespace Cosmic_Escape
             tex = null;
             pos = new Vector2(0, 0);
             parent = new Game1();
-            isCollide = false;
+            isCollide = isCollideBot = isCollideTop = false;
+            gravity = 1.5f;
 
             // we're not using this, since we're not doing rotation...
             origin = new Vector2(0, 0);
@@ -64,7 +66,7 @@ namespace Cosmic_Escape
 
         public virtual void Draw(SpriteBatch sb)
         {
-            return;
+            
         }
 
         public virtual void updatePoints()
@@ -85,30 +87,53 @@ namespace Cosmic_Escape
                 if (this.point3.X < plat.point2.X && this.point4.X > plat.point1.X && this.point3.Y >= plat.point2.Y + 7 && this.point4.Y >= plat.point1.Y + 7
                         && this.point3.Y < plat.point3.Y && this.point4.Y < plat.point4.Y) //stop falling through platforms
                 {
-                    this.isCollide = true;
+                    this.isCollideBot = true;
+                    this.gravity = 0;
+                    return plat;
+                }
+                else if (this.point2.X < plat.point3.X && this.point1.X > plat.point4.X && this.point2.Y <= plat.point3.Y && this.point1.Y <= plat.point4.Y
+                    && this.point2.Y > plat.point2.Y && this.point1.Y > plat.point1.Y) //cannot go from below platforms
+                {
+                    this.isCollideTop = true;
+                    this.pos.Y += 0;
                     return plat;
                 }
                 else if (this.point4.X <= plat.point3.X && this.point4.X > plat.point4.X && this.point1.Y > plat.point2.Y && this.point1.Y < plat.point3.Y)//cannot go into platform from the right
                 {
                     this.isCollide = true;
+                    this.isCollideBot = true;
                     this.pos.X += this.getWalkSpeed();
                     return plat;
                 }
-                else if (this.point3.X >= plat.point4.X && this.point3.X < plat.point3.X && this.point1.Y > plat.point2.Y && this.point1.Y < plat.point3.Y)//cannot go into platform from the left
+                else if (this.point3.X >= plat.point4.X && this.point3.X < plat.point3.X && this.point2.Y > plat.point1.Y && this.point3.Y < plat.point3.Y)//cannot go into platform from the left
                 {
                     this.isCollide = true;
+                    this.isCollideBot = true;
                     this.pos.X -= this.getWalkSpeed();
                     return plat;
+                }
+                else if ((pos.Y > parent.screenHeight - (tex.Height / 2 - 3)))
+                {
+                    this.isCollideBot = true;
+                    this.gravity = 0;
                 }
                 else
                 {
                     this.isCollide = false;
+                    this.isCollideTop = false;
+                    this.isCollideBot = false;
+                    this.gravity = 1.5f;
                 }
             }
             return null;
         }
 
         public virtual float getWalkSpeed()
+        {
+            return 0.0f;
+        }
+
+        public virtual float getGravity()
         {
             return 0.0f;
         }

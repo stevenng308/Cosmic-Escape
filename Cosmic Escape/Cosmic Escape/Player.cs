@@ -21,7 +21,7 @@ namespace Cosmic_Escape
         //Game1 parent;           // Game1
         int state;              // The state that the player is in IDLE/WALKING/JUMPING/RUNNING...
         int facing;             // Either facing LEFT or RIGHT.
-        bool cooldown, cooldownF;          // allow for jumping
+        public bool cooldown, cooldownF;          // allow for jumping
         //bool isCollide;         // flag for rectangle collision
         const int IDLE = 0;
         const int WALKING = 1;
@@ -30,9 +30,8 @@ namespace Cosmic_Escape
         const int LEFT = 0;
         const int RIGHT = 1;
         const float STOPPED = 0.0f;
-        const float WALK_SPEED = 3.5f;
+        const float WALK_SPEED = 3.0f;
         //const float RUN_SPEED = 4.0f;
-        float gravity = 1.5f;
         Rectangle tempRect;     // debugging purpose to show what rectangle is in contact
         Platform targetPlat;
         float timer, timerF;
@@ -55,7 +54,8 @@ namespace Cosmic_Escape
             targetPlat = null;
             cooldown = cooldownF = false;
             isCollide = false;
-            timer = timerF = 0.0f;
+            timer = 0.0f;
+            timerF = 0.0f;
             power = new Power();
 
             point1 = p;
@@ -118,17 +118,17 @@ namespace Cosmic_Escape
                 //state = JUMPING;
                  srcRect.Y = state * 64;
                 srcRect.X = frameCounter * 64;
-                pos.Y += -7.5f * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                //pos.Y += -7.5f * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                power.jumping(this);
                 timer = totalTime + 0.03f;
-                cooldown = true;
+                //cooldown = true;
             }
 
             //activate power
-            if (fKeyDown)
+            if (fKeyDown && cooldownF != true)
             {
-                timerF = totalTime + 1.0f;
-                cooldownF = true;
-                power.zeroGravity(this);
+                //cooldownF = true;
+                power.zeroGravity(this, 30);
             }
             //gravity
             /*foreach (Platform p in l)
@@ -151,17 +151,17 @@ namespace Cosmic_Escape
             }*/
             if (isCollide || (pos.Y > parent.screenHeight - (tex.Height / 2 - 3)))
             {
-                gravity = 0.0f;
+                //gravity = 0.0f;
                 if (totalTime >= timer)
                 {
                     cooldown = false;
                 }
             }
-            else
+            /*else
             {
-                gravity = 1.5f;
+                //gravity = 1.5f;
                 //targetPlat = isColliding(l); //chack for collision
-            }
+            }*/
 
             pos.Y += gravity;
             // Update the destination rectangle based on our position.
@@ -173,7 +173,13 @@ namespace Cosmic_Escape
 
             //check for collision with other gameobjects;
             //base.Update(gameTime, targetPlat);
-            targetPlat = isColliding(l); //chack for collision
+            targetPlat = isColliding(l); //check for collision
+
+            //recharge time
+            if (cooldownF || isCollideBot)
+            {
+                power.rechargeTimer(0.15, this);
+            }
 
             //frame rate
             timeCounter += gameTime.ElapsedGameTime.Milliseconds / 1000f;
@@ -194,7 +200,7 @@ namespace Cosmic_Escape
         public override void Draw(SpriteBatch sb)
         {
             //sb.DrawString(parent.theFont, "Total Time: " + totalTime + "\nFrame: " + frameCounter, parent.textPos, Color.White);
-            sb.DrawString(parent.theFont, "      X: " + point3.X + "\n      Y: " + point3.Y + "\n timeF: " + timerF, pos, Color.White);
+            sb.DrawString(parent.theFont, "      X: " + point3.X + "\n      Y: " + point3.Y + "\n timeF: " + power.getTimer(), pos, Color.White);
             if (targetPlat != null)
             {
                 sb.DrawString(parent.theFont, "Rectangle X: " + targetPlat.getDestRect().X + " Rectangle Y: " + targetPlat.getDestRect().Y, parent.textPos, Color.White);
@@ -206,10 +212,18 @@ namespace Cosmic_Escape
                 sb.Draw(tex, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.None, 1.0f);
         }
 
-        //setter when collision detected
-        public void setIsCollide(bool flag)
+        //get iscolliding
+        public bool getIsCollide()
         {
-            isCollide = flag;
+            return isCollide;
+        }
+        public bool getIsCollideTop()
+        {
+            return isCollideTop;
+        }
+        public bool getIsCollideBot()
+        {
+            return isCollideBot;
         }
 
         //get play position
@@ -231,7 +245,11 @@ namespace Cosmic_Escape
             pos.Y += gravity;
         }
 
-        public float getGravity()
+        public void resetGravity(float g)
+        {
+            gravity = g;
+        }
+        public override float getGravity()
         {
             return gravity;
         }

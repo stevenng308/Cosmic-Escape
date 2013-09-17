@@ -13,16 +13,68 @@ namespace Cosmic_Escape
 {
     class Power
     {
+        double timer;
         public Power()
         {
-
+            timer = 0.0;
         }
 
-        public void zeroGravity(Player p)
+        public void jumping(Player p)
         {
-            float gravity = p.getGravity();
-            gravity = -(gravity + gravity * 0.5f);
-            p.setGravity(gravity);
+            if (p.getIsCollideBot())
+            {
+                float gravity = p.getGravity();
+                double time = 15.0;
+                for (double t = 0.1; t < time; t += 0.005)
+                {
+                    gravity = -(float)(gravity + t * 0.0025);
+                    p.setGravity(gravity);
+                }
+                //p.cooldown = true;
+            }
+            p.setGravity(1.5f);
+        }
+
+        public void zeroGravity(Player p, double timeLimit)
+        {
+            if (timer == 0 || timer >= 30)
+            {
+                timer = timeLimit;
+            }
+            if (!p.getIsCollideTop() && timer != 0)
+            {
+                float gravity = p.getGravity();
+                double time = 10.0;
+                for (double t = 0.1; t < time; t += 0.005)
+                {
+                    gravity = -(float)(gravity + t * 0.0015);
+                    p.setGravity(gravity);
+                }
+                timer -= 0.8;
+                if (timer <= 0)
+                {
+                    p.cooldownF = true;
+                }
+            }
+            //p.cooldownF = true;
+            p.setGravity(1.5f);
+        }
+
+        public void rechargeTimer(double num, Player p)
+        {
+            if (timer <= 30)
+            {
+                timer += num;
+            }
+            else
+            {
+                p.cooldownF = false;
+            }
+        }
+
+        public double getTimer()
+        {
+            return timer;
         }
     }
 }
