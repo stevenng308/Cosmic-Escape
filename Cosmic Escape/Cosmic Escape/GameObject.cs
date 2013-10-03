@@ -95,7 +95,7 @@ namespace Cosmic_Escape
                 }
                 //else if (this.point2.X < plat.point3.X && this.point1.X > plat.point4.X && this.point2.Y <= plat.point3.Y && this.point1.Y <= plat.point4.Y
                     //&& this.point2.Y > plat.point2.Y && this.point1.Y > plat.point1.Y) //cannot go from below platforms
-                if (((this.point3.X > plat.point1.X && this.point3.X < plat.point2.X) || (this.point4.X > plat.point1.X && this.point4.X < plat.point2.X)) &&
+                else if (((this.point3.X > plat.point1.X && this.point3.X < plat.point2.X) || (this.point4.X > plat.point1.X && this.point4.X < plat.point2.X)) &&
                         (this.point2.Y <= plat.point3.Y && this.point2.Y > plat.point3.Y - 6))//cannot go through the bottom
                 {
                     this.isCollideTop = true;
@@ -116,7 +116,7 @@ namespace Cosmic_Escape
                         (this.point2.X >= plat.point1.X && this.point2.X < plat.point1.X + 6)) //cannot go into platform from the right
                 {
                     this.isCollide = true;
-                    this.isCollideBot = true;
+                    //this.isCollideBot = true;
                     this.pos.X -= this.getWalkSpeed();
                     return plat;
                 }

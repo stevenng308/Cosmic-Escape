@@ -75,7 +75,7 @@ namespace Cosmic_Escape
             //bool shiftDown = Keyboard.GetState().IsKeyDown(Keys.LeftShift);
             bool aKeyDown = Keyboard.GetState().IsKeyDown(Keys.A);
             bool dKeyDown = Keyboard.GetState().IsKeyDown(Keys.D);
-            bool fKeyDown = Keyboard.GetState().IsKeyDown(Keys.F);
+            bool fKeyDown = (Mouse.GetState().LeftButton == ButtonState.Pressed);
             bool spaceKeyDown = Keyboard.GetState().IsKeyDown(Keys.Space);
 
 

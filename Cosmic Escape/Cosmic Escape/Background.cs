@@ -19,7 +19,7 @@ namespace Cosmic_Escape
         protected const int BACKGROUND_RATE = 60;     //controls speed of space and stars background outside the ship
         protected Texture2D texBg;
         protected float backgroundCounter = 0.0f;
-        protected int pos;
+        protected int bgPos;
         int counter;
         protected Vector2 playerPos, startPos;
         protected Player alien;
@@ -33,6 +33,7 @@ namespace Cosmic_Escape
             texBg = t;
             playerPos = new Vector2(0, 0);
             counter = 0;
+            bgPos = 0;
         }
 
         public void Update(Player p)
@@ -42,13 +43,12 @@ namespace Cosmic_Escape
 
         public virtual void Draw(SpriteBatch sb)
         {
-            sb.Draw(texBg, new Vector2(0, 0), Color.White);                         //draws background of the player's current view
-            if (playerPos.X >= 350)
+            sb.Draw(texBg, new Vector2(bgPos, 0), Color.White);                         //draws background of the player's current view
+            for (counter = 0; counter < 10; counter++)
             {
-                for (counter = 0; counter < 10; counter++)
-                    sb.Draw(texBg, new Vector2((800 * counter), 0), Color.White);                   //draws background to the right of player's current view
+                sb.Draw(texBg, new Vector2((800 * counter), 0), Color.White);            //draws background to the right of player's current view
             }
-            sb.Draw(texBg, new Vector2(pos - texBg.Width, 0), Color.White);           //draws background to the left of player's current view
+            sb.Draw(texBg, new Vector2(bgPos - texBg.Width, 0), Color.White);           //draws background to the left of player's current view
         }
 
     }

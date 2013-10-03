@@ -83,13 +83,14 @@ namespace Cosmic_Escape
             shipBackgroundTex = Content.Load<Texture2D>("background_ship");             
             background_space = new Space(spaceBackgroundTex);
             background_ship = new Background(shipBackgroundTex);
+            this.IsMouseVisible = true;
 
             // Get the width and height of the window
             screenWidth = graphics.GraphicsDevice.Viewport.Width;
             screenHeight = graphics.GraphicsDevice.Viewport.Height;
 
             // Start the player off at the middle/bottom of the screen
-            Vector2 initialPlayerPos = new Vector2(400, 300);
+            Vector2 initialPlayerPos = new Vector2(0, 300);
             // Bring the player to life
             player = new Player(spritesheet, initialPlayerPos, this);
             // Platform list created

@@ -28,19 +28,19 @@ namespace Cosmic_Escape
                 return;
 
             backgroundCounter = 1000f / BACKGROUND_RATE;
-            pos--;
+            bgPos--;
 
-            if (pos < -texBg.Width)
+            if (bgPos < -texBg.Width)
             {
-                pos += texBg.Width;
+                bgPos += texBg.Width;
             }
         }
 
         public override void Draw(SpriteBatch sb)
         {
-            sb.Draw(texBg, new Vector2(pos, 0), Color.White);                         //draws background of the player's current view
-            sb.Draw(texBg, new Vector2(pos + texBg.Width, 0), Color.White);           //draws background to the right of player's current view
-            sb.Draw(texBg, new Vector2(pos - texBg.Width, 0), Color.White);           //draws background to the left of player's current view
+            sb.Draw(texBg, new Vector2(bgPos, 0), Color.White);                         //draws background of the player's current view
+            sb.Draw(texBg, new Vector2(bgPos + texBg.Width, 0), Color.White);           //draws background to the right of player's current view
+            sb.Draw(texBg, new Vector2(bgPos - texBg.Width, 0), Color.White);           //draws background to the left of player's current view
         }
 
     }
