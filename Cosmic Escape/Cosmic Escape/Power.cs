@@ -16,7 +16,7 @@ namespace Cosmic_Escape
         double timer;
         public Power()
         {
-            timer = 0.0;
+            timer = 30.0;
         }
 
         public void jumping(Player p)

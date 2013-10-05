@@ -19,7 +19,7 @@ namespace Cosmic_Escape
             texBg = t;
         }
 
-        public void MoveBackground(float elapsedTime, Player p)
+        public void MoveBackground(float elapsedTime, GameObject p)
         {
             playerPos = p.getPos();
             backgroundCounter -= elapsedTime;

@@ -20,27 +20,23 @@ namespace Cosmic_Escape
         const float WALK_SPEED = 1.0f;
         //bool walkLeft = true;
 
-        Player player;          //instantiates a instance of player class so we can access player position and use it to move enemies towards the player.
+        GameObject player;          //instantiates a instance of player class so we can access player position and use it to move enemies towards the player.
 
         //int frameCounter;     // Which frame of the animation we're in (a value between 0 and 23)
         //float frameRate;      // This should always be 1/24 (or 0.04167 seconds)
         //float timeCounter;      // How much time has elapsed since the last time we incremented the frame counter
         float totalTime;        // Total time elapsed
 
-        public Enemy(Texture2D t, Vector2 p, Game1 g)
+        public Enemy(Texture2D t, Vector2 p, Game1 g, GameObject user) : base(t, p, g)
         {
-            tex = t;
-            pos = p;
-            parent = g;
             totalTime = 0.0f;
             //timeCounter = 0.0f;
             //updateCounter = 0;
             //updateRate = 60;
-
-            player = new Player(player.getPos(), g);
+            player = user;
         }
        
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, List<Platform> l)
         {
 
             totalTime += gameTime.ElapsedGameTime.Milliseconds / 1000f;
@@ -64,6 +60,28 @@ namespace Cosmic_Escape
             //    walkLeft = false;
             //if (pos.X >= 350)
             //    walkLeft = true;
+
+            pos.Y += gravity;
+
+            //update the 4 points of the rectangle with new position
+            updatePoints();
+
+            //check for collision with other gameobjects;
+            isColliding(l); //check for collision
+        }
+
+
+        //update the 4 corners of a sprite's rectangle
+        //change this if the sprite sheet changes
+        public override void updatePoints()
+        {
+            point1 = pos;
+            point2.X = pos.X + tex.Width;
+            point2.Y = pos.Y;
+            point3.X = pos.X + tex.Width;
+            point3.Y = pos.Y + tex.Height;
+            point4.X = pos.X;
+            point4.Y = pos.Y + tex.Height;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

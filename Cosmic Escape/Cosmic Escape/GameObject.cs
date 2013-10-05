@@ -44,9 +44,15 @@ namespace Cosmic_Escape
             tex = t;
             pos = p;
             parent = g;
+
+            //4 corners of a gameobject's rectangle
+            point1 = p;
+            point2 = new Vector2(pos.X + tex.Width / 2, pos.Y);
+            point3 = new Vector2(pos.X + tex.Width / 2, pos.Y + tex.Height / 2);
+            point4 = new Vector2(pos.X, pos.Y + tex.Height / 2);
         }
 
-        public virtual void Update(GameTime gametime, Platform plat)
+        public virtual void Update(GameTime gameTime, List<Platform> l)
         {
             /*if (plat == null)
             {
@@ -69,6 +75,8 @@ namespace Cosmic_Escape
             
         }
 
+        //update the 4 corners of a sprite's rectangle
+        //change this if the sprite sheet changes
         public virtual void updatePoints()
         {
             point1 = pos;

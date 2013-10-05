@@ -24,8 +24,8 @@ namespace Cosmic_Escape
         Texture2D enemySprite;
 
         public int screenWidth, screenHeight;
-        Player player;
-        Enemy enemy;
+        GameObject player;
+        GameObject enemy;
         public SpriteFont theFont;
         public Vector2 textPos;
         Song bgsong;
@@ -89,23 +89,20 @@ namespace Cosmic_Escape
             background_space = new Space(spaceBackgroundTex);
             background_ship = new Background(shipBackgroundTex);
             this.IsMouseVisible = true;
+            Mouse.SetPosition(400, 240);
 
             // Get the width and height of the window
             screenWidth = graphics.GraphicsDevice.Viewport.Width;
             screenHeight = graphics.GraphicsDevice.Viewport.Height;
 
             // Start the player off at the middle/bottom of the screen
-<<<<<<< HEAD
             Vector2 initialPlayerPos = new Vector2(0, 300);
-=======
-            Vector2 initialPlayerPos = new Vector2(400, 300);
             // Test enemy start position
             Vector2 initialEnemyPos = new Vector2(250, 200);
->>>>>>> cd00cc319754083aa1d50202d556034203bebd5f
             // Bring the player to life
             player = new Player(spritesheet, initialPlayerPos, this);
             // Bring enemy to life
-            enemy = new Enemy(enemySprite, initialEnemyPos, this);
+            enemy = new Enemy(enemySprite, initialEnemyPos, this, player);
             // Platform list created
             platList = new List<Platform>();
             //Generate platforms
@@ -147,7 +144,7 @@ namespace Cosmic_Escape
             textPos.Y = camera.getCamera().Y;
 
             //Enemy update method. Deals with enemy movements, status, etc.
-            enemy.Update(gameTime);
+            enemy.Update(gameTime, platList);
 
            
 

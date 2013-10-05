@@ -33,7 +33,7 @@ namespace Cosmic_Escape
             bgPos = 0;
         }
 
-        public void Update(Player p)
+        public void Update(GameObject p)
         {
             playerPos.X = p.getPos().X; 
         }

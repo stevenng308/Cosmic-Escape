@@ -42,11 +42,8 @@ namespace Cosmic_Escape
         float timeCounter;      // How much time has elapsed since the last time we incremented the frame counter
         float totalTime;        // Total time elapsed
 
-        public Player(Texture2D t, Vector2 p, Game1 g)
+        public Player(Texture2D t, Vector2 p, Game1 g) : base(t, p, g)
         {
-            tex = t;
-            pos = p;
-            parent = g;
             state = IDLE;
             frameCounter = 0;
             frameRate = 1.0f / 2.0f;
@@ -58,10 +55,6 @@ namespace Cosmic_Escape
             timerF = 0.0f;
             power = new Power();
 
-            point1 = p;
-            point2 = new Vector2(pos.X + tex.Width / 2, pos.Y);
-            point3 = new Vector2(pos.X + tex.Width / 2, pos.Y + tex.Height / 2);
-            point4 = new Vector2(pos.X, pos.Y + tex.Height / 2);
             // we're not using this, since we're not doing rotation...
             origin = new Vector2(0, 0);
             // we'll start the source rectangle to be the idle row, frame 0
@@ -70,41 +63,14 @@ namespace Cosmic_Escape
             destRect = new Rectangle((int)pos.X, (int)pos.Y, 64, 64);
         }
 
-        public Player(Vector2 p, Game1 g)
-        {
-            //tex = t;
-            pos = p;
-            parent = g;
-            state = IDLE;
-            frameCounter = 0;
-            frameRate = 1.0f / 2.0f;
-            totalTime = 0.0f;
-            targetPlat = null;
-            cooldown = cooldownF = false;
-            isCollide = false;
-            timer = 0.0f;
-            timerF = 0.0f;
-            power = new Power();
-
-            point1 = p;
-            point2 = new Vector2(pos.X + tex.Width / 2, pos.Y);
-            point3 = new Vector2(pos.X + tex.Width / 2, pos.Y + tex.Height / 2);
-            point4 = new Vector2(pos.X, pos.Y + tex.Height / 2);
-            // we're not using this, since we're not doing rotation...
-            origin = new Vector2(0, 0);
-            // we'll start the source rectangle to be the idle row, frame 0
-            srcRect = new Rectangle(0, 0, tex.Width / 2, tex.Height / 2);
-            // the destination rect is where we're drawing on the screen
-            destRect = new Rectangle((int)pos.X, (int)pos.Y, 64, 64);
-        }
-
-        public void Update(GameTime gameTime, List<Platform> l)
+        public override void Update(GameTime gameTime, List<Platform> l)
         {
             // Determine which keys are down
             //bool shiftDown = Keyboard.GetState().IsKeyDown(Keys.LeftShift);
             bool aKeyDown = Keyboard.GetState().IsKeyDown(Keys.A);
             bool dKeyDown = Keyboard.GetState().IsKeyDown(Keys.D);
-            bool fKeyDown = (Mouse.GetState().LeftButton == ButtonState.Pressed);
+            bool fKeyDown = Keyboard.GetState().IsKeyDown(Keys.F);
+            bool leftClick = (Mouse.GetState().LeftButton == ButtonState.Pressed);
             bool spaceKeyDown = Keyboard.GetState().IsKeyDown(Keys.Space);
 
 
@@ -154,7 +120,7 @@ namespace Cosmic_Escape
             }
 
             //activate power
-            if (fKeyDown && cooldownF != true)
+            if ((fKeyDown || leftClick) && cooldownF != true)
             {
                 //cooldownF = true;
                 power.zeroGravity(this, 30);
