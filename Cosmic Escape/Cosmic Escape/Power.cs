@@ -14,9 +14,11 @@ namespace Cosmic_Escape
     class Power
     {
         double timer;
-        public Power()
+        Game1 parent;
+        public Power(Game1 g)
         {
             timer = 30.0;
+            parent = g;
         }
 
         public void jumping(Player p)
@@ -50,6 +52,10 @@ namespace Cosmic_Escape
                 {
                     gravity = -(float)(gravity + t * 0.0015);
                     p.setGravity(gravity);
+                    foreach (Enemy e in parent.enemyList)
+                    {
+                        e.setGravity(gravity);
+                    }
                 }
                 timer -= 0.8;
                 if (timer <= 0)

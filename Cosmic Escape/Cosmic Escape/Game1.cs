@@ -26,6 +26,7 @@ namespace Cosmic_Escape
         public int screenWidth, screenHeight;
         GameObject player;
         GameObject enemy;
+        public List<GameObject> enemyList;
         public SpriteFont theFont;
         public Vector2 textPos;
         Song bgsong;
@@ -95,6 +96,7 @@ namespace Cosmic_Escape
             screenWidth = graphics.GraphicsDevice.Viewport.Width;
             screenHeight = graphics.GraphicsDevice.Viewport.Height;
 
+            enemyList = new List<GameObject>();
             // Start the player off at the middle/bottom of the screen
             Vector2 initialPlayerPos = new Vector2(0, 300);
             // Test enemy start position
@@ -103,6 +105,7 @@ namespace Cosmic_Escape
             player = new Player(spritesheet, initialPlayerPos, this);
             // Bring enemy to life
             enemy = new Enemy(enemySprite, initialEnemyPos, this, player);
+            enemyList.Add(enemy);
             // Platform list created
             platList = new List<Platform>();
             //Generate platforms

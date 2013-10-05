@@ -53,7 +53,7 @@ namespace Cosmic_Escape
             isCollide = false;
             timer = 0.0f;
             timerF = 0.0f;
-            power = new Power();
+            power = new Power(g);
 
             // we're not using this, since we're not doing rotation...
             origin = new Vector2(0, 0);
@@ -231,22 +231,6 @@ namespace Cosmic_Escape
         public override float getWalkSpeed()
         {
             return WALK_SPEED;
-        }
-
-        //change gravity based on power used
-        public void setGravity(float g)
-        {
-            gravity = g;
-            pos.Y += gravity;
-        }
-
-        public void resetGravity(float g)
-        {
-            gravity = g;
-        }
-        public override float getGravity()
-        {
-            return gravity;
         }
     }
 }

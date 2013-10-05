@@ -149,9 +149,17 @@ namespace Cosmic_Escape
             return 0.0f;
         }
 
+        //change gravity if power is used for all gameobjects
+        public virtual void setGravity(float g)
+        {
+            gravity = g;
+            pos.Y += gravity;
+        }
+
+        //get gravity
         public virtual float getGravity()
         {
-            return 0.0f;
+            return gravity;
         }
 
         public virtual Vector2 getPos()
