@@ -69,6 +69,35 @@ namespace Cosmic_Escape
             // the destination rect is where we're drawing on the screen
             destRect = new Rectangle((int)pos.X, (int)pos.Y, 64, 64);
         }
+
+        public Player(Vector2 p, Game1 g)
+        {
+            //tex = t;
+            pos = p;
+            parent = g;
+            state = IDLE;
+            frameCounter = 0;
+            frameRate = 1.0f / 2.0f;
+            totalTime = 0.0f;
+            targetPlat = null;
+            cooldown = cooldownF = false;
+            isCollide = false;
+            timer = 0.0f;
+            timerF = 0.0f;
+            power = new Power();
+
+            point1 = p;
+            point2 = new Vector2(pos.X + tex.Width / 2, pos.Y);
+            point3 = new Vector2(pos.X + tex.Width / 2, pos.Y + tex.Height / 2);
+            point4 = new Vector2(pos.X, pos.Y + tex.Height / 2);
+            // we're not using this, since we're not doing rotation...
+            origin = new Vector2(0, 0);
+            // we'll start the source rectangle to be the idle row, frame 0
+            srcRect = new Rectangle(0, 0, tex.Width / 2, tex.Height / 2);
+            // the destination rect is where we're drawing on the screen
+            destRect = new Rectangle((int)pos.X, (int)pos.Y, 64, 64);
+        }
+
         public void Update(GameTime gameTime, List<Platform> l)
         {
             // Determine which keys are down
@@ -211,7 +240,7 @@ namespace Cosmic_Escape
             else
                 sb.Draw(tex, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.None, 1.0f);
         }
-
+        
         //get iscolliding
         public bool getIsCollide()
         {
