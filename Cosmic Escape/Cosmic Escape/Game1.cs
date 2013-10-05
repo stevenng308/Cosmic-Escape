@@ -20,8 +20,12 @@ namespace Cosmic_Escape
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D spritesheet;
+
+        Texture2D enemySprite;
+
         public int screenWidth, screenHeight;
         Player player;
+        Enemy enemy;
         public SpriteFont theFont;
         public Vector2 textPos;
         Song bgsong;
@@ -69,6 +73,7 @@ namespace Cosmic_Escape
             // default code that came with the project
             spriteBatch = new SpriteBatch(GraphicsDevice);
             spritesheet = Content.Load<Texture2D>("zep spritesheet");
+            enemySprite = Content.Load<Texture2D>("enemy_sprite");
             theFont = Content.Load<SpriteFont>("myFont");
             //load song
             bgsong = Content.Load<Song>("SECRET IV - Adaptation");
@@ -90,8 +95,12 @@ namespace Cosmic_Escape
 
             // Start the player off at the middle/bottom of the screen
             Vector2 initialPlayerPos = new Vector2(400, 300);
+            // Test enemy start position
+            Vector2 initialEnemyPos = new Vector2(250, 200);
             // Bring the player to life
             player = new Player(spritesheet, initialPlayerPos, this);
+            // Bring enemy to life
+            enemy = new Enemy(enemySprite, initialEnemyPos, this);
             // Platform list created
             platList = new List<Platform>();
             //Generate platforms
@@ -132,6 +141,11 @@ namespace Cosmic_Escape
             textPos.X = camera.getCamera().X + 25.0f;
             textPos.Y = camera.getCamera().Y;
 
+            //Enemy update method. Deals with enemy movements, status, etc.
+            enemy.Update(gameTime);
+
+           
+
             //update camera movement
             camera.Update(gameTime, 32, player);
             
@@ -158,6 +172,7 @@ namespace Cosmic_Escape
 
             //draw player
             player.Draw(spriteBatch);
+            enemy.Draw(spriteBatch);
             spriteBatch.End();
             
             base.Draw(gameTime);
