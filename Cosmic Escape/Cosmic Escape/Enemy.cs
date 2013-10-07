@@ -19,6 +19,7 @@ namespace Cosmic_Escape
         //float updateCounter = 0.0f;
         const float WALK_SPEED = 1.0f;
         //bool walkLeft = true;
+        bool chase = false;
 
         GameObject player;          //instantiates a instance of player class so we can access player position and use it to move enemies towards the player.
 
@@ -40,15 +41,19 @@ namespace Cosmic_Escape
         {
 
             totalTime += gameTime.ElapsedGameTime.Milliseconds / 1000f;
-            
-            if (player.getPos().X < pos.X)
+
+            if (Math.Abs((pos.X - player.getPos().X)) < 300 || chase == true)
             {
-                pos.X -= WALK_SPEED;
-            }
-            
-            if (player.getPos().X > pos.X)
-            {
-                pos.X += WALK_SPEED;
+                if (player.getPos().X < pos.X)
+                {
+                    pos.X -= WALK_SPEED;
+                }
+
+                if (player.getPos().X > pos.X)
+                {
+                    pos.X += WALK_SPEED;
+                }
+                chase = true;
             }
 
             //if (walkLeft == true)

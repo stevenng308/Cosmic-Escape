@@ -21,16 +21,20 @@ namespace Cosmic_Escape
         SpriteBatch spriteBatch;
         Texture2D spritesheet;
 
-        Texture2D enemySprite;
-
         public int screenWidth, screenHeight;
         GameObject player;
         GameObject enemy;
-        public List<GameObject> enemyList;
         public SpriteFont theFont;
         public Vector2 textPos;
         Song bgsong;
         bool songstart;
+
+        //enemy variables
+        string enemyInfo;
+        System.IO.StreamReader enemyFile;
+        Texture2D enemySprite;
+        public List<GameObject> enemyList;
+
 
         //background variables
         const int BACKGROUND_RATE = 60;     //controls speed of space and stars background outside the ship
@@ -43,7 +47,7 @@ namespace Cosmic_Escape
 
         //platform variables
         string platformInfo;
-        System.IO.StreamReader file;
+        System.IO.StreamReader platFile;
         Texture2D block;
         List<Platform> platList;
 
@@ -74,13 +78,18 @@ namespace Cosmic_Escape
             // default code that came with the project
             spriteBatch = new SpriteBatch(GraphicsDevice);
             spritesheet = Content.Load<Texture2D>("zep spritesheet");
-            enemySprite = Content.Load<Texture2D>("enemy_sprite");
             theFont = Content.Load<SpriteFont>("myFont");
+
+            //load enemies from file
+            enemyFile = new System.IO.StreamReader("Content\\enemyPosList.txt");
+            enemySprite = Content.Load<Texture2D>("enemy_sprite");
+
             //load song
             bgsong = Content.Load<Song>("SECRET IV - Adaptation");
             MediaPlayer.IsRepeating = true;
+
             //read block sheet
-            file = new System.IO.StreamReader("Content\\platformsheet.txt");
+            platFile = new System.IO.StreamReader("Content\\platformsheet.txt");
             block = Content.Load<Texture2D>("block1");
             textPos = new Vector2(10, 10);
 
@@ -99,22 +108,39 @@ namespace Cosmic_Escape
             enemyList = new List<GameObject>();
             // Start the player off at the middle/bottom of the screen
             Vector2 initialPlayerPos = new Vector2(0, 300);
+            
+            
+            
+            
             // Test enemy start position
-            Vector2 initialEnemyPos = new Vector2(250, 200);
+            //Vector2 initialEnemyPos = new Vector2(250, 200);
+            
+            
+            
             // Bring the player to life
             player = new Player(spritesheet, initialPlayerPos, this);
             // Bring enemy to life
-            enemy = new Enemy(enemySprite, initialEnemyPos, this, player);
-            enemyList.Add(enemy);
+            //enemy = new Enemy(enemySprite, initialEnemyPos, this, player);
+            //enemyList.Add(enemy);
+
             // Platform list created
             platList = new List<Platform>();
             //Generate platforms
-            while ((platformInfo = file.ReadLine()) != null)
+            while ((platformInfo = platFile.ReadLine()) != null)
             {
                 string[] tempStringArray = platformInfo.Split(',');
                 Vector2 tempVect = new Vector2(float.Parse(tempStringArray[0]), float.Parse(tempStringArray[1]));
                 Platform plat = new Platform(block, tempVect);
                 platList.Add(plat);
+            }
+
+            //Generate Enemies
+            while ((enemyInfo = enemyFile.ReadLine()) != null)
+            {
+                string[] tempStringArray = enemyInfo.Split(',');
+                Vector2 tempVect = new Vector2(float.Parse(tempStringArray[0]), float.Parse(tempStringArray[1]));
+                enemy = new Enemy(enemySprite, tempVect, this, player);
+                enemyList.Add(enemy);
             }
             
         }
@@ -147,10 +173,11 @@ namespace Cosmic_Escape
             textPos.Y = camera.getCamera().Y;
 
             //Enemy update method. Deals with enemy movements, status, etc.
-            enemy.Update(gameTime, platList);
 
-           
-
+            foreach (Enemy e in enemyList)
+            {
+                e.Update(gameTime, platList);
+            }
             //update camera movement
             camera.Update(gameTime, 32, player);
             
@@ -175,9 +202,14 @@ namespace Cosmic_Escape
                 p.Draw(spriteBatch, theFont);
             }
 
+            foreach (Enemy e in enemyList)
+            {
+                e.Draw(spriteBatch);
+            }
+
             //draw player
             player.Draw(spriteBatch);
-            enemy.Draw(spriteBatch);
+            //enemy.Draw(spriteBatch);
             spriteBatch.End();
             
             base.Draw(gameTime);
