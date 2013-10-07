@@ -20,6 +20,7 @@ namespace Cosmic_Escape
         const float WALK_SPEED = 1.0f;
         //bool walkLeft = true;
         bool chase = false;
+        bool facingLeft = true;
 
         GameObject player;          //instantiates a instance of player class so we can access player position and use it to move enemies towards the player.
 
@@ -48,11 +49,13 @@ namespace Cosmic_Escape
                 if (player.getPos().X < pos.X)
                 {
                     pos.X -= WALK_SPEED;
+                    facingLeft = true;
                 }
 
                 if (player.getPos().X > pos.X)
                 {
                     pos.X += WALK_SPEED;
+                    facingLeft = false;
                 }
                 chase = true;
             }
@@ -109,7 +112,15 @@ namespace Cosmic_Escape
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(tex, pos, Color.White);
+            if (facingLeft == true)
+            {
+                spriteBatch.Draw(tex, pos, Color.White);
+            }
+            if (facingLeft == false)
+            {
+                //spriteBatch.Draw(tex, pos, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.FlipHorizontally, 1.0f);
+                spriteBatch.Draw(tex, pos, null, Color.White, 0.0f, origin, 1, SpriteEffects.FlipHorizontally, 0.0f);
+            }
         }
 
 
