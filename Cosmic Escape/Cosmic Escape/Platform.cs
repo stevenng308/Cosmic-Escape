@@ -39,11 +39,5 @@ namespace Cosmic_Escape
             sb.Draw(tex, destRect, Color.White);
             sb.DrawString(font, "point1 X: " + point1.X + "\npoint2 x: " + point2.X, pos, Color.White);
         }
-
-        //get the rectangle of the platform
-        public Rectangle getDestRect()
-        {
-            return destRect;
-        }
     }
 }
