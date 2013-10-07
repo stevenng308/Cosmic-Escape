@@ -25,7 +25,7 @@ namespace Cosmic_Escape
         GameObject player;
         GameObject enemy;
         public SpriteFont theFont;
-        public Vector2 textPos;
+        public Vector2 textPos, healthPos;
         Song bgsong;
         bool songstart;
 
@@ -91,7 +91,8 @@ namespace Cosmic_Escape
             //read block sheet
             platFile = new System.IO.StreamReader("Content\\platformsheet.txt");
             block = Content.Load<Texture2D>("block1");
-            textPos = new Vector2(10, 10);
+            textPos = new Vector2(10, 30);
+            healthPos = new Vector2(10, 10);
 
             //Load Backgrounds and Initialize
             spaceBackgroundTex = Content.Load<Texture2D>("space_bg");                   
@@ -170,8 +171,9 @@ namespace Cosmic_Escape
             // to know which image/frame to draw
             player.Update(gameTime, platList);
             textPos.X = camera.getCamera().X + 25.0f;
-            textPos.Y = camera.getCamera().Y;
+            textPos.Y = camera.getCamera().Y + 25.0f;
 
+            healthPos.X = camera.getCamera().X + 25.0f;
             //Enemy update method. Deals with enemy movements, status, etc.
 
             foreach (Enemy e in enemyList)

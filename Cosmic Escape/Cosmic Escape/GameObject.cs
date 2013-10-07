@@ -162,6 +162,22 @@ namespace Cosmic_Escape
             return gravity;
         }
 
+        public virtual Rectangle getDestRect()
+        {
+            return destRect;
+        }
+
+        public virtual void setHealth(int i)
+        {
+
+        }
+
+
+        public virtual void setCollideFeedback(float i)
+        {
+
+        }
+
         public virtual Vector2 getPos()
         {
             return new Vector2(0,0);

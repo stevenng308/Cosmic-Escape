@@ -35,6 +35,7 @@ namespace Cosmic_Escape
             //updateCounter = 0;
             //updateRate = 60;
             player = user;
+            destRect = new Rectangle(0, 0, tex.Width, tex.Height);
         }
        
         public override void Update(GameTime gameTime, List<Platform> l)
@@ -67,12 +68,28 @@ namespace Cosmic_Escape
             //    walkLeft = true;
 
             pos.Y += gravity;
+            // Update the destination rectangle based on our position.
+            destRect.X = (int)pos.X;
+            destRect.Y = (int)pos.Y;
 
             //update the 4 points of the rectangle with new position
             updatePoints();
 
             //check for collision with other gameobjects;
-            isColliding(l); //check for collision
+            isColliding(l); //check for collision with platforms
+
+            if (destRect.Intersects(player.getDestRect()))
+            {
+                player.setHealth(1);
+                if (player.getPos().X < pos.X)
+                {
+                    player.setCollideFeedback(-WALK_SPEED);
+                }
+                else if (player.getPos().X > pos.X)
+                {
+                    player.setCollideFeedback(WALK_SPEED);
+                }
+            }
         }
 
 

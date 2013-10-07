@@ -36,6 +36,7 @@ namespace Cosmic_Escape
         Platform targetPlat;
         float timer, timerF;
         Power power;
+        int health;
 
         int frameCounter;       // Which frame of the animation we're in (a value between 0 and 23)
         float frameRate;        // This should always be 1/24 (or 0.04167 seconds)
@@ -54,6 +55,7 @@ namespace Cosmic_Escape
             timer = 0.0f;
             timerF = 0.0f;
             power = new Power(g);
+            health = 5;
 
             // we're not using this, since we're not doing rotation...
             origin = new Vector2(0, 0);
@@ -196,6 +198,7 @@ namespace Cosmic_Escape
         {
             //sb.DrawString(parent.theFont, "Total Time: " + totalTime + "\nFrame: " + frameCounter, parent.textPos, Color.White);
             sb.DrawString(parent.theFont, "      X: " + point3.X + "\n      Y: " + point3.Y + "\n timeF: " + power.getTimer(), pos, Color.White);
+            sb.DrawString(parent.theFont, "HP: " + health, parent.healthPos, Color.White);
             if (targetPlat != null)
             {
                 sb.DrawString(parent.theFont, "Rectangle X: " + targetPlat.getDestRect().X + " Rectangle Y: " + targetPlat.getDestRect().Y, parent.textPos, Color.White);
@@ -219,6 +222,16 @@ namespace Cosmic_Escape
         public bool getIsCollideBot()
         {
             return isCollideBot;
+        }
+
+        public override void setHealth(int i)
+        {
+            health -= i;
+        }
+
+        public override void setCollideFeedback(float i)
+        {
+            pos.X += i * 15.0f;
         }
 
         //get play position
