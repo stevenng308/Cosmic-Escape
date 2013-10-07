@@ -172,6 +172,15 @@ namespace Cosmic_Escape
 
         }
 
+        public virtual void setMode(bool m)
+        {
+
+        }
+
+        public virtual bool getMode()
+        {
+            return false;
+        }
 
         public virtual void setCollideFeedback(float i)
         {

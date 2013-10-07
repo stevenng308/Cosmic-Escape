@@ -77,9 +77,10 @@ namespace Cosmic_Escape
 
             //check for collision with other gameobjects;
             isColliding(l); //check for collision with platforms
-
-            if (destRect.Intersects(player.getDestRect()))
+            //check if colliding with player
+            if (destRect.Intersects(player.getDestRect()) && player.getMode())
             {
+                player.setMode(false);
                 player.setHealth(1);
                 if (player.getPos().X < pos.X)
                 {

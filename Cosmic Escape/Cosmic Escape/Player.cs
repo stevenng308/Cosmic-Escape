@@ -34,9 +34,10 @@ namespace Cosmic_Escape
         //const float RUN_SPEED = 4.0f;
         Rectangle tempRect;     // debugging purpose to show what rectangle is in contact
         Platform targetPlat;
-        float timer, timerF;
+        float timer, timerInvulnerable;
         Power power;
         int health;
+        bool godMode;
 
         int frameCounter;       // Which frame of the animation we're in (a value between 0 and 23)
         float frameRate;        // This should always be 1/24 (or 0.04167 seconds)
@@ -53,9 +54,10 @@ namespace Cosmic_Escape
             cooldown = cooldownF = false;
             isCollide = false;
             timer = 0.0f;
-            timerF = 0.0f;
+            timerInvulnerable = 0.0f;
             power = new Power(g);
             health = 5;
+            godMode = true;
 
             // we're not using this, since we're not doing rotation...
             origin = new Vector2(0, 0);
@@ -75,6 +77,8 @@ namespace Cosmic_Escape
             bool leftClick = (Mouse.GetState().LeftButton == ButtonState.Pressed);
             bool spaceKeyDown = Keyboard.GetState().IsKeyDown(Keys.Space);
 
+            int mouseX = Mouse.GetState().X;
+            int mouseY = Mouse.GetState().Y;
 
             // This aggregates the amount of time that has elapsed since the last frame was called
             totalTime += gameTime.ElapsedGameTime.Milliseconds / 1000f;
@@ -178,6 +182,25 @@ namespace Cosmic_Escape
                 power.rechargeTimer(0.15, this);
             }
 
+            //invulnerable timer
+            if (!godMode)
+            {
+                timerInvulnerable -= 0.1f;
+                if (timerInvulnerable < 0)
+                {
+                    godMode = true;
+                }
+            }
+            //throwing enemies
+            /*if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                if (mouseX <= (pos.X + 30) && mouseX >= (pos.X - 30)) && (mouseY <= (pos.Y + 30) && mouseY >= (pos.Y - 30)))
+                {
+                    //allows moving the enemy
+                    pos.X = mouseX;
+                    pos.Y = mouseY;
+                }
+            }*/
             //frame rate
             timeCounter += gameTime.ElapsedGameTime.Milliseconds / 1000f;
             if (timeCounter >= frameRate)
@@ -224,6 +247,17 @@ namespace Cosmic_Escape
             return isCollideBot;
         }
 
+        public override bool getMode()
+        {
+            return godMode;
+        }
+
+        public override void setMode(bool m)
+        {
+            godMode = m;
+            timerInvulnerable = 10;
+        }
+
         public override void setHealth(int i)
         {
             health -= i;
@@ -231,7 +265,10 @@ namespace Cosmic_Escape
 
         public override void setCollideFeedback(float i)
         {
-            pos.X += i * 15.0f;
+            for (int j = 0; j < 10; j++)
+            {
+                pos.X += i * (float)j;
+            }
         }
 
         //get play position
