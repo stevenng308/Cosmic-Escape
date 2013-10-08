@@ -65,7 +65,7 @@ namespace Cosmic_Escape
             // we'll start the source rectangle to be the idle row, frame 0
             srcRect = new Rectangle(0, 0, tex.Width / 2, tex.Height / 2);
             // the destination rect is where we're drawing on the screen
-            destRect = new Rectangle((int)pos.X, (int)pos.Y, 64, 64);
+            destRect = new Rectangle((int)pos.X, (int)pos.Y, tex.Width / 2, tex.Height / 2);
         }
 
         public override void Update(GameTime gameTime, List<Platform> l)
@@ -95,8 +95,8 @@ namespace Cosmic_Escape
             {
                 facing = LEFT;
                 state = WALKING;
-                srcRect.Y = state * 64;
-                srcRect.X = frameCounter * 64;
+                srcRect.Y = state * tex.Height / 2;
+                srcRect.X = frameCounter * tex.Width / 2;
                 pos.X -= WALK_SPEED;
                 
             }
@@ -106,8 +106,8 @@ namespace Cosmic_Escape
             {
                 facing = RIGHT;
                 state = WALKING;
-                srcRect.Y = state * 64;
-                srcRect.X = frameCounter * 64;
+                srcRect.Y = state * tex.Height / 2 ;
+                srcRect.X = frameCounter * tex.Width / 2;
                 pos.X += WALK_SPEED;
                 
             }
@@ -116,16 +116,16 @@ namespace Cosmic_Escape
             else
             {
                 state = IDLE;
-                srcRect.Y = state * 64;
-                srcRect.X = frameCounter * 64;
+                srcRect.Y = state * tex.Height / 2;
+                srcRect.X = frameCounter * tex.Width / 2;
             }
 
             //jumping
             if (spaceKeyDown && cooldown != true)
             {
                 //state = JUMPING;
-                srcRect.Y = state * 64;
-                srcRect.X = frameCounter * 64;
+                srcRect.Y = state * tex.Height / 2;
+                srcRect.X = frameCounter * tex.Width / 2;
                 //pos.Y += -7.5f * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 power.jumping(this);
                 timer = totalTime + 0.03f;
@@ -231,7 +231,7 @@ namespace Cosmic_Escape
         public override void Draw(SpriteBatch sb)
         {
             //sb.DrawString(parent.theFont, "Total Time: " + totalTime + "\nFrame: " + frameCounter, parent.textPos, Color.White);
-            sb.DrawString(parent.theFont, "      X: " + mouseXZ + "\n      Y: " + mouseYZ + "\n timeF: " + power.getTimer(), pos, Color.White);
+            sb.DrawString(parent.theFont, "      X: " + point4.X + "\n      Y: " + point4.Y + "\n timeF: " + power.getTimer(), pos, Color.White);
             sb.DrawString(parent.theFont, "HP: " + health, parent.healthPos, Color.White);
             if (targetPlat != null)
             {

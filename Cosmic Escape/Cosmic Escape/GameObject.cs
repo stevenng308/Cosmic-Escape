@@ -95,7 +95,7 @@ namespace Cosmic_Escape
                 //if (this.point3.X < plat.point2.X && this.point4.X > plat.point1.X && this.point3.Y >= plat.point2.Y + 7 && this.point4.Y >= plat.point1.Y + 7
                         //&& this.point3.Y < plat.point3.Y && this.point4.Y < plat.point4.Y) //stop falling through platforms
                 if (((this.point3.X > plat.point1.X && this.point3.X < plat.point2.X) || (this.point4.X > plat.point1.X && this.point4.X < plat.point2.X)) && 
-                        (this.point3.Y >= plat.point2.Y && this.point3.Y < plat.point2.Y + 6))//don't fall through platform
+                        (this.point3.Y >= plat.point2.Y && this.point3.Y < plat.point2.Y + 9))//don't fall through platform
                 {
                     this.isCollideBot = true;
                     this.gravity = 0;
@@ -104,7 +104,7 @@ namespace Cosmic_Escape
                 //else if (this.point2.X < plat.point3.X && this.point1.X > plat.point4.X && this.point2.Y <= plat.point3.Y && this.point1.Y <= plat.point4.Y
                     //&& this.point2.Y > plat.point2.Y && this.point1.Y > plat.point1.Y) //cannot go from below platforms
                 else if (((this.point3.X > plat.point1.X && this.point3.X < plat.point2.X) || (this.point4.X > plat.point1.X && this.point4.X < plat.point2.X)) &&
-                        (this.point2.Y <= plat.point3.Y && this.point2.Y > plat.point3.Y - 6))//cannot go through the bottom
+                        (this.point2.Y <= plat.point3.Y && this.point2.Y > plat.point3.Y - 9))//cannot go through the bottom
                 {
                     this.isCollideTop = true;
                     this.pos.Y += 0;
@@ -112,7 +112,7 @@ namespace Cosmic_Escape
                 }
                 //else if (this.point4.X <= plat.point3.X && this.point4.X > plat.point4.X && this.point1.Y > plat.point2.Y && this.point1.Y < plat.point3.Y)//cannot go into platform from the right
                 else if (((this.point2.Y > plat.point1.Y && this.point2.Y < plat.point4.Y) || this.point3.Y > plat.point1.Y && this.point3.Y < plat.point4.Y) && 
-                        (this.point1.X <= plat.point2.X && this.point1.X > plat.point2.X - 6)) //cannot go into platform from the left
+                        (this.point1.X <= plat.point2.X && this.point1.X > plat.point2.X - 9)) //cannot go into platform from the left
                 {
                     this.isCollide = true;
                     this.isCollideBot = true;
@@ -121,14 +121,14 @@ namespace Cosmic_Escape
                 }
                 //else if (this.point3.X >= plat.point4.X && this.point3.X < plat.point3.X && this.point2.Y > plat.point1.Y && this.point3.Y < plat.point3.Y)//cannot go into platform from the left
                 else if (((this.point2.Y > plat.point1.Y && this.point2.Y < plat.point4.Y) || this.point3.Y > plat.point1.Y && this.point3.Y < plat.point4.Y) && 
-                        (this.point2.X >= plat.point1.X && this.point2.X < plat.point1.X + 6)) //cannot go into platform from the right
+                        (this.point2.X >= plat.point1.X && this.point2.X < plat.point1.X + 9)) //cannot go into platform from the right
                 {
                     this.isCollide = true;
                     //this.isCollideBot = true;
                     this.pos.X -= this.getWalkSpeed();
                     return plat;
                 }
-                else if ((pos.Y > parent.screenHeight - (tex.Height / 2 + 10))) // fall off the screen on the bottom
+                else if ((pos.Y > parent.screenHeight - (tex.Height + 10))) // fall off the screen on the bottom
                 {
                     this.isCollideBot = true;
                     this.gravity = 0;

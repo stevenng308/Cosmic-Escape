@@ -112,15 +112,7 @@ namespace Cosmic_Escape
             enemyList = new List<GameObject>();
             // Start the player off at the middle/bottom of the screen
             Vector2 initialPlayerPos = new Vector2(0, 300);
-            
-            
-            
-            
-            // Test enemy start position
-            //Vector2 initialEnemyPos = new Vector2(250, 200);
-            
-            
-            
+
             // Bring the player to life
             player = new Player(spritesheet, initialPlayerPos, this);
             // Bring enemy to life
