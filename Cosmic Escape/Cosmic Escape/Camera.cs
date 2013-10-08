@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Cosmic_Escape
 {
-    class Camera
+    public class Camera
     {
         public Matrix transform;
         Viewport view;
@@ -31,6 +31,5 @@ namespace Cosmic_Escape
         {
             return center;
         }
-
     }
 }

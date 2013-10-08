@@ -128,7 +128,7 @@ namespace Cosmic_Escape
                     this.pos.X -= this.getWalkSpeed();
                     return plat;
                 }
-                else if ((pos.Y > parent.screenHeight - (tex.Height / 2 - 3))) // fall off the screen on the bottom
+                else if ((pos.Y > parent.screenHeight - (tex.Height / 2 + 10))) // fall off the screen on the bottom
                 {
                     this.isCollideBot = true;
                     this.gravity = 0;
@@ -190,6 +190,12 @@ namespace Cosmic_Escape
         public virtual Vector2 getPos()
         {
             return new Vector2(0,0);
+        }
+
+        public virtual void setPos()
+        {
+            pos.X = 0;
+            pos.Y = 0;
         }
     }
 

@@ -38,6 +38,7 @@ namespace Cosmic_Escape
         Power power;
         int health;
         bool godMode;
+        float mouseXZ, mouseYZ;
 
         int frameCounter;       // Which frame of the animation we're in (a value between 0 and 23)
         float frameRate;        // This should always be 1/24 (or 0.04167 seconds)
@@ -77,8 +78,14 @@ namespace Cosmic_Escape
             bool leftClick = (Mouse.GetState().LeftButton == ButtonState.Pressed);
             bool spaceKeyDown = Keyboard.GetState().IsKeyDown(Keys.Space);
 
-            int mouseX = Mouse.GetState().X;
-            int mouseY = Mouse.GetState().Y;
+            Vector2 mousePosition = new Vector2(0, 0);
+            Matrix viewMatrix = parent.camera.transform;
+            mousePosition.X = Mouse.GetState().X;
+            mousePosition.Y = Mouse.GetState().Y;
+
+            viewMatrix = Matrix.Invert(viewMatrix);
+            mouseXZ = mousePosition.X ;
+            mouseYZ = mousePosition.Y;
 
             // This aggregates the amount of time that has elapsed since the last frame was called
             totalTime += gameTime.ElapsedGameTime.Milliseconds / 1000f;
@@ -126,7 +133,7 @@ namespace Cosmic_Escape
             }
 
             //activate power
-            if ((fKeyDown || leftClick) && cooldownF != true)
+            if ((fKeyDown) && cooldownF != true)
             {
                 //cooldownF = true;
                 power.zeroGravity(this, 30);
@@ -192,15 +199,19 @@ namespace Cosmic_Escape
                 }
             }
             //throwing enemies
-            /*if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                if (mouseX <= (pos.X + 30) && mouseX >= (pos.X - 30)) && (mouseY <= (pos.Y + 30) && mouseY >= (pos.Y - 30)))
+                foreach (Enemy e in parent.enemyList)
                 {
-                    //allows moving the enemy
-                    pos.X = mouseX;
-                    pos.Y = mouseY;
+                    if ((mouseXZ <= 1600))
+                    {
+                        //allows moving the enemy
+                        e.setPos();
+                    }
+                    
                 }
-            }*/
+                
+            }
             //frame rate
             timeCounter += gameTime.ElapsedGameTime.Milliseconds / 1000f;
             if (timeCounter >= frameRate)
@@ -220,7 +231,7 @@ namespace Cosmic_Escape
         public override void Draw(SpriteBatch sb)
         {
             //sb.DrawString(parent.theFont, "Total Time: " + totalTime + "\nFrame: " + frameCounter, parent.textPos, Color.White);
-            sb.DrawString(parent.theFont, "      X: " + point3.X + "\n      Y: " + point3.Y + "\n timeF: " + power.getTimer(), pos, Color.White);
+            sb.DrawString(parent.theFont, "      X: " + mouseXZ + "\n      Y: " + mouseYZ + "\n timeF: " + power.getTimer(), pos, Color.White);
             sb.DrawString(parent.theFont, "HP: " + health, parent.healthPos, Color.White);
             if (targetPlat != null)
             {

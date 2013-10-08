@@ -52,7 +52,7 @@ namespace Cosmic_Escape
         List<Platform> platList;
 
         //camera variables
-        Camera camera;
+        public Camera camera;
 
         public Game1()
         {
@@ -104,8 +104,11 @@ namespace Cosmic_Escape
 
             // Get the width and height of the window
             screenWidth = graphics.GraphicsDevice.Viewport.Width;
-            screenHeight = graphics.GraphicsDevice.Viewport.Height;
+            screenHeight = graphics.GraphicsDevice.Viewport.Height + 80;
 
+            graphics.PreferredBackBufferHeight = screenHeight;
+            graphics.PreferredBackBufferWidth = screenWidth;
+            graphics.ApplyChanges();
             enemyList = new List<GameObject>();
             // Start the player off at the middle/bottom of the screen
             Vector2 initialPlayerPos = new Vector2(0, 300);
@@ -193,7 +196,7 @@ namespace Cosmic_Escape
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.transform);
-
+            //spriteBatch.Begin();
             //draw backgrounds      
             background_space.Draw(spriteBatch);
             background_ship.Draw(spriteBatch);
