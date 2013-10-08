@@ -54,6 +54,11 @@ namespace Cosmic_Escape
         //camera variables
         public Camera camera;
 
+        //cursor variables
+        Texture2D cursor;
+        Cursor mouse;
+        Vector2 mousePos;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -99,12 +104,13 @@ namespace Cosmic_Escape
             shipBackgroundTex = Content.Load<Texture2D>("background_ship");             
             background_space = new Space(spaceBackgroundTex);
             background_ship = new Background(shipBackgroundTex);
-            this.IsMouseVisible = true;
-            Mouse.SetPosition(400, 240);
+            //this.IsMouseVisible = true;
+            Mouse.WindowHandle = Window.Handle;
+            Mouse.SetPosition(600, screenHeight);
 
             // Get the width and height of the window
-            screenWidth = graphics.GraphicsDevice.Viewport.Width;
-            screenHeight = graphics.GraphicsDevice.Viewport.Height + 80;
+            screenWidth = 800;
+            screenHeight = 600;
 
             graphics.PreferredBackBufferHeight = screenHeight;
             graphics.PreferredBackBufferWidth = screenWidth;
@@ -138,6 +144,11 @@ namespace Cosmic_Escape
                 enemy = new Enemy(enemySprite, tempVect, this, player);
                 enemyList.Add(enemy);
             }
+
+            //cursor stuff
+            cursor = Content.Load<Texture2D>("mouse");
+            mousePos = new Vector2(0, 0);
+            mouse = new Cursor(cursor, mousePos, this);
             
         }
 
@@ -158,7 +169,7 @@ namespace Cosmic_Escape
             //start song
             if (!songstart)
             {
-                MediaPlayer.Play(bgsong);
+                //MediaPlayer.Play(bgsong);
                 songstart = true;
             }
 
@@ -178,6 +189,8 @@ namespace Cosmic_Escape
             //update camera movement
             camera.Update(gameTime, 32, player);
             
+            //update mouse
+            mouse.Update();
             base.Update(gameTime);
         }
 
@@ -207,6 +220,7 @@ namespace Cosmic_Escape
             //draw player
             player.Draw(spriteBatch);
             //enemy.Draw(spriteBatch);
+            mouse.Draw(spriteBatch);
             spriteBatch.End();
             
             base.Draw(gameTime);

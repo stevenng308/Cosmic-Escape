@@ -52,6 +52,10 @@ namespace Cosmic_Escape
             point4 = new Vector2(pos.X, pos.Y + tex.Height / 2);
         }
 
+        public virtual void Update()
+        {
+        }
+
         public virtual void Update(GameTime gameTime, List<Platform> l)
         {
             /*if (plat == null)

@@ -231,7 +231,7 @@ namespace Cosmic_Escape
         public override void Draw(SpriteBatch sb)
         {
             //sb.DrawString(parent.theFont, "Total Time: " + totalTime + "\nFrame: " + frameCounter, parent.textPos, Color.White);
-            sb.DrawString(parent.theFont, "      X: " + point4.X + "\n      Y: " + point4.Y + "\n timeF: " + power.getTimer(), pos, Color.White);
+            sb.DrawString(parent.theFont, "      X: " + mouseXZ + "\n      Y: " + mouseYZ + "\n timeF: " + power.getTimer(), pos, Color.White);
             sb.DrawString(parent.theFont, "HP: " + health, parent.healthPos, Color.White);
             if (targetPlat != null)
             {
