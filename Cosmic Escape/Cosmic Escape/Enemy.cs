@@ -44,7 +44,7 @@ namespace Cosmic_Escape
 
             totalTime += gameTime.ElapsedGameTime.Milliseconds / 1000f;
 
-            if (Math.Abs((pos.X - player.getPos().X)) < 300 || chase == true)
+            if (Math.Abs((pos.X - player.getPos().X)) < 300 || chase == true)//calculate proximity of player
             {
                 if (player.getPos().X < pos.X)
                 {
@@ -60,16 +60,6 @@ namespace Cosmic_Escape
                 chase = true;
             }
 
-            //if (walkLeft == true)
-            //    pos.X -= moveRate;
-            //else
-            //    pos.X += moveRate;
-
-            //if (pos.X <= 150)
-            //    walkLeft = false;
-            //if (pos.X >= 350)
-            //    walkLeft = true;
-
             pos.Y += gravity;
             // Update the destination rectangle based on our position.
             destRect.X = (int)pos.X;
@@ -80,6 +70,7 @@ namespace Cosmic_Escape
 
             //check for collision with other gameobjects;
             isColliding(l); //check for collision with platforms
+
             //check if colliding with player
             if (destRect.Intersects(player.getDestRect()) && player.getMode())
             {
@@ -98,7 +89,7 @@ namespace Cosmic_Escape
 
 
         //update the 4 corners of a sprite's rectangle
-        //change this if the sprite sheet changes
+        //change this if the sprite sheet changes that has animations
         public override void updatePoints()
         {
             point1 = pos;

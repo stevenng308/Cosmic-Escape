@@ -40,10 +40,8 @@ namespace Cosmic_Escape
         const int BACKGROUND_RATE = 60;     //controls speed of space and stars background outside the ship
         Texture2D spaceBackgroundTex;
         Texture2D shipBackgroundTex;
-
         Space background_space;
         Background background_ship;
-        
 
         //platform variables
         string platformInfo;
@@ -115,7 +113,7 @@ namespace Cosmic_Escape
             graphics.PreferredBackBufferHeight = screenHeight;
             graphics.PreferredBackBufferWidth = screenWidth;
             graphics.ApplyChanges();
-            enemyList = new List<GameObject>();
+
             // Start the player off at the middle/bottom of the screen
             Vector2 initialPlayerPos = new Vector2(0, 300);
 
@@ -134,6 +132,7 @@ namespace Cosmic_Escape
             }
 
             //Generate Enemies
+            enemyList = new List<GameObject>();
             while ((enemyInfo = enemyFile.ReadLine()) != null)
             {
                 string[] tempStringArray = enemyInfo.Split(',');

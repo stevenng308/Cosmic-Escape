@@ -14,7 +14,7 @@ namespace Cosmic_Escape
 {
     public class Cursor : GameObject
     {
-        MouseState cursorState;
+        Vector2 cursorState;
         GameObject alien;
         List<GameObject> eList;
         Rectangle curRect;
@@ -29,20 +29,21 @@ namespace Cosmic_Escape
 
         public override void Update()
         {
-            if (Mouse.GetState().X > 1080 || Mouse.GetState().X < 270)
+            if (Mouse.GetState().X > 1080 || Mouse.GetState().X < 270) //keep mouse within game window
             {
                 Mouse.SetPosition(parent.screenWidth / 2, Mouse.GetState().Y);
             }
 
-            if (Mouse.GetState().Y > 600 || Mouse.GetState().Y < 50)
+            if (Mouse.GetState().Y > 600 || Mouse.GetState().Y < 50) //keep mouse within game window
             {
                 Mouse.SetPosition(Mouse.GetState().X, parent.screenHeight / 2);
             }
-            cursorState = Mouse.GetState();
-            pos.X = cursorState.X - 650;
-            pos.Y = cursorState.Y - 6;
-            pos.X += alien.getPos().X;
-            curRect.X = (int)pos.X;
+            cursorState.X = Mouse.GetState().X;
+            cursorState.Y = Mouse.GetState().Y;
+            pos.X = cursorState.X - 650;//offset the actual mouse position to somehwate match the game cursor position
+            pos.Y = cursorState.Y - 6;//same offset
+            pos.X += alien.getPos().X;//move cursor with the player
+            curRect.X = (int)pos.X;//update rect position
             curRect.Y = (int)pos.Y;
 
             //throwing enemies
@@ -58,7 +59,6 @@ namespace Cosmic_Escape
                         tempV.Y = pos.Y - 30;
                         e.setPos(tempV);
                     }
-
                 }
 
             }

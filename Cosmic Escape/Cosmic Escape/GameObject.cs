@@ -92,6 +92,7 @@ namespace Cosmic_Escape
             point4.Y = pos.Y + tex.Height / 2;
         }
 
+        //collision detection with platforms
         public Platform isColliding(List<Platform> l)
         {
             foreach (Platform plat in l)
@@ -148,11 +149,6 @@ namespace Cosmic_Escape
             return null;
         }
 
-        public virtual float getWalkSpeed()
-        {
-            return 0.0f;
-        }
-
         //change gravity if power is used for all gameobjects
         public virtual void setGravity(float g)
         {
@@ -186,6 +182,11 @@ namespace Cosmic_Escape
             return false;
         }
 
+        public virtual float getWalkSpeed()
+        {
+            return 0.0f;
+        }
+
         public virtual void setCollideFeedback(float i)
         {
 
@@ -196,6 +197,7 @@ namespace Cosmic_Escape
             return new Vector2(0,0);
         }
 
+        //set gameobject position
         public virtual void setPos(Vector2 v)
         {
             pos = v;
