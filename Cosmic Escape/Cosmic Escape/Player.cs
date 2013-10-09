@@ -198,20 +198,7 @@ namespace Cosmic_Escape
                     godMode = true;
                 }
             }
-            //throwing enemies
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
-            {
-                foreach (Enemy e in parent.enemyList)
-                {
-                    if ((mouseXZ <= 1600))
-                    {
-                        //allows moving the enemy
-                        e.setPos();
-                    }
-                    
-                }
-                
-            }
+            
             //frame rate
             timeCounter += gameTime.ElapsedGameTime.Milliseconds / 1000f;
             if (timeCounter >= frameRate)
@@ -231,7 +218,7 @@ namespace Cosmic_Escape
         public override void Draw(SpriteBatch sb)
         {
             //sb.DrawString(parent.theFont, "Total Time: " + totalTime + "\nFrame: " + frameCounter, parent.textPos, Color.White);
-            sb.DrawString(parent.theFont, "      X: " + mouseXZ + "\n      Y: " + mouseYZ + "\n timeF: " + power.getTimer(), pos, Color.White);
+            //sb.DrawString(parent.theFont, "      MainMouseX: " + mouseXZ + "\n      MainMouseY: " + mouseYZ + "\n timeF: " + power.getTimer(), pos, Color.White);
             sb.DrawString(parent.theFont, "HP: " + health, parent.healthPos, Color.White);
             if (targetPlat != null)
             {

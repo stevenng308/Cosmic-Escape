@@ -74,7 +74,7 @@ namespace Cosmic_Escape
 
             base.Initialize();
 
-            graphics.SynchronizeWithVerticalRetrace = false;
+            //graphics.SynchronizeWithVerticalRetrace = false;
             IsFixedTimeStep = false;
         }
 
@@ -104,7 +104,7 @@ namespace Cosmic_Escape
             shipBackgroundTex = Content.Load<Texture2D>("background_ship");             
             background_space = new Space(spaceBackgroundTex);
             background_ship = new Background(shipBackgroundTex);
-            this.IsMouseVisible = true;
+            //this.IsMouseVisible = true;
             //Mouse.WindowHandle = Window.Handle;
             Mouse.SetPosition(400, 300);
 
@@ -121,9 +121,6 @@ namespace Cosmic_Escape
 
             // Bring the player to life
             player = new Player(spritesheet, initialPlayerPos, this);
-            // Bring enemy to life
-            //enemy = new Enemy(enemySprite, initialEnemyPos, this, player);
-            //enemyList.Add(enemy);
 
             // Platform list created
             platList = new List<Platform>();
@@ -169,7 +166,7 @@ namespace Cosmic_Escape
             //start song
             if (!songstart)
             {
-                //MediaPlayer.Play(bgsong);
+                MediaPlayer.Play(bgsong);
                 songstart = true;
             }
 

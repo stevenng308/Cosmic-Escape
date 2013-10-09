@@ -196,10 +196,9 @@ namespace Cosmic_Escape
             return new Vector2(0,0);
         }
 
-        public virtual void setPos()
+        public virtual void setPos(Vector2 v)
         {
-            pos.X = 0;
-            pos.Y = 0;
+            pos = v;
         }
     }
 
