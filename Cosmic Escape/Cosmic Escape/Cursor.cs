@@ -18,6 +18,7 @@ namespace Cosmic_Escape
         GameObject alien;
         List<GameObject> eList;
         Rectangle curRect;
+        bool contact = false;
 
         public Cursor(Texture2D t, Vector2 p, Game1 g, GameObject play, List<GameObject> e) : base(t, p, g)
         {
@@ -52,7 +53,10 @@ namespace Cosmic_Escape
                     if (curRect.Intersects(e.getDestRect()))
                     {
                         //allows moving the enemy
-                        e.setPos(pos);
+                        Vector2 tempV = pos;
+                        tempV.X = pos.X - 30;
+                        tempV.Y = pos.Y - 30;
+                        e.setPos(tempV);
                     }
 
                 }
