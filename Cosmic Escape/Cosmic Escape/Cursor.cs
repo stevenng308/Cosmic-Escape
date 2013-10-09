@@ -15,10 +15,13 @@ namespace Cosmic_Escape
     public class Cursor : GameObject
     {
         MouseState cursorState;
+        GameObject alien;
+        List<GameObject> eList;
 
-        public Cursor(Texture2D t, Vector2 p, Game1 g) : base(t, p, g)
+        public Cursor(Texture2D t, Vector2 p, Game1 g, GameObject play, List<GameObject> e) : base(t, p, g)
         {
-            
+            alien = play;
+            eList = e;
         }
 
         public override void Update()
@@ -33,8 +36,9 @@ namespace Cosmic_Escape
                 Mouse.SetPosition(Mouse.GetState().X, parent.screenHeight / 2);
             }*/
             cursorState = Mouse.GetState();
-            pos.X = cursorState.X;
-            pos.Y = cursorState.Y;
+            pos.X = cursorState.X - 650;
+            pos.Y = cursorState.Y - 6;
+            pos.X += alien.getPos().X;
         }
 
         public override void Draw(SpriteBatch sb)

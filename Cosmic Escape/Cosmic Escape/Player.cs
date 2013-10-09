@@ -276,9 +276,12 @@ namespace Cosmic_Escape
 
         public override void setCollideFeedback(float i)
         {
-            for (int j = 0; j < 10; j++)
+            if (!isCollide)
             {
-                pos.X += i * (float)j;
+                for (int j = 0; j < 10; j++)
+                {
+                    pos.X += i * (float)j;
+                }
             }
         }
 

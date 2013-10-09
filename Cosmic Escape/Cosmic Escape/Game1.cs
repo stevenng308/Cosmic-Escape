@@ -104,9 +104,9 @@ namespace Cosmic_Escape
             shipBackgroundTex = Content.Load<Texture2D>("background_ship");             
             background_space = new Space(spaceBackgroundTex);
             background_ship = new Background(shipBackgroundTex);
-            //this.IsMouseVisible = true;
-            Mouse.WindowHandle = Window.Handle;
-            Mouse.SetPosition(600, screenHeight);
+            this.IsMouseVisible = true;
+            //Mouse.WindowHandle = Window.Handle;
+            Mouse.SetPosition(400, 300);
 
             // Get the width and height of the window
             screenWidth = 800;
@@ -148,7 +148,7 @@ namespace Cosmic_Escape
             //cursor stuff
             cursor = Content.Load<Texture2D>("mouse");
             mousePos = new Vector2(0, 0);
-            mouse = new Cursor(cursor, mousePos, this);
+            mouse = new Cursor(cursor, mousePos, this, player, enemyList);
             
         }
 
