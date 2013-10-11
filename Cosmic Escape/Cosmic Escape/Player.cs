@@ -37,6 +37,7 @@ namespace Cosmic_Escape
         float timer, timerInvulnerable;
         Power power;
         int health;
+        int powerIndex = 0;
         bool godMode;
         float mouseXZ, mouseYZ;
 
@@ -74,18 +75,18 @@ namespace Cosmic_Escape
             //bool shiftDown = Keyboard.GetState().IsKeyDown(Keys.LeftShift);
             bool aKeyDown = Keyboard.GetState().IsKeyDown(Keys.A);
             bool dKeyDown = Keyboard.GetState().IsKeyDown(Keys.D);
-            bool fKeyDown = Keyboard.GetState().IsKeyDown(Keys.F);
+            bool fKeyDown = Keyboard.GetState().IsKeyDown(Keys.F);//select power
             bool leftClick = (Mouse.GetState().LeftButton == ButtonState.Pressed);
             bool spaceKeyDown = Keyboard.GetState().IsKeyDown(Keys.Space);
 
-            Vector2 mousePosition = new Vector2(0, 0);
+            /*Vector2 mousePosition = new Vector2(0, 0);
             Matrix viewMatrix = parent.camera.transform;
             mousePosition.X = Mouse.GetState().X;
             mousePosition.Y = Mouse.GetState().Y;
 
             viewMatrix = Matrix.Invert(viewMatrix);
             mouseXZ = mousePosition.X ;
-            mouseYZ = mousePosition.Y;
+            mouseYZ = mousePosition.Y;*/
 
             // This aggregates the amount of time that has elapsed since the last frame was called
             totalTime += gameTime.ElapsedGameTime.Milliseconds / 1000f;
@@ -132,12 +133,21 @@ namespace Cosmic_Escape
                 //cooldown = true;
             }
 
-            //activate power
-            if ((fKeyDown) && cooldownF != true)
+            //select power
+            if (fKeyDown)
             {
-                //cooldownF = true;
-                power.zeroGravity(this, 30);
+                if (powerIndex + 1 == 2)
+                    powerIndex = 0;
+                else
+                    powerIndex++;
             }
+
+            //activate power
+            if (leftClick && cooldownF != true)
+            {
+                power.powerSelect(powerIndex, this);
+            }
+
             //gravity
             /*foreach (Platform p in l)
             {
@@ -218,7 +228,7 @@ namespace Cosmic_Escape
         public override void Draw(SpriteBatch sb)
         {
             //sb.DrawString(parent.theFont, "Total Time: " + totalTime + "\nFrame: " + frameCounter, parent.textPos, Color.White);
-            //sb.DrawString(parent.theFont, "      MainMouseX: " + mouseXZ + "\n      MainMouseY: " + mouseYZ + "\n timeF: " + power.getTimer(), pos, Color.White);
+            sb.DrawString(parent.theFont, "      ScrollNum: " + powerIndex + "\n      timeF: " + power.getTimer(), pos, Color.White);
             sb.DrawString(parent.theFont, "HP: " + health, parent.healthPos, Color.White);
             if (targetPlat != null)
             {

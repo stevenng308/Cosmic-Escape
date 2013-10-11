@@ -54,7 +54,7 @@ namespace Cosmic_Escape
 
         //cursor variables
         Texture2D cursor;
-        Cursor mouse;
+        public Cursor mouse;
         Vector2 mousePos;
 
         public Game1()

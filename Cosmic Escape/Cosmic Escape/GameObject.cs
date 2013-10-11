@@ -194,7 +194,7 @@ namespace Cosmic_Escape
 
         public virtual Vector2 getPos()
         {
-            return new Vector2(0,0);
+            return pos;
         }
 
         //set gameobject position

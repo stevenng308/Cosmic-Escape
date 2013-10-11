@@ -37,6 +37,17 @@ namespace Cosmic_Escape
             p.setGravity(1.5f);
         }
 
+        public void powerSelect(int i, Player p)
+        {
+            switch (i)
+            {
+                case 0: telekinesis(p, 30.0);
+                    break;
+                case 1: zeroGravity(p, 30.0);
+                    break;
+            }
+        }
+
         //zero gravity power
         public void zeroGravity(Player p, double timeLimit)
         {
@@ -63,8 +74,34 @@ namespace Cosmic_Escape
                     p.cooldownF = true;
                 }
             }
-            //p.cooldownF = true;
             p.setGravity(1.5f); //reset to default gravity
+        }
+
+        public void telekinesis(Player p, double timeLimit)
+        {
+            if (timer == 0 || timer >= 30) //cannot assign the timer until it is recharged or when initialized
+            {
+                timer = timeLimit;
+            }
+            if ((Mouse.GetState().LeftButton == ButtonState.Pressed) && timer != 0)
+            {
+                foreach (Enemy e in parent.enemyList)
+                {
+                    if (parent.mouse.getDestRect().Intersects(e.getDestRect()))
+                    {
+                        //allows moving the enemy
+                        Vector2 tempV = parent.mouse.getPos();
+                        tempV.X = parent.mouse.getPos().X - 30;
+                        tempV.Y = parent.mouse.getPos().Y - 30;
+                        e.setPos(tempV);
+                    }
+                }
+                timer -= 0.8;
+                if (timer <= 0)
+                {
+                    p.cooldownF = true;
+                }
+            }
         }
 
         //recharging timer gets called from update when cooldownF is true

@@ -47,7 +47,7 @@ namespace Cosmic_Escape
             curRect.Y = (int)pos.Y;
 
             //throwing enemies
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            /*if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 foreach (Enemy e in parent.enemyList)
                 {
@@ -60,15 +60,19 @@ namespace Cosmic_Escape
                         e.setPos(tempV);
                     }
                 }
-
-            }
+            }*/
         }
 
         public override void Draw(SpriteBatch sb)
         {
             sb.Draw(tex, curRect, Color.White);
             sb.DrawString(parent.theFont, "      GameMouse X: " + pos.X + "\n      GameMouseY: " + pos.Y, pos, Color.White);
-            sb.DrawString(parent.theFont, "      MainMouse X: " + cursorState.X + "\n      MainMouseY: " + cursorState.Y, alien.getPos(), Color.White);
+            //sb.DrawString(parent.theFont, "      MainMouse X: " + cursorState.X + "\n      MainMouseY: " + cursorState.Y, alien.getPos(), Color.White);
+        }
+
+        public override Rectangle getDestRect()
+        {
+            return curRect;
         }
     }
 }
