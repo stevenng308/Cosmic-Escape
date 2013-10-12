@@ -39,7 +39,7 @@ namespace Cosmic_Escape
         int health;
         int powerIndex = 0;
         bool godMode;
-        float mouseXZ, mouseYZ;
+        bool lastKey;
 
         int frameCounter;       // Which frame of the animation we're in (a value between 0 and 23)
         float frameRate;        // This should always be 1/24 (or 0.04167 seconds)
@@ -60,6 +60,7 @@ namespace Cosmic_Escape
             power = new Power(g);
             health = 5;
             godMode = true;
+            lastKey = false;
 
             // we're not using this, since we're not doing rotation...
             origin = new Vector2(0, 0);
@@ -76,6 +77,7 @@ namespace Cosmic_Escape
             bool aKeyDown = Keyboard.GetState().IsKeyDown(Keys.A);
             bool dKeyDown = Keyboard.GetState().IsKeyDown(Keys.D);
             bool fKeyDown = Keyboard.GetState().IsKeyDown(Keys.F);//select power
+            bool fKeyUp = Keyboard.GetState().IsKeyUp(Keys.F);
             bool leftClick = (Mouse.GetState().LeftButton == ButtonState.Pressed);
             bool spaceKeyDown = Keyboard.GetState().IsKeyDown(Keys.Space);
 
@@ -136,10 +138,15 @@ namespace Cosmic_Escape
             //select power
             if (fKeyDown)
             {
-                if (powerIndex + 1 == 2)
-                    powerIndex = 0;
-                else
-                    powerIndex++;
+                lastKey = true; //fkey has been pressed now wait for release
+            }
+            if (fKeyUp && lastKey) //makes the change when the user releases the f key
+            {
+                    if (powerIndex + 1 == 2)
+                        powerIndex = 0;
+                    else
+                        powerIndex++;
+                    lastKey = false; //released
             }
 
             //activate power
@@ -228,7 +235,7 @@ namespace Cosmic_Escape
         public override void Draw(SpriteBatch sb)
         {
             //sb.DrawString(parent.theFont, "Total Time: " + totalTime + "\nFrame: " + frameCounter, parent.textPos, Color.White);
-            sb.DrawString(parent.theFont, "      ScrollNum: " + powerIndex + "\n      timeF: " + power.getTimer(), pos, Color.White);
+            sb.DrawString(parent.theFont, "      powerNum: " + powerIndex + "\n      PowerTime: " + power.getTimer(), pos, Color.White);
             sb.DrawString(parent.theFont, "HP: " + health, parent.healthPos, Color.White);
             if (targetPlat != null)
             {
