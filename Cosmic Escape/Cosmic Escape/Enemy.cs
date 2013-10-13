@@ -21,6 +21,7 @@ namespace Cosmic_Escape
         //bool walkLeft = true;
         bool chase = false;
         bool facingLeft = true;
+        Platform targetPlat;
 
         GameObject player;          //instantiates a instance of player class so we can access player position and use it to move enemies towards the player.
 
@@ -37,6 +38,7 @@ namespace Cosmic_Escape
             //updateRate = 60;
             player = user;
             destRect = new Rectangle(0, 0, tex.Width, tex.Height);
+            updatePoints();
         }
        
         public override void Update(GameTime gameTime, List<Platform> l)
@@ -69,7 +71,7 @@ namespace Cosmic_Escape
             updatePoints();
 
             //check for collision with other gameobjects;
-            isColliding(l); //check for collision with platforms
+            targetPlat = isColliding2(l); //check for collision with platforms
 
             //check if colliding with player
             if (destRect.Intersects(player.getDestRect()) && player.getMode())
@@ -103,6 +105,7 @@ namespace Cosmic_Escape
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            //spriteBatch.DrawString(parent.theFont, "     p2Y: " + point2.Y + "\n      p3Y: " + point3.Y, pos, Color.White);
             if (facingLeft == true)
             {
                 spriteBatch.Draw(tex, pos, Color.White);
@@ -112,6 +115,16 @@ namespace Cosmic_Escape
                 //spriteBatch.Draw(tex, pos, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.FlipHorizontally, 1.0f);
                 spriteBatch.Draw(tex, pos, null, Color.White, 0.0f, origin, 1, SpriteEffects.FlipHorizontally, 0.0f);
             }
+
+            if (targetPlat != null)
+            {
+                spriteBatch.DrawString(parent.theFont, "     Rectangle X: " + targetPlat.getDestRect().X + "\n     Rectangle Y: " + targetPlat.getDestRect().Y, pos, Color.White);
+            }
+
+            spriteBatch.DrawString(parent.theFont, "p2X: " + point2.X + "\np2Y: " + point2.Y, point2, Color.Red);
+            spriteBatch.DrawString(parent.theFont, "p3X: " + point3.X + "\np3Y: " + point3.Y, point3, Color.Red);
+            spriteBatch.Draw(parent.dot, point2, Color.White);
+            spriteBatch.Draw(parent.dot, point3, Color.White);
         }
 
 
@@ -121,6 +134,11 @@ namespace Cosmic_Escape
             {
                 return pos;
             }
+        }
+
+        public override float getWalkSpeed()
+        {
+            return WALK_SPEED;
         }
     }
 }

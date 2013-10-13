@@ -25,7 +25,7 @@ namespace Cosmic_Escape
         GameObject player;
         GameObject enemy;
         public SpriteFont theFont;
-        public Vector2 textPos, healthPos;
+        public Vector2 textPos, textPos2, healthPos;
         Song bgsong;
         bool songstart;
 
@@ -33,6 +33,7 @@ namespace Cosmic_Escape
         string enemyInfo;
         System.IO.StreamReader enemyFile;
         Texture2D enemySprite;
+        public Texture2D dot;
         public List<GameObject> enemyList;
 
 
@@ -86,6 +87,7 @@ namespace Cosmic_Escape
             //load enemies from file
             enemyFile = new System.IO.StreamReader("Content\\enemyPosList.txt");
             enemySprite = Content.Load<Texture2D>("enemy_sprite");
+            dot = Content.Load<Texture2D>("effector");
 
             //load song
             bgsong = Content.Load<Song>("SECRET IV - Adaptation");
@@ -95,6 +97,7 @@ namespace Cosmic_Escape
             platFile = new System.IO.StreamReader("Content\\platformsheet.txt");
             block = Content.Load<Texture2D>("block1");
             textPos = new Vector2(10, 30);
+            textPos = new Vector2(10, 50);
             healthPos = new Vector2(10, 10);
 
             //Load Backgrounds and Initialize
