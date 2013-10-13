@@ -29,6 +29,17 @@ namespace Cosmic_Escape
         Song bgsong;
         bool songstart;
 
+        public Texture2D startButton;
+        public Texture2D exitButton;
+        public Texture2D pauseButton;
+        public Texture2D resumeButton;
+
+        public Vector2 startButtonPos;
+        public Vector2 exitButtonPos;
+        public Vector2 resumeButtonPos;
+
+        
+
         //enemy variables
         string enemyInfo;
         System.IO.StreamReader enemyFile;
@@ -43,7 +54,15 @@ namespace Cosmic_Escape
 
         Space background_space;
         Background background_ship;
-        
+
+        MenuComponent menuComponent;
+
+        KeyboardState keyboardState;
+        KeyboardState oldKeyboardState;
+
+        GameScreen activeScreen;
+        StartScreen startScreen;
+        ActionScreen actionScreen;
 
         //platform variables
         string platformInfo;
@@ -75,10 +94,29 @@ namespace Cosmic_Escape
 
         protected override void LoadContent()
         {
+            string[] menuItems = { "Start Game", "High Scores", "End Game" };
+
+
             // default code that came with the project
             spriteBatch = new SpriteBatch(GraphicsDevice);
             spritesheet = Content.Load<Texture2D>("zep spritesheet");
             theFont = Content.Load<SpriteFont>("myFont");
+
+            //menuComponent = new MenuComponent(this, spriteBatch, Content.Load<SpriteFont>("myfont"), menuItems);
+            
+
+            startScreen = new StartScreen(this, spriteBatch, Content.Load<SpriteFont>("myfont"), Content.Load<Texture2D>("StartScreen"));
+            Components.Add(startScreen);
+            startScreen.Hide();
+
+            actionScreen = new ActionScreen(this, spriteBatch, Content.Load<Texture2D>("background_ship"));
+            Components.Add(actionScreen);
+            actionScreen.Hide();
+
+            activeScreen = startScreen;
+            activeScreen.Show();
+
+            //Components.Add(menuComponent);
 
             //load enemies from file
             enemyFile = new System.IO.StreamReader("Content\\enemyPosList.txt");
@@ -150,41 +188,78 @@ namespace Cosmic_Escape
         // Again, remember that this function is called 60 times per second.
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit. Again, I added the escape key
-            if ((GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed) ||
-                (Keyboard.GetState().IsKeyDown(Keys.Escape)))
+           
+            //update camera movement
+            camera.Update(this, screenWidth, player);
+
+
+            keyboardState = Keyboard.GetState();
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            //moves space background
-            background_space.MoveBackground((float)gameTime.ElapsedGameTime.TotalMilliseconds, player);
-            
-            //update ship background
-            background_ship.Update(player);
-            //start song
-            if (!songstart)
+            if (activeScreen == startScreen)
             {
-                MediaPlayer.Play(bgsong);
-                songstart = true;
+                if (CheckKey(Keys.Enter))
+                {
+                    if (startScreen.SelectedIndex == 0)
+                    {
+                        activeScreen.Hide();
+                        activeScreen = actionScreen;
+                        activeScreen.Show();
+                    }
+                    if (startScreen.SelectedIndex == 1)
+                    {
+                        this.Exit();
+                    }
+                }
             }
 
-            // Note that the Update method of the player MUST have access to the game time
-            // to know which image/frame to draw
-            player.Update(gameTime, platList);
-            textPos.X = camera.getCamera().X + 25.0f;
-            textPos.Y = camera.getCamera().Y + 25.0f;
-
-            healthPos.X = camera.getCamera().X + 25.0f;
-            //Enemy update method. Deals with enemy movements, status, etc.
-
-            foreach (Enemy e in enemyList)
+            if (activeScreen == actionScreen)
             {
-                e.Update(gameTime, platList);
+                // Allows the game to exit. Again, I added the escape key
+                if ((GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed) ||
+                    (Keyboard.GetState().IsKeyDown(Keys.Escape)))
+                    this.Exit();
+
+                //moves space background
+                background_space.MoveBackground((float)gameTime.ElapsedGameTime.TotalMilliseconds, player);
+
+                //update ship background
+                background_ship.Update(player);
+                //start song
+                if (!songstart)
+                {
+                    MediaPlayer.Play(bgsong);
+                    songstart = true;
+                }
+
+                // Note that the Update method of the player MUST have access to the game time
+                // to know which image/frame to draw
+                player.Update(gameTime, platList);
+                textPos.X = camera.getCamera().X + 25.0f;
+                textPos.Y = camera.getCamera().Y + 25.0f;
+
+                healthPos.X = camera.getCamera().X + 25.0f;
+                //Enemy update method. Deals with enemy movements, status, etc.
+
+                foreach (Enemy e in enemyList)
+                {
+                    e.Update(gameTime, platList);
+                }
             }
-            //update camera movement
-            camera.Update(gameTime, 32, player);
-            
+
+
+            base.Update(gameTime);
+            oldKeyboardState = keyboardState;
+          
             base.Update(gameTime);
         }
+
+        private bool CheckKey(Keys theKey)
+{
+	return keyboardState.IsKeyUp(theKey) &&
+		oldKeyboardState.IsKeyDown(theKey);
+}
 
         // Basically, just tell the player to draw itself.
         // This is called 60 times per second as well.  
@@ -212,9 +287,10 @@ namespace Cosmic_Escape
             //draw player
             player.Draw(spriteBatch);
             //enemy.Draw(spriteBatch);
-            spriteBatch.End();
+            //spriteBatch.End();
             
             base.Draw(gameTime);
+            spriteBatch.End();
         }
     }
 }
