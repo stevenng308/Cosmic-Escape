@@ -167,7 +167,7 @@ namespace Cosmic_Escape
                 //if (this.point3.X < plat.point2.X && this.point4.X > plat.point1.X && this.point3.Y >= plat.point2.Y + 7 && this.point4.Y >= plat.point1.Y + 7
                 //&& this.point3.Y < plat.point3.Y && this.point4.Y < plat.point4.Y) //stop falling through platforms
                 if (((this.point3.X > plat.point1.X && this.point3.X < plat.point2.X) || (this.point4.X > plat.point1.X && this.point4.X < plat.point2.X)) &&
-                        (this.point3.Y >= plat.point2.Y && this.point3.Y < plat.point2.Y + 9))//don't fall through platform
+                        (this.point3.Y >= plat.point2.Y && this.point3.Y < plat.point2.Y + 3))//don't fall through platform
                 {
                     this.isCollideBot = true;
                     this.gravity = 0;

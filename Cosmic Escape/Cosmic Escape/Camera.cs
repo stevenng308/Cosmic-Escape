@@ -18,7 +18,7 @@ namespace Cosmic_Escape
             view = newView;
         }
 
-        public void Update(GameTime gameTime, int mid, GameObject alien)
+        public void Update(Game1 game, int mid, GameObject alien)
         {
             //mid is the mid point of the sprite
             //325 is arbitrary change to move the centering of the camera
