@@ -20,6 +20,7 @@ namespace Cosmic_Escape
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D spritesheet;
+        public Texture2D heartTex;
 
         public int screenWidth, screenHeight;
         GameObject player;
@@ -101,6 +102,7 @@ namespace Cosmic_Escape
             // default code that came with the project
             spriteBatch = new SpriteBatch(GraphicsDevice);
             spritesheet = Content.Load<Texture2D>("zep spritesheet");
+            heartTex = Content.Load<Texture2D>("heart");
             theFont = Content.Load<SpriteFont>("myFont");
 
             //load menu screen

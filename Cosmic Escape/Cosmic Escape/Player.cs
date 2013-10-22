@@ -236,7 +236,17 @@ namespace Cosmic_Escape
         {
             //sb.DrawString(parent.theFont, "Total Time: " + totalTime + "\nFrame: " + frameCounter, parent.textPos, Color.White);
             sb.DrawString(parent.theFont, "      powerNum: " + powerIndex + "\n      PowerTime: " + power.getTimer(), pos, Color.White);
-            sb.DrawString(parent.theFont, "HP: " + health, parent.healthPos, Color.White);
+            //draw health hearts
+            sb.DrawString(parent.theFont, "HP: ", parent.healthPos, Color.White);
+            for (int i = 1; i <= health ; i++)
+            {
+                //Vector2 heartPos;
+                //heartPos.X = 0 * i;
+                //heartPos.Y = 0;
+                parent.healthPos.X += 32 + i;
+                sb.Draw(parent.heartTex, parent.healthPos, Color.White);
+            }
+
             if (targetPlat != null)
             {
                 sb.DrawString(parent.theFont, "Rectangle X: " + targetPlat.getDestRect().X + " Rectangle Y: " + targetPlat.getDestRect().Y, parent.textPos, Color.White);
