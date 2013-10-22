@@ -132,6 +132,8 @@
     <ProjectReference Include="..\Cosmic EscapeContent\Cosmic EscapeContent.contentproj">
       <Name>Cosmic_EscapeContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>
+      <Private>True</Private>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

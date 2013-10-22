@@ -37,7 +37,7 @@ namespace Cosmic_Escape
         public void Draw(SpriteBatch sb, SpriteFont font)
         {
             sb.Draw(tex, destRect, Color.White);
-            sb.DrawString(font, "point1 X: " + point1.X + "\npoint2 x: " + point2.X, pos, Color.White);
+            //sb.DrawString(font, "point1 X: " + point1.X + "\npoint2 x: " + point2.X, pos, Color.White);
         }
     }
 }

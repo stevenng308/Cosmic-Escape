@@ -103,6 +103,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="StartScreen.jpg">
+      <Name>StartScreen</Name>
+    </Compile>
     <Compile Include="menu.jpg">
       <Name>menu</Name>
       <Importer>TextureImporter</Importer>

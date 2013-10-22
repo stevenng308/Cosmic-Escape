@@ -39,7 +39,8 @@ namespace Cosmic_Escape
         public override void Draw(SpriteBatch sb)
         {
             sb.Draw(texBg, new Vector2(bgPos, 0), Color.White);                         //draws background of the player's current view
-            sb.Draw(texBg, new Vector2(bgPos + texBg.Width, 0), Color.White);           //draws background to the right of player's current view
+            sb.Draw(texBg, new Vector2(bgPos + texBg.Width, 0), Color.White);
+            sb.Draw(texBg, new Vector2(bgPos + (texBg.Width * 2), 0), Color.White);           //draws background to the right of player's current view
             sb.Draw(texBg, new Vector2(bgPos - texBg.Width, 0), Color.White);           //draws background to the left of player's current view
         }
 
