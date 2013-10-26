@@ -26,7 +26,7 @@ namespace Cosmic_Escape
         GameObject player;
         GameObject enemy;
         public SpriteFont theFont;
-        public Vector2 textPos, textPos2, healthPos;
+        public Vector2 textPos, textPos2, healthPos, powerPos;
         Song bgsong;
         bool songstart;
 
@@ -132,6 +132,7 @@ namespace Cosmic_Escape
             textPos = new Vector2(10, 30);
             textPos = new Vector2(10, 50);
             healthPos = new Vector2(10, 10);
+            powerPos = new Vector2(200, 10);
 
             //Load Backgrounds and Initialize
             spaceBackgroundTex = Content.Load<Texture2D>("space_bg");                   
@@ -239,6 +240,7 @@ namespace Cosmic_Escape
                 textPos.Y = camera.getCamera().Y + 25.0f;
 
                 healthPos.X = camera.getCamera().X + 25.0f;
+                powerPos.X = camera.getCamera().X + 550.0f;
                 //Enemy update method. Deals with enemy movements, status, etc.
 
                 foreach (Enemy e in enemyList)

@@ -235,7 +235,7 @@ namespace Cosmic_Escape
         public override void Draw(SpriteBatch sb)
         {
             //sb.DrawString(parent.theFont, "Total Time: " + totalTime + "\nFrame: " + frameCounter, parent.textPos, Color.White);
-            sb.DrawString(parent.theFont, "      powerNum: " + powerIndex + "\n      PowerTime: " + power.getTimer(), pos, Color.White);
+            sb.DrawString(parent.theFont, "      powerNum: " + powerIndex + "\n      PowerTime: " + (int)power.getTimer(), parent.powerPos, Color.White);
             //draw health hearts
             sb.DrawString(parent.theFont, "HP: ", parent.healthPos, Color.White);
             for (int i = 1; i <= health ; i++)
