@@ -67,6 +67,10 @@ namespace Cosmic_Escape
                     {
                         e.setGravity(gravity);
                     }
+                    foreach (Barrel b in parent.objectList)
+                    {
+                        b.setGravity(gravity);
+                    }
                 }
                 timer -= 0.8;
                 if (timer <= 0)
@@ -94,6 +98,18 @@ namespace Cosmic_Escape
                         tempV.X = parent.mouse.getPos().X - 30;
                         tempV.Y = parent.mouse.getPos().Y - 30;
                         e.setPos(tempV);
+                    }
+                }
+
+                foreach (Barrel b in parent.objectList)
+                {
+                    if (parent.mouse.getDestRect().Intersects(b.getDestRect()))
+                    {
+                        //allows moving the interactable objects
+                        Vector2 tempV = parent.mouse.getPos();
+                        tempV.X = parent.mouse.getPos().X - 30;
+                        tempV.Y = parent.mouse.getPos().Y - 30;
+                        b.setPos(tempV);
                     }
                 }
                 timer -= 0.8;

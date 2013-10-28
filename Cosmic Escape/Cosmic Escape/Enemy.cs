@@ -77,7 +77,7 @@ namespace Cosmic_Escape
             if (destRect.Intersects(player.getDestRect()) && player.getMode())
             {
                 player.setMode(false);
-                player.setHealth(1);
+                player.setHealth();
                 if (player.getPos().X < pos.X)
                 {
                     player.setCollideFeedback(-WALK_SPEED);

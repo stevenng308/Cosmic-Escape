@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="ActionScreen.cs" />
     <Compile Include="Background.cs" />
+    <Compile Include="Barrel.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Cursor.cs" />
     <Compile Include="Enemy.cs" />

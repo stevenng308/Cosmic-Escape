@@ -283,9 +283,9 @@ namespace Cosmic_Escape
             timerInvulnerable = 10;
         }
 
-        public override void setHealth(int i)
+        public override void setHealth()
         {
-            health -= i;
+            health--;
         }
 
         public override void setCollideFeedback(float i)

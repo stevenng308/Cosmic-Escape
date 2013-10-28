@@ -217,6 +217,24 @@ namespace Cosmic_Escape
             return null;
         }
 
+        public void isCollidingDeath()
+        {
+            List<GameObject> targetEnemies = new List<GameObject>();
+            foreach (Enemy e in parent.enemyList)
+            {
+                if (this.getDestRect().Intersects(e.getDestRect()))
+                {
+                    targetEnemies.Add(e);
+                }
+                this.setHealth();
+            }
+
+            foreach (Enemy e in targetEnemies)
+            {
+                parent.enemyList.Remove(e);
+            }
+        }
+
         //change gravity if power is used for all gameobjects
         public virtual void setGravity(float g)
         {
@@ -235,7 +253,7 @@ namespace Cosmic_Escape
             return destRect;
         }
 
-        public virtual void setHealth(int i)
+        public virtual void setHealth()
         {
 
         }
@@ -269,6 +287,11 @@ namespace Cosmic_Escape
         public virtual void setPos(Vector2 v)
         {
             pos = v;
+        }
+
+        public virtual void setVel(Vector2 v)
+        {
+
         }
     }
 

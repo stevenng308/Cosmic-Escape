@@ -78,6 +78,11 @@ namespace Cosmic_Escape
         public Cursor mouse;
         Vector2 mousePos;
 
+        //interactable objects
+        Texture2D barrelTex;
+        public List<GameObject> objectList;
+        GameObject actionObject;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -183,6 +188,12 @@ namespace Cosmic_Escape
             mousePos = new Vector2(0, 0);
             mouse = new Cursor(cursor, mousePos, this, player, enemyList);
             
+            //load interactable objects
+            barrelTex = Content.Load<Texture2D>("barrel");
+            objectList = new List<GameObject>();
+            Vector2 tempVect2 = new Vector2(300, 25);
+            actionObject = new Barrel(barrelTex, tempVect2, player, this);
+            objectList.Add(actionObject);
         }
 
         // Basically, just tell the player to update.
@@ -284,6 +295,12 @@ namespace Cosmic_Escape
             //get last key press
             oldKeyboardState = keyboardState;
 
+            //update the interactable objects in game
+            foreach (GameObject o in objectList)
+            {
+                o.Update(gameTime, platList);
+            }
+
             base.Update(gameTime);
         }
 
@@ -304,12 +321,16 @@ namespace Cosmic_Escape
             {
                 p.Draw(spriteBatch, theFont);
             }
-
+            //draw enemies
             foreach (Enemy e in enemyList)
             {
                 e.Draw(spriteBatch);
             }
-
+            //draw interactable objects
+            foreach (GameObject o in objectList)
+            {
+                o.Draw(spriteBatch);
+            }
             //draw player
             player.Draw(spriteBatch);
             //enemy.Draw(spriteBatch);
