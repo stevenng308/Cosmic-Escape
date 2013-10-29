@@ -115,6 +115,7 @@
     <Compile Include="Enemy.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameScreen.cs" />
+    <Compile Include="InvisibleEnemy.cs" />
     <Compile Include="MenuComponent.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Player.cs" />

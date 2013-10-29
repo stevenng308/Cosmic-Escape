@@ -24,7 +24,7 @@ namespace Cosmic_Escape
 
         public int screenWidth, screenHeight;
         GameObject player;
-        GameObject enemy;
+        GameObject enemy, invisibleEnemy;
         public SpriteFont theFont;
         public Vector2 textPos, textPos2, healthPos, powerPos;
         Song bgsong;
@@ -53,6 +53,7 @@ namespace Cosmic_Escape
         string enemyInfo;
         System.IO.StreamReader enemyFile;
         Texture2D enemySprite;
+        Texture2D enemySpriteInvisible;
         public Texture2D dot;
         public List<GameObject> enemyList;
 
@@ -125,6 +126,7 @@ namespace Cosmic_Escape
             //load enemies from file
             enemyFile = new System.IO.StreamReader("Content\\enemyPosList.txt");
             enemySprite = Content.Load<Texture2D>("enemy_sprite");
+            enemySpriteInvisible = Content.Load<Texture2D>("enemy2_sprite");
             dot = Content.Load<Texture2D>("effector");
 
             //load song
@@ -182,6 +184,8 @@ namespace Cosmic_Escape
                 enemy = new Enemy(enemySprite, tempVect, this, player);
                 enemyList.Add(enemy);
             }
+
+            invisibleEnemy = new InvisibleEnemy(enemySprite, enemySpriteInvisible, new Vector2(215, 330), this, player);
 
             //cursor stuff
             cursor = Content.Load<Texture2D>("mouse");
@@ -258,6 +262,8 @@ namespace Cosmic_Escape
                 {
                     e.Update(gameTime, platList);
                 }
+
+                invisibleEnemy.Update(gameTime, platList); 
             }
             /*
             //moves space background
@@ -334,6 +340,7 @@ namespace Cosmic_Escape
             //draw player
             player.Draw(spriteBatch);
             //enemy.Draw(spriteBatch);
+            invisibleEnemy.Draw(spriteBatch);
             mouse.Draw(spriteBatch);
             spriteBatch.End();
             
