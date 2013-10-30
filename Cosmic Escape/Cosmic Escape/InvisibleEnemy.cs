@@ -9,44 +9,38 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
+
 namespace Cosmic_Escape
 {
-    class Enemy : GameObject
+    class InvisibleEnemy : Enemy
     {
-        //protected Texture2D sprite;
-        //protected Vector2 pos;
-        //int updateRate;
-        //float updateCounter = 0.0f;
+        Texture2D invisibleSprite;
+        //Texture2D visible;
+
         const float WALK_SPEED = 1.0f;
-        //bool walkLeft = true;
-        bool chase = false;
+
+        bool isVisible = false;
         bool facingLeft = true;
+        //bool chase = false;
+
+        float totalTime;
         Platform targetPlat;
 
-        protected GameObject player;          //instantiates a instance of player class so we can access player position and use it to move enemies towards the player.
-
-        //int frameCounter;     // Which frame of the animation we're in (a value between 0 and 23)
-        //float frameRate;      // This should always be 1/24 (or 0.04167 seconds)
-        //float timeCounter;      // How much time has elapsed since the last time we incremented the frame counter
-        float totalTime;        // Total time elapsed
-
-        public Enemy(Texture2D t, Vector2 p, Game1 g, GameObject user) : base(t, p, g)
+        public InvisibleEnemy(Texture2D t1, Texture2D t2,  Vector2 p, Game1 g, GameObject user)
+            : base(t1, p, g, user)
         {
+            invisibleSprite = t2;
             totalTime = 0.0f;
-            //timeCounter = 0.0f;
-            //updateCounter = 0;
-            //updateRate = 60;
-            player = user;
             destRect = new Rectangle(0, 0, tex.Width, tex.Height);
             updatePoints();
         }
-       
+
         public override void Update(GameTime gameTime, List<Platform> l)
         {
 
             totalTime += gameTime.ElapsedGameTime.Milliseconds / 1000f;
 
-            if (Math.Abs((pos.X - player.getPos().X)) < 300 || chase == true)//calculate proximity of player
+            if (Math.Abs((pos.X - player.getPos().X)) < 150)//calculate proximity of player
             {
                 if (player.getPos().X < pos.X)
                 {
@@ -59,7 +53,11 @@ namespace Cosmic_Escape
                     pos.X += WALK_SPEED;
                     facingLeft = false;
                 }
-                chase = true;
+                isVisible = true;
+            }
+            else
+            {
+                isVisible = false;
             }
 
             pos.Y += gravity;
@@ -70,7 +68,7 @@ namespace Cosmic_Escape
             //update the 4 points of the rectangle with new position
             updatePoints();
 
-            //check for collision with platforms;
+            //check for collision with other gameobjects;
             targetPlat = isColliding2(l); //check for collision with platforms
 
             //check if colliding with player
@@ -90,30 +88,33 @@ namespace Cosmic_Escape
         }
 
 
-        //update the 4 corners of a sprite's rectangle
-        //change this if the sprite sheet changes that has animations
-        public override void updatePoints()
-        {
-            point1 = pos;
-            point2.X = pos.X + tex.Width;
-            point2.Y = pos.Y;
-            point3.X = pos.X + tex.Width;
-            point3.Y = pos.Y + tex.Height;
-            point4.X = pos.X;
-            point4.Y = pos.Y + tex.Height;
-        }
-
         public override void Draw(SpriteBatch spriteBatch)
         {
             //spriteBatch.DrawString(parent.theFont, "     p2Y: " + point2.Y + "\n      p3Y: " + point3.Y, pos, Color.White);
-            if (facingLeft == true)
+            if (isVisible == true)
             {
-                spriteBatch.Draw(tex, pos, Color.White);
+                if (facingLeft == true)
+                {
+                    spriteBatch.Draw(tex, pos, Color.White);
+                }
+                if (facingLeft == false)
+                {
+                    //spriteBatch.Draw(tex, pos, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.FlipHorizontally, 1.0f);
+                    spriteBatch.Draw(tex, pos, null, Color.White, 0.0f, origin, 1, SpriteEffects.FlipHorizontally, 0.0f);
+                }
             }
-            if (facingLeft == false)
+
+            if (isVisible == false)
             {
-                //spriteBatch.Draw(tex, pos, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.FlipHorizontally, 1.0f);
-                spriteBatch.Draw(tex, pos, null, Color.White, 0.0f, origin, 1, SpriteEffects.FlipHorizontally, 0.0f);
+                if (facingLeft == true)
+                {
+                    spriteBatch.Draw(invisibleSprite, pos, Color.White);
+                }
+                if (facingLeft == false)
+                {
+                    //spriteBatch.Draw(tex, pos, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.FlipHorizontally, 1.0f);
+                    spriteBatch.Draw(invisibleSprite, pos, null, Color.White, 0.0f, origin, 1, SpriteEffects.FlipHorizontally, 0.0f);
+                }
             }
 
             if (targetPlat != null)
@@ -127,18 +128,5 @@ namespace Cosmic_Escape
             //spriteBatch.Draw(parent.dot, point3, Color.White);
         }
 
-
-        public Vector2 getPosition
-        {
-            get
-            {
-                return pos;
-            }
-        }
-
-        public override float getWalkSpeed()
-        {
-            return WALK_SPEED;
-        }
     }
 }

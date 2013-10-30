@@ -283,6 +283,11 @@ namespace Cosmic_Escape
             timerInvulnerable = 10;
         }
 
+        public override int getHealth()
+        {
+            return health;
+        }
+
         public override void setHealth()
         {
             health--;
