@@ -202,6 +202,12 @@ namespace Cosmic_Escape
 
         // Basically, just tell the player to update.
         // Again, remember that this function is called 60 times per second.
+
+        protected override void UnloadContent()
+        {
+            Content.Unload();
+        }
+
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit. Again, I added the escape key
@@ -262,8 +268,34 @@ namespace Cosmic_Escape
                 {
                     e.Update(gameTime, platList);
                 }
+                
+                invisibleEnemy.Update(gameTime, platList);
 
-                invisibleEnemy.Update(gameTime, platList); 
+
+                
+                if (player.getHealth() == 0)
+                {
+                    activeScreen.Hide();
+                    activeScreen = startScreen;
+                    activeScreen.Show();
+
+
+                 /*
+                    if (CheckKey(Keys.Enter))
+                    {
+                        if (startScreen.SelectedIndex == 0)
+                        {
+                            activeScreen.Hide();
+                            activeScreen = actionScreen;
+                            activeScreen.Show();
+                        }
+                        if (startScreen.SelectedIndex == 1)
+                        {
+                            this.Exit();
+                        }
+                    }
+                    */
+                }
             }
             /*
             //moves space background
@@ -277,7 +309,7 @@ namespace Cosmic_Escape
                 MediaPlayer.Play(bgsong);
                 songstart = true;
             }
-
+            
             // Note that the Update method of the player MUST have access to the game time
             // to know which image/frame to draw
             player.Update(gameTime, platList);

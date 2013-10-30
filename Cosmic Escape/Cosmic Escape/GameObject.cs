@@ -194,7 +194,8 @@ namespace Cosmic_Escape
                 }
                 //else if (this.point3.X >= plat.point4.X && this.point3.X < plat.point3.X && this.point2.Y > plat.point1.Y && this.point3.Y < plat.point3.Y)//cannot go into platform from the left
                 else if (((this.point2.Y > plat.point1.Y && this.point2.Y < plat.point4.Y) || this.point3.Y > plat.point1.Y && this.point3.Y < plat.point4.Y) &&
-                        (this.point2.X >= plat.point1.X && this.point2.X < plat.point1.X + 3)) //cannot go into platform from the left to right
+                        (this.point2.X >= plat.point1.X && this.point2.X < plat.point1.X + 3
+                    )) //cannot go into platform from the left to right
                 {
                     this.isCollide = true;
                     //this.isCollideBot = true;
@@ -253,6 +254,11 @@ namespace Cosmic_Escape
             return destRect;
         }
 
+        public virtual int getHealth()
+        {
+            return getHealth();
+        }
+        
         public virtual void setHealth()
         {
 
