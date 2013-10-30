@@ -70,7 +70,7 @@ namespace Cosmic_Escape
             //update the 4 points of the rectangle with new position
             updatePoints();
 
-            //check for collision with other gameobjects;
+            //check for collision with platforms;
             targetPlat = isColliding2(l); //check for collision with platforms
 
             //check if colliding with player
