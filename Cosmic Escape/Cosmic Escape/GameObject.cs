@@ -92,17 +92,6 @@ namespace Cosmic_Escape
             point4.Y = pos.Y + tex.Height / 2;
         }
 
-        public virtual void updatePoints2()
-        {
-            point1 = pos;
-            point2.X = pos.X + tex.Width;
-            point2.Y = pos.Y;
-            point3.X = pos.X + tex.Width;
-            point3.Y = pos.Y + tex.Height;
-            point4.X = pos.X;
-            point4.Y = pos.Y + tex.Height;
-        }
-
         //collision detection with platforms
         public Platform isColliding(List<Platform> l)
         {

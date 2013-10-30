@@ -180,12 +180,17 @@ namespace Cosmic_Escape
             while ((enemyInfo = enemyFile.ReadLine()) != null)
             {
                 string[] tempStringArray = enemyInfo.Split(',');
-                Vector2 tempVect = new Vector2(float.Parse(tempStringArray[0]), float.Parse(tempStringArray[1]));
-                enemy = new Enemy(enemySprite, tempVect, this, player);
-                enemyList.Add(enemy);
+                Vector2 tempVect = new Vector2(float.Parse(tempStringArray[1]), float.Parse(tempStringArray[2]));
+                switch (Int32.Parse(tempStringArray[0]))
+                {
+                    case 0: enemy = new Enemy(enemySprite, tempVect, this, player);
+                        enemyList.Add(enemy);
+                        break;
+                    case 1: invisibleEnemy = new InvisibleEnemy(enemySprite, enemySpriteInvisible, tempVect, this, player);
+                        enemyList.Add(invisibleEnemy);
+                        break;
+                };
             }
-
-            invisibleEnemy = new InvisibleEnemy(enemySprite, enemySpriteInvisible, new Vector2(215, 330), this, player);
 
             //cursor stuff
             cursor = Content.Load<Texture2D>("mouse");
@@ -268,11 +273,7 @@ namespace Cosmic_Escape
                 {
                     e.Update(gameTime, platList);
                 }
-                
-                invisibleEnemy.Update(gameTime, platList);
-
-
-                
+                                
                 if (player.getHealth() == 0)
                 {
                     activeScreen.Hide();
@@ -371,8 +372,7 @@ namespace Cosmic_Escape
             }
             //draw player
             player.Draw(spriteBatch);
-            //enemy.Draw(spriteBatch);
-            invisibleEnemy.Draw(spriteBatch);
+
             mouse.Draw(spriteBatch);
             spriteBatch.End();
             

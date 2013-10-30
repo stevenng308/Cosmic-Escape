@@ -203,7 +203,7 @@ namespace Cosmic_Escape
             //recharge timer for power
             if (cooldownF || isCollideBot)
             {
-                power.rechargeTimer(0.15, this);
+                power.rechargeTimer(0.20, this);
             }
 
             //invulnerable timer
