@@ -136,8 +136,8 @@ namespace Cosmic_Escape
 
             //spriteBatch.DrawString(parent.theFont, "p2X: " + point2.X + "\np2Y: " + point2.Y, point2, Color.Red);
             //spriteBatch.DrawString(parent.theFont, "p3X: " + point3.X + "\np3Y: " + point3.Y, point3, Color.Red);
-            spriteBatch.Draw(parent.dot, point1, Color.White);
-            spriteBatch.Draw(parent.dot, point4, Color.White);
+            //spriteBatch.Draw(parent.dot, point1, Color.White);
+            //spriteBatch.Draw(parent.dot, point4, Color.White);
         }
 
     }
