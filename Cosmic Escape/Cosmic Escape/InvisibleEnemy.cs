@@ -87,6 +87,18 @@ namespace Cosmic_Escape
             }
         }
 
+        //update the 4 corners of a sprite's rectangle
+        //change this if the sprite sheet changes that has animations
+        public override void updatePoints()
+        {
+            point1 = pos;
+            point2.X = pos.X + tex.Width;
+            point2.Y = pos.Y;
+            point3.X = pos.X + tex.Width;
+            point3.Y = pos.Y + tex.Height;
+            point4.X = pos.X;
+            point4.Y = pos.Y + tex.Height;
+        }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -124,8 +136,8 @@ namespace Cosmic_Escape
 
             //spriteBatch.DrawString(parent.theFont, "p2X: " + point2.X + "\np2Y: " + point2.Y, point2, Color.Red);
             //spriteBatch.DrawString(parent.theFont, "p3X: " + point3.X + "\np3Y: " + point3.Y, point3, Color.Red);
-            //spriteBatch.Draw(parent.dot, point2, Color.White);
-            //spriteBatch.Draw(parent.dot, point3, Color.White);
+            spriteBatch.Draw(parent.dot, point1, Color.White);
+            spriteBatch.Draw(parent.dot, point4, Color.White);
         }
 
     }

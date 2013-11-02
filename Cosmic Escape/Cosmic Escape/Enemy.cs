@@ -70,7 +70,7 @@ namespace Cosmic_Escape
             //update the 4 points of the rectangle with new position
             updatePoints();
 
-            //check for collision with other gameobjects;
+            //check for collision with platforms;
             targetPlat = isColliding2(l); //check for collision with platforms
 
             //check if colliding with player
@@ -123,8 +123,8 @@ namespace Cosmic_Escape
 
             //spriteBatch.DrawString(parent.theFont, "p2X: " + point2.X + "\np2Y: " + point2.Y, point2, Color.Red);
             //spriteBatch.DrawString(parent.theFont, "p3X: " + point3.X + "\np3Y: " + point3.Y, point3, Color.Red);
-            //spriteBatch.Draw(parent.dot, point2, Color.White);
-            //spriteBatch.Draw(parent.dot, point3, Color.White);
+            spriteBatch.Draw(parent.dot, point2, Color.White);
+            spriteBatch.Draw(parent.dot, point3, Color.White);
         }
 
 

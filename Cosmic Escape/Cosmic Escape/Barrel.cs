@@ -42,8 +42,11 @@ namespace Cosmic_Escape
 
             /*if (hp < 0)
             {
-                Barrel b = this;
-                parent.objectList.Remove(b);
+                //Barrel b = this;
+                //foreach (Barrel b in parent.objectList)
+                //{
+                //    parent.objectList.Remove(this);
+                //}
             }*/
         }
 
