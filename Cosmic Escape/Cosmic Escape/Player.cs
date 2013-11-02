@@ -315,5 +315,12 @@ namespace Cosmic_Escape
         {
             return WALK_SPEED;
         }
+
+        public override void reset()
+        {
+            health = 5;
+            pos.X = 0;
+            pos.Y = 380;
+        }
     }
 }

@@ -258,6 +258,11 @@ namespace Cosmic_Escape
         {
             return getHealth();
         }
+
+        public virtual void reset()
+        {
+
+        }
         
         public virtual void setHealth()
         {

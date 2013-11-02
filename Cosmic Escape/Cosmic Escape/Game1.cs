@@ -28,6 +28,7 @@ namespace Cosmic_Escape
         public SpriteFont theFont;
         public Vector2 textPos, textPos2, healthPos, powerPos;
         Song bgsong;
+        Song menuSong;
         bool songstart;
 
         //Menu Screen variables
@@ -130,7 +131,9 @@ namespace Cosmic_Escape
             dot = Content.Load<Texture2D>("effector");
 
             //load song
+            menuSong = Content.Load<Song>("menuSong"); 
             bgsong = Content.Load<Song>("SECRET IV - Adaptation");
+            MediaPlayer.Play(menuSong);
             MediaPlayer.IsRepeating = true;
 
             //read block sheet
@@ -153,7 +156,7 @@ namespace Cosmic_Escape
             // Get the width and height of the window
             screenWidth = 800;
             screenHeight = 600;
-
+            
             graphics.PreferredBackBufferHeight = screenHeight;
             graphics.PreferredBackBufferWidth = screenWidth;
             graphics.ApplyChanges();
@@ -241,7 +244,7 @@ namespace Cosmic_Escape
                 if ((GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed) ||
                     (Keyboard.GetState().IsKeyDown(Keys.Escape)))
                     this.Exit();
-
+                
                 //moves space background
                 background_space.MoveBackground((float)gameTime.ElapsedGameTime.TotalMilliseconds, player);
 
@@ -253,7 +256,7 @@ namespace Cosmic_Escape
                     MediaPlayer.Play(bgsong);
                     songstart = true;
                 }
-
+                
                 // Note that the Update method of the player MUST have access to the game time
                 // to know which image/frame to draw
                 player.Update(gameTime, platList);
@@ -276,11 +279,15 @@ namespace Cosmic_Escape
                 if (player.getHealth() == 0)
                 {
                     activeScreen.Hide();
+                    
                     activeScreen = startScreen;
                     activeScreen.Show();
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(menuSong);
+                    //player.reset(); 
+                    //Reset();
+                    
 
-
-                 /*
                     if (CheckKey(Keys.Enter))
                     {
                         if (startScreen.SelectedIndex == 0)
@@ -288,13 +295,15 @@ namespace Cosmic_Escape
                             activeScreen.Hide();
                             activeScreen = actionScreen;
                             activeScreen.Show();
+                            Reset();
+
                         }
                         if (startScreen.SelectedIndex == 1)
                         {
                             this.Exit();
                         }
                     }
-                    */
+                 
                 }
             }
             /*
@@ -384,6 +393,46 @@ namespace Cosmic_Escape
         {
             return keyboardState.IsKeyUp(theKey) &&
                 oldKeyboardState.IsKeyDown(theKey);
+        }
+
+        public void Reset()
+        {
+            // Start the player off at the middle/bottom of the screen
+            Vector2 initialPlayerPos = new Vector2(0, 380);
+
+            // Bring the player to life
+            player = new Player(spritesheet, initialPlayerPos, this);
+
+            //Enemy reset code
+            enemyFile = new System.IO.StreamReader("Content\\enemyPosList.txt");
+
+            enemyList = new List<GameObject>();
+            while ((enemyInfo = enemyFile.ReadLine()) != null)
+            {
+                string[] tempStringArray = enemyInfo.Split(',');
+                Vector2 tempVect = new Vector2(float.Parse(tempStringArray[0]), float.Parse(tempStringArray[1]));
+                enemy = new Enemy(enemySprite, tempVect, this, player);
+                enemyList.Add(enemy);
+            }
+
+            invisibleEnemy = new InvisibleEnemy(enemySprite, enemySpriteInvisible, new Vector2(215, 330), this, player);
+
+            //load interactable objects
+            barrelTex = Content.Load<Texture2D>("barrel");
+            objectList = new List<GameObject>();
+            Vector2 tempVect2 = new Vector2(320, 25);
+            actionObject = new Barrel(barrelTex, tempVect2, player, this);
+            objectList.Add(actionObject);
+
+            //cursor stuff
+            cursor = Content.Load<Texture2D>("mouse");
+            mousePos = new Vector2(0, 0);
+            mouse = new Cursor(cursor, mousePos, this, player, enemyList);
+            Mouse.SetPosition(400, 300);
+
+            MediaPlayer.Stop();
+            MediaPlayer.Play(bgsong);
+
         }
     }
 }
