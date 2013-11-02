@@ -69,8 +69,8 @@ namespace Cosmic_Escape
             }
             //position of game menu text
             position = new Vector2(
-                (Game.Window.ClientBounds.Width - 135) / 2,
-                (Game.Window.ClientBounds.Height - 100) / 2);
+                (Game.Window.ClientBounds.Width + 400) / 2,
+                (Game.Window.ClientBounds.Height + 325) / 2);
         }
 
         public override void Initialize()
@@ -122,7 +122,7 @@ namespace Cosmic_Escape
                     menuItems[i],
                     location,
                     tint);
-                location.Y += spriteFont.LineSpacing + 5;
+                location.Y += spriteFont.LineSpacing + 50; //spacing between menu options
                 
             }
             spriteBatch.End();
