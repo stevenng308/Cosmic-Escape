@@ -335,7 +335,7 @@ namespace Cosmic_Escape
             }
             */
             //update camera movement
-            camera.Update(this, 32, player);
+            camera.Update(this, 350, player);
             
             //update mouse
             mouse.Update();
@@ -410,9 +410,16 @@ namespace Cosmic_Escape
             while ((enemyInfo = enemyFile.ReadLine()) != null)
             {
                 string[] tempStringArray = enemyInfo.Split(',');
-                Vector2 tempVect = new Vector2(float.Parse(tempStringArray[0]), float.Parse(tempStringArray[1]));
-                enemy = new Enemy(enemySprite, tempVect, this, player);
-                enemyList.Add(enemy);
+                Vector2 tempVect = new Vector2(float.Parse(tempStringArray[1]), float.Parse(tempStringArray[2]));
+                switch (Int32.Parse(tempStringArray[0]))
+                {
+                    case 0: enemy = new Enemy(enemySprite, tempVect, this, player);
+                        enemyList.Add(enemy);
+                        break;
+                    case 1: invisibleEnemy = new InvisibleEnemy(enemySprite, enemySpriteInvisible, tempVect, this, player);
+                        enemyList.Add(invisibleEnemy);
+                        break;
+                };
             }
 
             invisibleEnemy = new InvisibleEnemy(enemySprite, enemySpriteInvisible, new Vector2(215, 330), this, player);
@@ -432,7 +439,6 @@ namespace Cosmic_Escape
 
             MediaPlayer.Stop();
             MediaPlayer.Play(bgsong);
-
         }
     }
 }

@@ -13,6 +13,9 @@ namespace Cosmic_Escape
 {
     class Space : Background
     {
+        Rectangle rect1 = new Rectangle(-1920, 0, 1920, 1024);  //this is the rectangle that is behind the player initially
+        Rectangle rect2 = new Rectangle(0, 0, 1920, 1024);      //this is the rectangle the player starts inside
+        Rectangle rect3 = new Rectangle(1920, 0, 1920, 1024);   //this is the rectangele that is in front of the player initially
 
         public Space(Texture2D t)
         {
@@ -28,20 +31,35 @@ namespace Cosmic_Escape
                 return;
 
             backgroundCounter = 1000f / BACKGROUND_RATE;
-            bgPos--;
 
-            if (bgPos < -texBg.Width)
+            //Scrolling background
+            rect1.X--;
+            rect2.X--;
+            rect3.X--;
+
+            //If statements draw rectangles based on player's position. This gives a rectangle behind and in front of the player at all times.
+            if(rect1.X + texBg.Width <= (playerPos.X))
             {
-                bgPos += texBg.Width;
+                rect3.X = rect2.X + texBg.Width;
             }
+
+            if (rect2.X + texBg.Width <= (playerPos.X))
+            {
+                rect1.X = rect3.X + texBg.Width;
+            }
+
+            if (rect3.X + texBg.Width <= (playerPos.X))
+            {
+                rect2.X = rect1.X + texBg.Width;
+            }
+
         }
 
         public override void Draw(SpriteBatch sb)
         {
-            sb.Draw(texBg, new Vector2(bgPos, 0), Color.White);                         //draws background of the player's current view
-            sb.Draw(texBg, new Vector2(bgPos + texBg.Width, 0), Color.White);
-            sb.Draw(texBg, new Vector2(bgPos + (texBg.Width * 2), 0), Color.White);           //draws background to the right of player's current view
-            sb.Draw(texBg, new Vector2(bgPos - texBg.Width, 0), Color.White);           //draws background to the left of player's current view
+            sb.Draw(texBg, rect1, Color.White);
+            sb.Draw(texBg, rect2, Color.White);
+            sb.Draw(texBg, rect3, Color.White);
         }
 
     }
