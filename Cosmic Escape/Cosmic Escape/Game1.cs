@@ -348,6 +348,14 @@ namespace Cosmic_Escape
             {
                 o.Update(gameTime, platList);
             }
+            for (int i = objectList.Count - 1; i >= 0; i--)//removes interactable objects. cannot be in barrel class
+            {
+                GameObject tempBarrel = objectList[i];
+                if (tempBarrel.getHealth() <= 0)
+                {
+                    objectList.Remove(tempBarrel);
+                }
+            }
 
             base.Update(gameTime);
         }

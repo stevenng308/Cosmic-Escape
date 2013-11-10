@@ -39,15 +39,6 @@ namespace Cosmic_Escape
 
             isColliding2(l);
             isCollidingDeath();
-
-            /*if (hp < 0)
-            {
-                //Barrel b = this;
-                //foreach (Barrel b in parent.objectList)
-                //{
-                //    parent.objectList.Remove(this);
-                //}
-            }*/
         }
 
         //update the 4 corners of a sprite's rectangle
@@ -65,7 +56,7 @@ namespace Cosmic_Escape
         public override void Draw(SpriteBatch sb)
         {
             sb.Draw(tex, pos, Color.White);
-            sb.DrawString(parent.theFont, "     Rectangle X: " + this.getDestRect().X + "\n     Rectangle Y: " + this.getDestRect().Y, pos, Color.White);
+            sb.DrawString(parent.theFont, "     Rectangle X: " + hp + "\n     Rectangle Y: " + this.getDestRect().Y, pos, Color.White);
         }
 
         public override void setVel(Vector2 v)
@@ -76,6 +67,11 @@ namespace Cosmic_Escape
         public override void setHealth()
         {
             hp--;
+        }
+
+        public override int getHealth()
+        {
+            return hp;
         }
     }
 }

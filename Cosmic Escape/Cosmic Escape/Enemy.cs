@@ -116,10 +116,10 @@ namespace Cosmic_Escape
                 spriteBatch.Draw(tex, pos, null, Color.White, 0.0f, origin, 1, SpriteEffects.FlipHorizontally, 0.0f);
             }
 
-            if (targetPlat != null)
+            /*if (targetPlat != null)
             {
                 spriteBatch.DrawString(parent.theFont, "     Rectangle X: " + targetPlat.getDestRect().X + "\n     Rectangle Y: " + targetPlat.getDestRect().Y, pos, Color.White);
-            }
+            }*/
 
             //spriteBatch.DrawString(parent.theFont, "p2X: " + point2.X + "\np2Y: " + point2.Y, point2, Color.Red);
             //spriteBatch.DrawString(parent.theFont, "p3X: " + point3.X + "\np3Y: " + point3.Y, point3, Color.Red);

@@ -215,8 +215,8 @@ namespace Cosmic_Escape
                 if (this.getDestRect().Intersects(e.getDestRect()))
                 {
                     targetEnemies.Add(e);
+                    this.setHealth();
                 }
-                this.setHealth();
             }
 
             foreach (Enemy e in targetEnemies)

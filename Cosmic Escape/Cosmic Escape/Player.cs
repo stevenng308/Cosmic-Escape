@@ -247,10 +247,10 @@ namespace Cosmic_Escape
                 sb.Draw(parent.heartTex, parent.healthPos, Color.White);
             }
 
-            if (targetPlat != null)
+            /*if (targetPlat != null)
             {
                 sb.DrawString(parent.theFont, "Rectangle X: " + targetPlat.getDestRect().X + " Rectangle Y: " + targetPlat.getDestRect().Y, parent.textPos, Color.White);
-            }
+            }*/
             // Using Draw method 5 of 7
             if (facing == LEFT)
                 sb.Draw(tex, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.FlipHorizontally, 1.0f);
