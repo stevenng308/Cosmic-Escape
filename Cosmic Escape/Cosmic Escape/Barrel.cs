@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Cosmic_Escape
 {
-    class Barrel : GameObject
+    class Barrel : Platform
     {
         Vector2 vel;
         GameObject alien;
@@ -29,7 +29,6 @@ namespace Cosmic_Escape
         public override void Update(GameTime gt, List<Platform> l)
         {
             pos.Y += gravity;
-
             // Update the destination rectangle based on our position.
             destRect.X = (int)pos.X;
             destRect.Y = (int)pos.Y;

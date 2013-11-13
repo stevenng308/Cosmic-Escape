@@ -17,10 +17,8 @@ namespace Cosmic_Escape
         //Rectangle destRect;
         //Vector2 pos;
 
-        public Platform(Texture2D t, Vector2 p)
+        public Platform(Texture2D t, Vector2 p, Game1 g) : base(t, p ,g)
         {
-            tex = t;
-            pos = p;
             destRect = new Rectangle((int)pos.X, (int)pos.Y, tex.Width, tex.Height);
 
             point1 = p;

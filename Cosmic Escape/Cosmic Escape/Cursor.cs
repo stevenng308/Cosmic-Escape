@@ -29,7 +29,7 @@ namespace Cosmic_Escape
 
         public override void Update()
         {
-            if (Mouse.GetState().X > 1080 || Mouse.GetState().X < 270) //keep mouse within game window
+            /*if (Mouse.GetState().X > 1080 || Mouse.GetState().X < 270) //keep mouse within game window
             {
                 Mouse.SetPosition(parent.screenWidth / 2, Mouse.GetState().Y);
             }
@@ -37,30 +37,14 @@ namespace Cosmic_Escape
             if (Mouse.GetState().Y > 600 || Mouse.GetState().Y < 50) //keep mouse within game window
             {
                 Mouse.SetPosition(Mouse.GetState().X, parent.screenHeight / 2);
-            }
+            }*/
             cursorState.X = Mouse.GetState().X;
             cursorState.Y = Mouse.GetState().Y;
-            pos.X = cursorState.X - 650;//offset the actual mouse position to somehwate match the game cursor position
+            pos.X = cursorState.X - 350;//offset the actual mouse position to somehwate match the game cursor position
             pos.Y = cursorState.Y - 6;//same offset
             pos.X += alien.getPos().X;//move cursor with the player
             curRect.X = (int)pos.X;//update rect position
             curRect.Y = (int)pos.Y;
-
-            //throwing enemies
-            /*if (Mouse.GetState().LeftButton == ButtonState.Pressed)
-            {
-                foreach (Enemy e in parent.enemyList)
-                {
-                    if (curRect.Intersects(e.getDestRect()))
-                    {
-                        //allows moving the enemy
-                        Vector2 tempV = pos;
-                        tempV.X = pos.X - 30;
-                        tempV.Y = pos.Y - 30;
-                        e.setPos(tempV);
-                    }
-                }
-            }*/
         }
 
         public override void Draw(SpriteBatch sb)

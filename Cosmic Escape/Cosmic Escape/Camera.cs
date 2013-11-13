@@ -23,8 +23,7 @@ namespace Cosmic_Escape
             //mid is the mid point of the sprite
             //325 is arbitrary change to move the centering of the camera
             center = new Vector2(alien.getPos().X - mid, 0);
-            transform = Matrix.CreateScale(new Vector3(1,1,0)) * 
-                Matrix.CreateTranslation(new Vector3(-center.X, -center.Y, 0));
+            transform = Matrix.CreateTranslation(new Vector3(-center.X, -center.Y, 0));
         }
 
         public Vector2 getCamera()

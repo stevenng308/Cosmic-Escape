@@ -81,6 +81,8 @@ namespace Cosmic_Escape
         Vector2 mousePos;
 
         //interactable objects
+        string objectInfo;
+        System.IO.StreamReader objectFile;
         Texture2D barrelTex;
         public List<GameObject> objectList;
         GameObject actionObject;
@@ -174,7 +176,7 @@ namespace Cosmic_Escape
             {
                 string[] tempStringArray = platformInfo.Split(',');
                 Vector2 tempVect = new Vector2(float.Parse(tempStringArray[0]), float.Parse(tempStringArray[1]));
-                Platform plat = new Platform(block, tempVect);
+                Platform plat = new Platform(block, tempVect, this);
                 platList.Add(plat);
             }
 
@@ -203,9 +205,16 @@ namespace Cosmic_Escape
             //load interactable objects
             barrelTex = Content.Load<Texture2D>("barrel");
             objectList = new List<GameObject>();
-            Vector2 tempVect2 = new Vector2(300, 25);
-            actionObject = new Barrel(barrelTex, tempVect2, player, this);
-            objectList.Add(actionObject);
+            //Vector2 tempVect2 = new Vector2(300, 25);
+            objectFile = new System.IO.StreamReader("Content\\objectsheet.txt");
+            while ((objectInfo = objectFile.ReadLine()) != null)
+            {
+                string[] tempStringArray = objectInfo.Split(',');
+                Vector2 tempVect2 = new Vector2(float.Parse(tempStringArray[0]), float.Parse(tempStringArray[1]));
+                actionObject = new Barrel(barrelTex, tempVect2, player, this);
+                objectList.Add(actionObject);
+            }
+            //platList.Add((Platform)actionObject);
         }
 
         // Basically, just tell the player to update.
