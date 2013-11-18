@@ -55,7 +55,7 @@ namespace Cosmic_Escape
         public override void Draw(SpriteBatch sb)
         {
             sb.Draw(tex, pos, Color.White);
-            sb.DrawString(parent.theFont, "     Rectangle X: " + hp + "\n     Rectangle Y: " + this.getDestRect().Y, pos, Color.White);
+            sb.DrawString(parent.theFont, "     Uses: " + hp + "\n     Rectangle Y: " + this.getDestRect().Y, pos, Color.White);
         }
 
         public override void setVel(Vector2 v)
