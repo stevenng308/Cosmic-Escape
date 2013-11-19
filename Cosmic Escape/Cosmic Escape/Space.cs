@@ -13,9 +13,9 @@ namespace Cosmic_Escape
 {
     class Space : Background
     {
-        Rectangle rect1 = new Rectangle(-1920, 0, 1920, 1024);  //this is the rectangle that is behind the player initially
-        Rectangle rect2 = new Rectangle(0, 0, 1920, 1024);      //this is the rectangle the player starts inside
-        Rectangle rect3 = new Rectangle(1920, 0, 1920, 1024);   //this is the rectangele that is in front of the player initially
+        Rectangle rect1 = new Rectangle(-1920, -20, 1920, 1024);  //this is the rectangle that is behind the player initially
+        Rectangle rect2 = new Rectangle(0, -20, 1920, 1024);      //this is the rectangle the player starts inside
+        Rectangle rect3 = new Rectangle(1920, -20, 1920, 1024);   //this is the rectangele that is in front of the player initially
 
         public Space(Texture2D t)
         {

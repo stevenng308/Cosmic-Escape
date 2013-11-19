@@ -31,6 +31,10 @@ namespace Cosmic_Escape
         Song menuSong;
         bool songstart;
 
+        bool isPaused;
+        Rectangle rectPause;
+        Texture2D pauseBackground;
+
         //Menu Screen variables
         /*public Texture2D startButton;
         public Texture2D exitButton;
@@ -99,6 +103,7 @@ namespace Cosmic_Escape
             // TODO: Add your initialization logic here
             camera = new Camera(GraphicsDevice.Viewport);
             songstart = false;
+            isPaused = false;
 
             base.Initialize();
 
@@ -113,6 +118,7 @@ namespace Cosmic_Escape
             spritesheet = Content.Load<Texture2D>("zep spritesheet");
             heartTex = Content.Load<Texture2D>("heart");
             theFont = Content.Load<SpriteFont>("myFont");
+         
 
             //load menu screen
             startScreen = new StartScreen(this, spriteBatch, Content.Load<SpriteFont>("myfont"), Content.Load<Texture2D>("menu"));
@@ -258,62 +264,81 @@ namespace Cosmic_Escape
                 if ((GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed) ||
                     (Keyboard.GetState().IsKeyDown(Keys.Escape)))
                     this.Exit();
-                
-                //moves space background
-                background_space.MoveBackground((float)gameTime.ElapsedGameTime.TotalMilliseconds, player);
 
-                //update ship background
-                background_ship.Update(player);
-                //start song
-                if (!songstart)
+                if(CheckKey(Keys.P))
                 {
-                    MediaPlayer.Play(bgsong);
-                    songstart = true;
-                }
-                
-                // Note that the Update method of the player MUST have access to the game time
-                // to know which image/frame to draw
-                player.Update(gameTime, platList);
-                textPos.X = camera.getCamera().X + 25.0f;
-                textPos.Y = camera.getCamera().Y + 25.0f;
-
-                healthPos.X = camera.getCamera().X + 25.0f;
-                powerPos.X = camera.getCamera().X + 550.0f;
-                //Enemy update method. Deals with enemy movements, status, etc.
-
-                foreach (Enemy e in enemyList)
-                {
-                    e.Update(gameTime, platList);
-                }
-                                
-                if (player.getHealth() == 0)
-                {
-                    activeScreen.Hide();
-                    
-                    activeScreen = startScreen;
-                    activeScreen.Show();
-                    MediaPlayer.Stop();
-                    MediaPlayer.Play(menuSong);
-                    //player.reset(); 
-                    //Reset();
-                    
-
-                    if (CheckKey(Keys.Enter))
+                    if (isPaused == false)
                     {
-                        if (startScreen.SelectedIndex == 0)
-                        {
-                            activeScreen.Hide();
-                            activeScreen = actionScreen;
-                            activeScreen.Show();
-                            Reset();
-
-                        }
-                        if (startScreen.SelectedIndex == 1)
-                        {
-                            this.Exit();
-                        }
+                        isPaused = true;
+                        MediaPlayer.Pause();
+                        //songstart = false;
                     }
-                 
+                        
+                    else
+                    {
+                        isPaused = false;
+                        MediaPlayer.Resume();
+                    }
+                }
+
+                if (isPaused == false)
+                {
+                    //moves space background
+                    background_space.MoveBackground((float)gameTime.ElapsedGameTime.TotalMilliseconds, player);
+
+                    //update ship background
+                    background_ship.Update(player);
+                    //start song
+                    if (!songstart)
+                    {
+                        MediaPlayer.Play(bgsong);
+                        songstart = true;
+                    }
+
+                    // Note that the Update method of the player MUST have access to the game time
+                    // to know which image/frame to draw
+                    player.Update(gameTime, platList);
+                    textPos.X = camera.getCamera().X + 25.0f;
+                    textPos.Y = camera.getCamera().Y + 25.0f;
+
+                    healthPos.X = camera.getCamera().X + 25.0f;
+                    powerPos.X = camera.getCamera().X + 550.0f;
+                    //Enemy update method. Deals with enemy movements, status, etc.
+
+                    foreach (Enemy e in enemyList)
+                    {
+                        e.Update(gameTime, platList);
+                    }
+
+                    if (player.getHealth() == 0)
+                    {
+                        activeScreen.Hide();
+
+                        activeScreen = startScreen;
+                        activeScreen.Show();
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(menuSong);
+                        //player.reset(); 
+                        //Reset();
+
+
+                        if (CheckKey(Keys.Enter))
+                        {
+                            if (startScreen.SelectedIndex == 0)
+                            {
+                                activeScreen.Hide();
+                                activeScreen = actionScreen;
+                                activeScreen.Show();
+                                Reset();
+
+                            }
+                            if (startScreen.SelectedIndex == 1)
+                            {
+                                this.Exit();
+                            }
+                        }
+
+                    }
                 }
             }
             /*
@@ -375,13 +400,21 @@ namespace Cosmic_Escape
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.transform);
+            if(isPaused == true)
+            {
+                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, null, null, null, null, camera.transform);
+            }
+
+            if(isPaused == false)
+            {
+                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.transform);
+            }
             //spriteBatch.Begin();
             //draw backgrounds      
             background_space.Draw(spriteBatch);
             background_ship.Draw(spriteBatch);
-
-            //draw platform
+           
+                //draw platform
             foreach (Platform p in platList)
             {
                 p.Draw(spriteBatch, theFont);
