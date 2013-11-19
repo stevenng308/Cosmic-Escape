@@ -31,7 +31,7 @@ namespace Cosmic_Escape
         Song menuSong;
         bool songstart;
 
-        bool isPaused;
+        public bool isPaused;
         Rectangle rectPause;
         Texture2D pauseBackground;
 
@@ -238,7 +238,6 @@ namespace Cosmic_Escape
                 (Keyboard.GetState().IsKeyDown(Keys.Escape)))
                 this.Exit();
             //game menu update logic
-            //camera.Update(this, screenWidth, player);
             keyboardState = Keyboard.GetState();
 
             if (activeScreen == startScreen)
@@ -270,14 +269,15 @@ namespace Cosmic_Escape
                     if (isPaused == false)
                     {
                         isPaused = true;
-                        MediaPlayer.Pause();
-                        //songstart = false;
+                        //MediaPlayer.Pause();
+                        MediaPlayer.Volume = 0.20f;
                     }
                         
                     else
                     {
                         isPaused = false;
-                        MediaPlayer.Resume();
+                        MediaPlayer.Volume = 1.0f;
+                        //MediaPlayer.Resume();
                     }
                 }
 
@@ -301,8 +301,6 @@ namespace Cosmic_Escape
                     textPos.X = camera.getCamera().X + 25.0f;
                     textPos.Y = camera.getCamera().Y + 25.0f;
 
-                    healthPos.X = camera.getCamera().X + 25.0f;
-                    powerPos.X = camera.getCamera().X + 550.0f;
                     //Enemy update method. Deals with enemy movements, status, etc.
 
                     foreach (Enemy e in enemyList)
@@ -337,7 +335,21 @@ namespace Cosmic_Escape
                                 this.Exit();
                             }
                         }
+                    }
+                
 
+                    //update the interactable objects in game
+                    foreach (GameObject o in objectList)
+                    {
+                        o.Update(gameTime, platList);
+                    }
+                    for (int i = objectList.Count - 1; i >= 0; i--)//removes interactable objects. cannot be in barrel class
+                    {
+                        GameObject tempBarrel = objectList[i];
+                        if (tempBarrel.getHealth() <= 0)
+                        {
+                            objectList.Remove(tempBarrel);
+                        }
                     }
                 }
             }
@@ -368,8 +380,6 @@ namespace Cosmic_Escape
                 e.Update(gameTime, platList);
             }
             */
-            //update camera movement
-            camera.Update(this, 350, player);
             
             //update mouse
             mouse.Update();
@@ -377,19 +387,10 @@ namespace Cosmic_Escape
             //get last key press
             oldKeyboardState = keyboardState;
 
-            //update the interactable objects in game
-            foreach (GameObject o in objectList)
-            {
-                o.Update(gameTime, platList);
-            }
-            for (int i = objectList.Count - 1; i >= 0; i--)//removes interactable objects. cannot be in barrel class
-            {
-                GameObject tempBarrel = objectList[i];
-                if (tempBarrel.getHealth() <= 0)
-                {
-                    objectList.Remove(tempBarrel);
-                }
-            }
+            //update camera movement
+            camera.Update(this, 350, player);
+            healthPos.X = camera.getCamera().X + 25.0f;
+            powerPos.X = camera.getCamera().X + 550.0f;
 
             base.Update(gameTime);
         }

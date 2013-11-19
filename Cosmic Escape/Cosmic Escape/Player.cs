@@ -243,8 +243,16 @@ namespace Cosmic_Escape
                 //Vector2 heartPos;
                 //heartPos.X = 0 * i;
                 //heartPos.Y = 0;
-                parent.healthPos.X += 32 + i;
+                if (!parent.isPaused)
+                {
+                    parent.healthPos.X += 32 + i;
+                }
+                else
+                {
+                    parent.healthPos.X += 35;
+                }
                 sb.Draw(parent.heartTex, parent.healthPos, Color.White);
+                
             }
 
             /*if (targetPlat != null)
