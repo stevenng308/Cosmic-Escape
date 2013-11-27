@@ -80,11 +80,11 @@ namespace Cosmic_Escape
                 player.setHealth();
                 if (player.getPos().X < pos.X)
                 {
-                    player.setCollideFeedback(-WALK_SPEED);
+                    player.setCollideFeedback(-WALK_SPEED * 1.25f);
                 }
                 else if (player.getPos().X > pos.X)
                 {
-                    player.setCollideFeedback(WALK_SPEED);
+                    player.setCollideFeedback(WALK_SPEED * 1.25f);
                 }
             }
         }

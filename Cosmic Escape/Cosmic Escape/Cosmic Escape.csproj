@@ -113,6 +113,7 @@
     <Compile Include="Camera.cs" />
     <Compile Include="Cursor.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="Explosion.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameScreen.cs" />
     <Compile Include="InvisibleEnemy.cs" />

@@ -91,6 +91,15 @@ namespace Cosmic_Escape
         public List<GameObject> objectList;
         GameObject actionObject;
 
+        //explosion variables
+        Texture2D explodeTex;
+        Vector2 explodePos, explodeVel;
+        public Random generator;
+        List<Explosion> explosionList;
+        SoundEffect explodeSound;
+
+        public SoundEffect bumpSound;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -220,7 +229,15 @@ namespace Cosmic_Escape
                 actionObject = new Barrel(barrelTex, tempVect2, player, this);
                 objectList.Add(actionObject);
             }
-            //platList.Add((Platform)actionObject);
+            
+            //load explosion objects
+            explodeTex = Content.Load<Texture2D>("fire");
+            generator = new Random();
+            explosionList = new List<Explosion>();
+            explodePos = new Vector2();
+            explodeVel = new Vector2();
+            explodeSound = Content.Load<SoundEffect>("explosion");
+            bumpSound = Content.Load<SoundEffect>("bump");
         }
 
         // Basically, just tell the player to update.
@@ -348,7 +365,37 @@ namespace Cosmic_Escape
                         GameObject tempBarrel = objectList[i];
                         if (tempBarrel.getHealth() <= 0)
                         {
+                            explodePos.X = tempBarrel.getPos().X;
+                            explodePos.Y = tempBarrel.getPos().Y;
                             objectList.Remove(tempBarrel);
+                            for (int j = 0; j < 8; j++)
+                            {
+                                /*vel.X = (float)generator.NextDouble() - 0.5f;
+                                vel.Y = (float)generator.NextDouble() - 0.5f;
+                                vel *= 1.7f;*/
+                                double angle = generator.NextDouble() * (Math.PI * 2);
+                                explodeVel.X = (float)Math.Cos(angle) * 1.8f;
+                                explodeVel.Y = (float)Math.Sin(angle) * 1.3f;
+
+                                Explosion e = new Explosion(explodeTex, explodePos, explodeVel);
+                                explosionList.Add(e);
+                            }
+                            explodeSound.Play();
+                        }
+                        //update each particle
+                        foreach (Explosion e in explosionList)
+                        {
+                            e.Update();
+                        }
+                        //remove explosions
+                        for (int k = explosionList.Count - 1; k >= 0; k--)
+                        {
+                            Explosion tempParticle = explosionList[k];
+                            if (!tempParticle.isAlive)
+                            {
+                                explosionList.Remove(tempParticle);
+                                //explodeStart = false;
+                            }
                         }
                     }
                 }
@@ -433,7 +480,14 @@ namespace Cosmic_Escape
             //draw player
             player.Draw(spriteBatch);
 
+            //draw mouse
             mouse.Draw(spriteBatch);
+
+            //draw explosions
+            foreach (Explosion e in explosionList)
+            {
+                e.Draw(spriteBatch);
+            }
             spriteBatch.End();
             
             base.Draw(gameTime);

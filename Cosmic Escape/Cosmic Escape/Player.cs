@@ -309,6 +309,7 @@ namespace Cosmic_Escape
                 {
                     pos.X += i * (float)j;
                 }
+                parent.bumpSound.Play();
             }
         }
 
