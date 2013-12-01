@@ -25,19 +25,19 @@ namespace Cosmic_Escape
 
         protected GameObject player;          //instantiates a instance of player class so we can access player position and use it to move enemies towards the player.
 
-        //int frameCounter;     // Which frame of the animation we're in (a value between 0 and 23)
-        //float frameRate;      // This should always be 1/24 (or 0.04167 seconds)
-        //float timeCounter;      // How much time has elapsed since the last time we incremented the frame counter
+        protected int frameCounter;     // Which frame of the animation we're in (a value between 0 and 23)
+        protected float frameRate;      // This should always be 1/24 (or 0.04167 seconds)
+        protected float timeCounter;      // How much time has elapsed since the last time we incremented the frame counter
         float totalTime;        // Total time elapsed
 
         public Enemy(Texture2D t, Vector2 p, Game1 g, GameObject user) : base(t, p, g)
         {
             totalTime = 0.0f;
-            //timeCounter = 0.0f;
-            //updateCounter = 0;
-            //updateRate = 60;
+            frameCounter = 0;
+            frameRate = 1.0f / 5.0f;
             player = user;
-            destRect = new Rectangle(0, 0, tex.Width, tex.Height);
+            srcRect = new Rectangle(0, 0, tex.Width / 5, tex.Height);
+            destRect = new Rectangle(0, 0, tex.Width / 5, tex.Height);
             updatePoints();
         }
        
@@ -50,12 +50,14 @@ namespace Cosmic_Escape
             {
                 if (player.getPos().X < pos.X)
                 {
+                    srcRect.X = frameCounter * tex.Width / 5;
                     pos.X -= WALK_SPEED;
                     facingLeft = true;
                 }
 
                 if (player.getPos().X > pos.X)
                 {
+                    srcRect.X = frameCounter * tex.Width / 5;
                     pos.X += WALK_SPEED;
                     facingLeft = false;
                 }
@@ -87,6 +89,22 @@ namespace Cosmic_Escape
                     player.setCollideFeedback(WALK_SPEED * 1.25f);
                 }
             }
+
+            //frame rate
+            timeCounter += gameTime.ElapsedGameTime.Milliseconds / 1000f;
+            if (timeCounter >= frameRate)
+            {
+                if (frameCounter != 1) //check so it does not go to the 24th frame
+                {
+                    frameCounter++; //increment frame by 1
+                    timeCounter -= frameRate; //decrement updatecounter
+                }
+                else
+                {
+                    frameCounter = 0; //reset frameCounter
+                    timeCounter -= frameRate; //decrement updatecounter
+                }
+            }
         }
 
 
@@ -95,9 +113,9 @@ namespace Cosmic_Escape
         public override void updatePoints()
         {
             point1 = pos;
-            point2.X = pos.X + tex.Width;
+            point2.X = pos.X + tex.Width / 5;
             point2.Y = pos.Y;
-            point3.X = pos.X + tex.Width;
+            point3.X = pos.X + tex.Width / 5;
             point3.Y = pos.Y + tex.Height;
             point4.X = pos.X;
             point4.Y = pos.Y + tex.Height;
@@ -108,12 +126,12 @@ namespace Cosmic_Escape
             //spriteBatch.DrawString(parent.theFont, "     p2Y: " + point2.Y + "\n      p3Y: " + point3.Y, pos, Color.White);
             if (facingLeft == true)
             {
-                spriteBatch.Draw(tex, pos, Color.White);
+                spriteBatch.Draw(tex, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.None, 1.0f);
             }
             if (facingLeft == false)
             {
                 //spriteBatch.Draw(tex, pos, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.FlipHorizontally, 1.0f);
-                spriteBatch.Draw(tex, pos, null, Color.White, 0.0f, origin, 1, SpriteEffects.FlipHorizontally, 0.0f);
+                spriteBatch.Draw(tex, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.FlipHorizontally, 1.0f);
             }
 
             /*if (targetPlat != null)

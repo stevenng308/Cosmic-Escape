@@ -38,11 +38,12 @@ namespace Cosmic_Escape
         Power power;
         int health;
         int powerIndex = 0;
+        string powerName;
         bool godMode;
         bool lastKey;
 
         int frameCounter;       // Which frame of the animation we're in (a value between 0 and 23)
-        float frameRate;        // This should always be 1/24 (or 0.04167 seconds)
+        float frameRate;        // This should always be 1/2
         float timeCounter;      // How much time has elapsed since the last time we incremented the frame counter
         float totalTime;        // Total time elapsed
 
@@ -231,11 +232,28 @@ namespace Cosmic_Escape
                     timeCounter -= frameRate; //decrement updatecounter
                 }
             }
+
+            if (pos.X >= 4000)
+            {
+                parent.gameEnd = true;
+            }
+
+            switch (powerIndex)
+            {
+                case 0: powerName = "Telekinesis";
+                    break;
+                case 1: powerName = "Gravity Flip";
+                    break;
+            }
         }
         public override void Draw(SpriteBatch sb)
         {
             //sb.DrawString(parent.theFont, "Total Time: " + totalTime + "\nFrame: " + frameCounter, parent.textPos, Color.White);
-            sb.DrawString(parent.theFont, "      powerNum: " + powerIndex + "\n      PowerTime: " + (int)power.getTimer(), parent.powerPos, Color.White);
+            if (parent.gameEnd)
+            {
+                sb.DrawString(parent.theFont, "Thank you for playing!\nA WINRAR is YOU!", new Vector2(pos.X, pos.Y - 50), Color.White);
+            }
+            sb.DrawString(parent.theFont, "   Power: " + powerName + "\n   PowerTime: " + (int)power.getTimer(), parent.powerPos, Color.White);
             //draw health hearts
             sb.DrawString(parent.theFont, "HP: ", parent.healthPos, Color.White);
             for (int i = 1; i <= health ; i++)

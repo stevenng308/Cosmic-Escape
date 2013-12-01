@@ -99,6 +99,8 @@ namespace Cosmic_Escape
         SoundEffect explodeSound;
 
         public SoundEffect bumpSound;
+        //public SoundEffect powerSound;
+        public bool gameEnd = false;
 
         public Game1()
         {
@@ -143,8 +145,8 @@ namespace Cosmic_Escape
 
             //load enemies from file
             enemyFile = new System.IO.StreamReader("Content\\enemyPosList.txt");
-            enemySprite = Content.Load<Texture2D>("enemy_sprite");
-            enemySpriteInvisible = Content.Load<Texture2D>("enemy2_sprite");
+            enemySprite = Content.Load<Texture2D>("enemy");
+            enemySpriteInvisible = Content.Load<Texture2D>("invisEnemy2");
             dot = Content.Load<Texture2D>("effector");
 
             //load song
@@ -206,7 +208,9 @@ namespace Cosmic_Escape
                     case 0: enemy = new Enemy(enemySprite, tempVect, this, player);
                         enemyList.Add(enemy);
                         break;
-                    case 1: invisibleEnemy = new InvisibleEnemy(enemySprite, enemySpriteInvisible, tempVect, this, player);
+                    case 1:
+                        Texture2D enemySprite2 = Content.Load<Texture2D>("invisEnemy");
+                        invisibleEnemy = new InvisibleEnemy(enemySprite2, enemySpriteInvisible, tempVect, this, player);
                         enemyList.Add(invisibleEnemy);
                         break;
                 };
@@ -238,6 +242,7 @@ namespace Cosmic_Escape
             explodeVel = new Vector2();
             explodeSound = Content.Load<SoundEffect>("explosion");
             bumpSound = Content.Load<SoundEffect>("bump");
+            //powerSound = Content.Load<SoundEffect>("sweep");
         }
 
         // Basically, just tell the player to update.
@@ -314,7 +319,10 @@ namespace Cosmic_Escape
 
                     // Note that the Update method of the player MUST have access to the game time
                     // to know which image/frame to draw
-                    player.Update(gameTime, platList);
+                    if (!gameEnd)
+                    {
+                        player.Update(gameTime, platList);
+                    }
                     textPos.X = camera.getCamera().X + 25.0f;
                     textPos.Y = camera.getCamera().Y + 25.0f;
 
@@ -382,6 +390,25 @@ namespace Cosmic_Escape
                             }
                             explodeSound.Play();
                         }
+                        /*//update each particle
+                        foreach (Explosion e in explosionList)
+                        {
+                            e.Update();
+                        }
+                        //remove explosions
+                        for (int k = explosionList.Count - 1; k >= 0; k--)
+                        {
+                            Explosion tempParticle = explosionList[k];
+                            if (!tempParticle.isAlive)
+                            {
+                                explosionList.Remove(tempParticle);
+                                //explodeStart = false;
+                            }
+                        }*/
+                    }
+
+                    if (explosionList.Count() > 0)
+                    {
                         //update each particle
                         foreach (Explosion e in explosionList)
                         {

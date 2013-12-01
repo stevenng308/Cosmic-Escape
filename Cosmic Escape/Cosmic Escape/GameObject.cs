@@ -216,6 +216,7 @@ namespace Cosmic_Escape
                 if (this.getDestRect().Intersects(e.getDestRect()))
                 {
                     targetEnemies.Add(e);
+                    parent.bumpSound.Play();
                     this.setHealth();
                 }
             }

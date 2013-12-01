@@ -31,7 +31,7 @@ namespace Cosmic_Escape
         {
             invisibleSprite = t2;
             totalTime = 0.0f;
-            destRect = new Rectangle(0, 0, tex.Width, tex.Height);
+            //destRect = new Rectangle(0, 0, tex.Width, tex.Height);
             updatePoints();
         }
 
@@ -45,12 +45,14 @@ namespace Cosmic_Escape
                 if (player.getPos().X < pos.X)
                 {
                     pos.X -= WALK_SPEED;
+                    srcRect.X = frameCounter * tex.Width / 5;
                     facingLeft = true;
                 }
 
                 if (player.getPos().X > pos.X)
                 {
                     pos.X += WALK_SPEED;
+                    srcRect.X = frameCounter * tex.Width / 5;
                     facingLeft = false;
                 }
                 isVisible = true;
@@ -85,6 +87,22 @@ namespace Cosmic_Escape
                     player.setCollideFeedback(WALK_SPEED);
                 }
             }
+
+            //frame rate
+            timeCounter += gameTime.ElapsedGameTime.Milliseconds / 1000f;
+            if (timeCounter >= frameRate)
+            {
+                if (frameCounter != 1) //check so it does not go to the 24th frame
+                {
+                    frameCounter++; //increment frame by 1
+                    timeCounter -= frameRate; //decrement updatecounter
+                }
+                else
+                {
+                    frameCounter = 0; //reset frameCounter
+                    timeCounter -= frameRate; //decrement updatecounter
+                }
+            }
         }
 
         //update the 4 corners of a sprite's rectangle
@@ -92,9 +110,9 @@ namespace Cosmic_Escape
         public override void updatePoints()
         {
             point1 = pos;
-            point2.X = pos.X + tex.Width;
+            point2.X = pos.X + tex.Width / 5;
             point2.Y = pos.Y;
-            point3.X = pos.X + tex.Width;
+            point3.X = pos.X + tex.Width / 5;
             point3.Y = pos.Y + tex.Height;
             point4.X = pos.X;
             point4.Y = pos.Y + tex.Height;
@@ -107,12 +125,12 @@ namespace Cosmic_Escape
             {
                 if (facingLeft == true)
                 {
-                    spriteBatch.Draw(tex, pos, Color.White);
+                    spriteBatch.Draw(tex, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.None, 1.0f);
                 }
                 if (facingLeft == false)
                 {
                     //spriteBatch.Draw(tex, pos, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.FlipHorizontally, 1.0f);
-                    spriteBatch.Draw(tex, pos, null, Color.White, 0.0f, origin, 1, SpriteEffects.FlipHorizontally, 0.0f);
+                    spriteBatch.Draw(tex, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.FlipHorizontally, 1.0f);
                 }
             }
 
@@ -120,12 +138,12 @@ namespace Cosmic_Escape
             {
                 if (facingLeft == true)
                 {
-                    spriteBatch.Draw(invisibleSprite, pos, Color.White);
+                    spriteBatch.Draw(invisibleSprite, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.None, 1.0f);
                 }
                 if (facingLeft == false)
                 {
                     //spriteBatch.Draw(tex, pos, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.FlipHorizontally, 1.0f);
-                    spriteBatch.Draw(invisibleSprite, pos, null, Color.White, 0.0f, origin, 1, SpriteEffects.FlipHorizontally, 0.0f);
+                    spriteBatch.Draw(invisibleSprite, destRect, srcRect, Color.White, 0.0f, origin, SpriteEffects.FlipHorizontally, 1.0f);
                 }
             }
 
