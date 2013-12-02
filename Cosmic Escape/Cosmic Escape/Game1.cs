@@ -22,6 +22,11 @@ namespace Cosmic_Escape
         Texture2D spritesheet;
         public Texture2D heartTex;
 
+        Texture2D exitSign;
+        Vector2 exitSignPos;
+        Texture2D exitDoor;
+        Vector2 exitDoorPos;
+
         public int screenWidth, screenHeight;
         GameObject player;
         GameObject enemy, invisibleEnemy;
@@ -129,6 +134,8 @@ namespace Cosmic_Escape
             spritesheet = Content.Load<Texture2D>("zep spritesheet");
             heartTex = Content.Load<Texture2D>("heart");
             theFont = Content.Load<SpriteFont>("myFont");
+            exitSign = Content.Load<Texture2D>("ExitSign");
+            exitDoor = Content.Load<Texture2D>("exitDoor");
          
 
             //load menu screen
@@ -162,6 +169,8 @@ namespace Cosmic_Escape
             textPos = new Vector2(10, 50);
             healthPos = new Vector2(10, 10);
             powerPos = new Vector2(200, 10);
+            exitSignPos = new Vector2(-70, 200);
+            exitDoorPos = new Vector2(3925, 70);
 
             //Load Backgrounds and Initialize
             spaceBackgroundTex = Content.Load<Texture2D>("space_bg");                   
@@ -488,6 +497,9 @@ namespace Cosmic_Escape
             //draw backgrounds      
             background_space.Draw(spriteBatch);
             background_ship.Draw(spriteBatch);
+
+            spriteBatch.Draw(exitSign,exitSignPos, Color.White);
+            spriteBatch.Draw(exitDoor, exitDoorPos, Color.White);
            
                 //draw platform
             foreach (Platform p in platList)

@@ -40,7 +40,7 @@ namespace Cosmic_Escape
 
         public virtual void Draw(SpriteBatch sb)
         {
-            for (counter = 0; counter < 12; counter++)
+            for (counter = 0; counter < 7; counter++)
             {
                 sb.Draw(texBg, new Vector2((800 * counter), 0), Color.White);            //draws background to the right of player's current view
             }

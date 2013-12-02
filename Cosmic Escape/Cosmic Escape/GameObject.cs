@@ -188,7 +188,7 @@ namespace Cosmic_Escape
                     )) //cannot go into platform from the left to right
                 {
                     this.isCollide = true;
-                    //this.isCollideBot = true;
+                    this.isCollideBot = true;
                     this.pos.X -= this.getWalkSpeed();
                     return plat;
                 }

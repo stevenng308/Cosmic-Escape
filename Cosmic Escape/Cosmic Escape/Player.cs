@@ -30,7 +30,7 @@ namespace Cosmic_Escape
         const int LEFT = 0;
         const int RIGHT = 1;
         const float STOPPED = 0.0f;
-        const float WALK_SPEED = 3.0f;
+        const float WALK_SPEED = 2.5f;
         //const float RUN_SPEED = 4.0f;
         Rectangle tempRect;     // debugging purpose to show what rectangle is in contact
         Platform targetPlat;
@@ -233,7 +233,7 @@ namespace Cosmic_Escape
                 }
             }
 
-            if (pos.X >= 4000)
+            if ((pos.X >= 3925 && pos.X <= 4027) && (pos.Y  > 20 && pos.Y < 282))
             {
                 parent.gameEnd = true;
             }
@@ -251,7 +251,7 @@ namespace Cosmic_Escape
             //sb.DrawString(parent.theFont, "Total Time: " + totalTime + "\nFrame: " + frameCounter, parent.textPos, Color.White);
             if (parent.gameEnd)
             {
-                sb.DrawString(parent.theFont, "Thank you for playing!\nA WINRAR is YOU!", new Vector2(pos.X, pos.Y - 50), Color.White);
+                sb.DrawString(parent.theFont, "Zep has escaped his captors!\n Thank you for playing!\nA WINRAR is YOU!", new Vector2(pos.X, pos.Y + 85), Color.White);
             }
             sb.DrawString(parent.theFont, "   Power: " + powerName + "\n   PowerTime: " + (int)power.getTimer(), parent.powerPos, Color.White);
             //draw health hearts

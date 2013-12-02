@@ -50,7 +50,7 @@ namespace Cosmic_Escape
         public override void Draw(SpriteBatch sb)
         {
             sb.Draw(tex, curRect, Color.White);
-            sb.DrawString(parent.theFont, "      GameMouse X: " + pos.X + "\n      GameMouseY: " + pos.Y, pos, Color.White);
+            //sb.DrawString(parent.theFont, "      GameMouse X: " + pos.X + "\n      GameMouseY: " + pos.Y, pos, Color.White);
             //sb.DrawString(parent.theFont, "      MainMouse X: " + cursorState.X + "\n      MainMouseY: " + cursorState.Y, alien.getPos(), Color.White);
         }
 

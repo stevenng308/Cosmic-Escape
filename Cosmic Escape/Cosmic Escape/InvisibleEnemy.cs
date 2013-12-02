@@ -17,7 +17,7 @@ namespace Cosmic_Escape
         Texture2D invisibleSprite;
         //Texture2D visible;
 
-        const float WALK_SPEED = 1.0f;
+        const float WALK_SPEED = 2.3f;
 
         bool isVisible = false;
         bool facingLeft = true;
@@ -40,7 +40,7 @@ namespace Cosmic_Escape
 
             totalTime += gameTime.ElapsedGameTime.Milliseconds / 1000f;
 
-            if (Math.Abs((pos.X - player.getPos().X)) < 150)//calculate proximity of player
+            if (Math.Abs((pos.X - player.getPos().X)) < 200)//calculate proximity of player
             {
                 if (player.getPos().X < pos.X)
                 {

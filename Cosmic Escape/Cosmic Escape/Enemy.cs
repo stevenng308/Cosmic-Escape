@@ -17,7 +17,7 @@ namespace Cosmic_Escape
         //protected Vector2 pos;
         //int updateRate;
         //float updateCounter = 0.0f;
-        const float WALK_SPEED = 1.0f;
+        const float WALK_SPEED = 1.4f;
         //bool walkLeft = true;
         bool chase = false;
         bool facingLeft = true;
@@ -46,7 +46,7 @@ namespace Cosmic_Escape
 
             totalTime += gameTime.ElapsedGameTime.Milliseconds / 1000f;
 
-            if (Math.Abs((pos.X - player.getPos().X)) < 300 || chase == true)//calculate proximity of player
+            if (Math.Abs((pos.X - player.getPos().X)) < 350 || chase == true)//calculate proximity of player
             {
                 if (player.getPos().X < pos.X)
                 {
