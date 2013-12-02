@@ -251,7 +251,7 @@ namespace Cosmic_Escape
             //sb.DrawString(parent.theFont, "Total Time: " + totalTime + "\nFrame: " + frameCounter, parent.textPos, Color.White);
             if (parent.gameEnd)
             {
-                sb.DrawString(parent.theFont, "Zep has escaped his captors!\n Thank you for playing!\nA WINRAR is YOU!", new Vector2(pos.X, pos.Y + 85), Color.White);
+                sb.DrawString(parent.theFont, "Zep has escaped his captors!\nThank you for playing!\nA WINRAR is YOU!", new Vector2(pos.X - 150, pos.Y + 80), Color.White);
             }
             sb.DrawString(parent.theFont, "   Power: " + powerName + "\n   PowerTime: " + (int)power.getTimer(), parent.powerPos, Color.White);
             //draw health hearts

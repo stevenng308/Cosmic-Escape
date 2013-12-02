@@ -45,7 +45,7 @@ namespace Cosmic_Escape
 
             //bounce (gravity)
             vel.Y += 0.03f;
-            if (pos.Y > 450)
+            if (pos.Y > 500)
             {
                 vel.Y = -vel.Y * 0.8f;
                 pos += vel;

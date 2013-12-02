@@ -500,8 +500,12 @@ namespace Cosmic_Escape
 
             spriteBatch.Draw(exitSign,exitSignPos, Color.White);
             spriteBatch.Draw(exitDoor, exitDoorPos, Color.White);
-           
-                //draw platform
+            
+            spriteBatch.DrawString(theFont, "Select Telekinesis and drag this\nenemy to the topmost platform.", new Vector2 (600, 430), Color.White);
+            spriteBatch.DrawString(theFont, "Invisible enemy detected.\nThese enemy will only\nchase if you are within\na certain distance.", new Vector2(1500, 250), Color.White);
+            spriteBatch.DrawString(theFont, "Drag these barrels onto\nthe enemies. Use wisely.\nThey can only be used 3 times.", new Vector2(1850, 400), Color.White);
+            spriteBatch.DrawString(theFont, "Select the Gravity Flip power\nto get to these platforms.\nBe careful. Everything else\nwill float, too.", new Vector2(2700,390), Color.White);
+            //draw platform
             foreach (Platform p in platList)
             {
                 p.Draw(spriteBatch, theFont);
